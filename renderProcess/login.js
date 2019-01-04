@@ -1,4 +1,6 @@
 $(function () {
+    const {ipcRenderer} = require('electron');
+
     var machineId = '';
     var simple = new SimpleWebsocketConnection();
     simple.connect();
@@ -105,7 +107,7 @@ $(function () {
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
-                    console.log('登录成功');
+                    ipcRenderer.send('loginSuccess', '');
                     // window.location.href = 'syncClassroom.html?teacherId=' + res.response.colUid + '&teacherName=' + res.response.userName + '';
                 } else {
                     layer.msg(res.msg);
@@ -175,9 +177,9 @@ $(function () {
                 var uuid = data.uuid;
                 //                   var user = data.user;
                 if (uuid == machineId) {
-                    console.log('登陆成功');
-                    // window.location.href = 'syncClassroom.html?teacherId=' + data.user.colUid + '&teacherName=' + data.user.userName + '';
+                    ipcRenderer.send('loginSuccess', '');
                 } else {
+
                 }
             }
         }
