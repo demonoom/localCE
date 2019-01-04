@@ -47,7 +47,7 @@ function loginSuccess() {
         height: 100,
         frame: false,
         resizable: false,
-        transparent: true,  //使窗口 透明
+        transparent: true,  //使窗口透明
         x: size.width - 100,
         y: size.height / 2 - 150
     });
