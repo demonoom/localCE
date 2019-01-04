@@ -14,7 +14,7 @@ function ant_createWin() {
         width: 500,
         height: 500,
         title: '本地授课助手',
-        resizable: false,
+        // resizable: false,
     });
 
     win.loadURL(url.format({
