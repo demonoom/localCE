@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../style/login.css">
+</head>
+<body>
+<div class="content">
+    <div class="login_box">
+        <div class="logo"><img src="../images/logo.png"/>同步课堂</div>
+        <div class="tab my_flex">
+            <div class="btn_left active" id="account">账号登录</div>
+            <div class="btn_right" id="scan">扫码登录</div>
+        </div>
+
+        <!--账号登录 -->
+        <div class="account">
+            <div class="inputWrap">
+                <input id='act' type="text" placeholder="请输入小蚂蚁账号">
+                <!--存输入的用户名 -->
+                <div style="display:none" id="actData"></div>
+            </div>
+            <input id="pwd" type="password" placeholder="请输入密码">
+            <button id="login">登录</button>
+        </div>
+
+        <!--扫码登录 -->
+        <div class="scan">
+            <img id="scan_image" src="../images/school.png" alt="">
+            <div>打开手机小蚂蚁教师端扫一扫</div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="../public/jquery.min.js"></script>
+<script src="../public/simple.js"></script>
+<script src="../public/layer/layer.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#account').on('click', function () {
+            console.log('账号');
+            $('.account').show();
+            $('#account').addClass('active');
+            $('#scan').removeClass('active');
+            $('.scan').hide();
+        });
+
+        $('#scan').on('click', function () {
+            console.log('扫描');
+            $('.scan').show();
+            $('#scan').addClass('active');
+            $('#account').removeClass('active');
+            $('.account').hide();
+        });
+    })
+</script>
+</html>
