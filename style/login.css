@@ -27,12 +27,11 @@ input:-webkit-autofill {
 .login_box {
     position: absolute;
     width: 412px;
-    height: 480px;
+    height: 462px;
     background: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 0 35px;
     box-sizing: border-box;
 }
 
@@ -40,9 +39,10 @@ input:-webkit-autofill {
     font-size: 28px;
     color: #666;
     font-weight: bold;
-    margin: 37px 0 48px;
+    padding: 30px 0 30px;
+    margin-bottom: 25px;
     text-align: center;
-
+    background: #F8FAFF;
 }
 
 .my_flex {
@@ -59,8 +59,11 @@ input:-webkit-autofill {
     vertical-align: text-bottom;
 }
 
+.logo_content{
+    padding: 0 35px;
+}
 .tab {
-    font-size: 19px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -151,8 +154,8 @@ input#act {
 }
 
 #login {
-    line-height: 48px;
-    height: 48px;
+    line-height: 44px;
+    height: 44px;
     background-color: #4285F4;
     width: 100%;
     color: #fff;
@@ -199,8 +202,8 @@ input#act {
 }
 
 #scan_image {
-    width: 210px;
-    height: 210px;
+    width: 200px;
+    height: 200px;
 }
 
 .scan {

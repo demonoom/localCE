@@ -11,10 +11,10 @@ let win;
 
 function ant_createWin() {
     win = new BrowserWindow({
-        width: 500,
-        height: 500,
+        width: 412,
+        height: 462,
         title: '本地授课助手',
-        resizable: false,
+        // resizable: false,
     });
 
     win.loadURL(url.format({
