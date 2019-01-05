@@ -59,7 +59,6 @@ function loginSuccess() {
         protocol: 'file',
         slashes: true
     }));
-
 }
 
 //登陆成功
