@@ -101,7 +101,7 @@ function captureScreen(e, args) {
 
     captureWin.loadFile(path.join(__dirname, './views/capture.html'));
 
-    // captureWin.openDevTools();
+    captureWin.openDevTools();
 
     captureWin.on('closed', () => {
         captureWin = null

@@ -2,7 +2,7 @@ const { ipcRenderer, clipboard, nativeImage, remote, desktopCapturer, screen } =
 const Event = require('events')
 const fs = require('fs')
 
-let { bounds: { width, height }, scaleFactor } = screen.getPrimaryDisplay()
+const { bounds: { width, height }, scaleFactor } = screen.getPrimaryDisplay()
 
 const $canvas = document.getElementById('js-canvas')
 const $bg = document.getElementById('js-bg')
@@ -28,7 +28,6 @@ const ANCHORS = [
     { row: 'x', col: 'b', cursor: 'nesw-resize' },
     { row: '', col: 'b', cursor: 'ns-resize' },
     { row: 'r', col: 'b', cursor: 'nwse-resize' },
-
 ]
 
 console.time('capture')
@@ -40,12 +39,10 @@ desktopCapturer.getSources({
     }
 }, (error, sources) => {
     console.timeEnd('capture')
+    console.log(sources);
     let imgSrc = sources[0].thumbnail.toDataURL()
 
-    let capture = new Capture($canvas, imgSrc, scaleFactor)
-    $bg.style.backgroundImage = `url(${imgSrc})`
-    $bg.style.backgroundSize = `${width}px ${height}px`
-
+    let capture = new CaptureRenderer($canvas, $bg, imgSrc, scaleFactor)
 
     let onDrag = (selectRect) => {
         $toolbar.style.display = 'none'
@@ -104,7 +101,7 @@ desktopCapturer.getSources({
             url,
         })
 
-    };
+    }
     $btnOk.addEventListener('click', selectCapture)
 
     $btnSave.addEventListener('click', () => {
@@ -147,13 +144,14 @@ const CREATE_RECT = 1
 const MOVING_RECT = 2
 const RESIZE = 3
 
-class Capture extends Event {
+class CaptureRenderer extends Event {
 
-    constructor($canvas, imageSrc, scaleFactor) {
+    constructor($canvas, $bg, imageSrc, scaleFactor) {
         super()
         this.$canvas = $canvas
         this.imageSrc = imageSrc
         this.scaleFactor = scaleFactor
+        this.$bg = $bg
         this.ctx = $canvas.getContext('2d')
 
         this.onMouseDown = this.onMouseDown.bind(this)
@@ -166,6 +164,8 @@ class Capture extends Event {
     }
 
     async init() {
+        this.$bg.style.backgroundImage = `url(${this.imageSrc})`
+        this.$bg.style.backgroundSize = `${width}px ${height}px`
         let canvas = document.createElement('canvas')
         let ctx = canvas.getContext('2d')
         let img = await new Promise(resolve => {
@@ -402,9 +402,7 @@ class Capture extends Event {
             const { w, h, x, y, r, b } = this.selectRect
             let selectAnchor, selectIndex = -1
             if (this.anchors) {
-                console.log(pageX, pageY)
                 this.anchors.forEach(([x, y], i) => {
-                    console.log(x, y, Math.abs(pageX - x), Math.abs(pageY - y))
                     if (Math.abs(pageX - x) <= 10 && Math.abs(pageY - y) <= 10) {
                         selectAnchor = [x, y]
                         selectIndex = i
