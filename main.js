@@ -114,8 +114,9 @@ function captureScreen(e, args) {
 
 //登陆成功
 ipcMain.on('loginSuccess', () => {
-    loginSuccess();
-    win.hide();
+    // loginSuccess();
+    // win.hide();
+    captureScreen()
 });
 
 //截屏推题

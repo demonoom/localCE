@@ -1,8 +1,3 @@
-/**
- * Created by xujian1 on 2018/10/8.
- */
-
-
 const { getCurrentScreen } = require('./utils')
 
 const curScreen = getCurrentScreen()
@@ -63,7 +58,7 @@ function getScreen(callback) {
         // console.log(e)
     }
 
-    if (require('os').platform() !== 'win32') {
+    if (require('os').platform() !== 'darwin') {
         require('electron').desktopCapturer.getSources({
             types: ['screen'],
             thumbnailSize: { width: 1, height: 1 },
