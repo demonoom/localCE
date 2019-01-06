@@ -8,21 +8,13 @@ let electronScreen;
 app.on('ready', () => {
     ant_createWin();
     electronScreen = require('electron').screen;
-
-    //注册退出截屏快捷键
-    // globalShortcut.register('Esc', () => {
-    //     if (captureWin) {
-    //         captureWin.close();
-    //         captureWin = null
-    //     }
-    // });
 });
 
 let win = null;
 
 function ant_createWin() {
     // 初始化截图
-    useCapture();
+    useCapture()
 
     win = new BrowserWindow({
         width: 412,
@@ -41,7 +33,7 @@ function ant_createWin() {
 
     win.on('close', () => {
         win = null;
-        app.quit();
+        // app.quit();
     });
 
     win.on('ready-to-show', () => {
@@ -54,7 +46,7 @@ function ant_createWin() {
 
 function loginSuccess() {
     const size = electronScreen.getPrimaryDisplay().size;
-    let win = new BrowserWindow({
+    let win_ball = new BrowserWindow({
         width: 100,
         height: 100,
         frame: false,
@@ -66,7 +58,7 @@ function loginSuccess() {
 
     // win.webContents.openDevTools();
 
-    win.loadURL(url.format({
+    win_ball.loadURL(url.format({
         pathname: path.join(__dirname, './views/ball.html'),
         protocol: 'file',
         slashes: true

@@ -3,9 +3,9 @@ const {
 } = require('electron')
 
 const fs = require('fs')
-const { getScreenSources } = require('../public/desktop-capturer.js')
-const { CaptureEditor } = require('../public/capture-editor.js')
-const { getCurrentScreen } = require('../public/utils.js')
+const { getScreenSources } = require('../public/desktop-capturer')
+const { CaptureEditor } = require('../public/capture-editor')
+const { getCurrentScreen } = require('../public/utils')
 
 const $canvas = document.getElementById('js-canvas')
 const $bg = document.getElementById('js-bg')
