@@ -1,0 +1,4 @@
+owner: demonoom
+repo: '-'
+provider: github
+updaterCacheDirName: localclassassistant-updater

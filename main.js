@@ -23,7 +23,7 @@ let win = null;
 
 function ant_createWin() {
     // 初始化截图
-    // useCapture();
+    useCapture();
 
     win = new BrowserWindow({
         width: 412,

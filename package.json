@@ -3,9 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "build": {
+    "appId": "com.excoord-localClass.app",
+    "directories": {
+      "app": "./"
+    },
+    "productName": "小蚂蚁-本地课堂",
+    "win": {
+      "icon": "./images/icon.ico"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "buildwin": "electron-builder --platform=win --arch=x64"
   },
   "keywords": [],
   "author": "noom",
