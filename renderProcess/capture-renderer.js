@@ -1,7 +1,3 @@
-/**
- * Created by xujian1 on 2018/10/4.
- */
-
 const {
     ipcRenderer, clipboard, nativeImage, remote,
 } = require('electron')

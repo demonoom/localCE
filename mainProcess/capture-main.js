@@ -1,10 +1,7 @@
-/**
- * Created by xujian1 on 2018/10/5.
- */
-
-const { BrowserWindow, ipcMain, globalShortcut } = require('electron')
+const {BrowserWindow, ipcMain, globalShortcut} = require('electron')
 const os = require('os')
 const path = require('path')
+const url = require('url');
 
 let captureWins = []
 
@@ -12,7 +9,7 @@ const captureScreen = (e, args) => {
     if (captureWins.length) {
         return
     }
-    const { screen } = require('electron')
+    const {screen} = require('electron')
 
     let displays = screen.getAllDisplays()
     captureWins = displays.map((display) => {
@@ -36,16 +33,20 @@ const captureScreen = (e, args) => {
         captureWin.setVisibleOnAllWorkspaces(true)
         captureWin.setFullScreenable(false)
 
-        captureWin.loadFile(path.join(__dirname, 'capture.html'))
+        captureWin.loadURL(url.format({
+            pathname: path.join(__dirname, '../views/capture.html'),
+            slashes: true,
+            protocol: 'file'
+        }));
 
-        let { x, y } = screen.getCursorScreenPoint()
+        let {x, y} = screen.getCursorScreenPoint()
         if (x >= display.bounds.x && x <= display.bounds.x + display.bounds.width && y >= display.bounds.y && y <= display.bounds.y + display.bounds.height) {
             captureWin.focus()
         } else {
             captureWin.blur()
         }
         // 调试用
-        // captureWin.openDevTools()
+        captureWin.openDevTools()
 
         captureWin.on('closed', () => {
             let index = captureWins.indexOf(captureWin)
@@ -67,19 +68,15 @@ const useCapture = () => {
         }
     })
 
-    globalShortcut.register('CmdOrCtrl+Shift+A', captureScreen)
-
-    ipcMain.on('capture-screen', (e, { type = 'start', screenId } = {}) => {
+    ipcMain.on('capture-screen', (e, {type = 'start', screenId} = {}) => {
         if (type === 'start') {
             captureScreen()
         } else if (type === 'complete') {
             // nothing
         } else if (type === 'select') {
-            captureWins.forEach(win => win.webContents.send('capture-screen', { type: 'select', screenId }))
+            captureWins.forEach(win => win.webContents.send('capture-screen', {type: 'select', screenId}))
         }
     })
-
-
 }
 
 exports.useCapture = useCapture

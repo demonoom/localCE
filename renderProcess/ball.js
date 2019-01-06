@@ -8,6 +8,6 @@
     };
     //截图推题
     push_que.onclick = () => {
-        ipcRenderer.send('capture-screen')
+        ipcRenderer.send('capture-screen');
     }
 })();

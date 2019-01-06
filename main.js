@@ -1,9 +1,8 @@
 //项目入口文件
-const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron');
-const os = require('os');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const {useCapture} = require('./public/capture-main');
+const {useCapture} = require('./mainProcess/capture-main');
 let electronScreen;
 
 app.on('ready', () => {
@@ -11,12 +10,12 @@ app.on('ready', () => {
     electronScreen = require('electron').screen;
 
     //注册退出截屏快捷键
-    globalShortcut.register('Esc', () => {
-        if (captureWin) {
-            captureWin.close();
-            captureWin = null
-        }
-    });
+    // globalShortcut.register('Esc', () => {
+    //     if (captureWin) {
+    //         captureWin.close();
+    //         captureWin = null
+    //     }
+    // });
 });
 
 let win = null;
@@ -74,52 +73,9 @@ function loginSuccess() {
     }));
 }
 
-let captureWin = null;
-
-function captureScreen(e, args) {
-    if (captureWin) {
-        return
-    }
-    const {screen} = require('electron');
-    let {width, height} = screen.getPrimaryDisplay().bounds;
-    captureWin = new BrowserWindow({
-        // window 使用 fullscreen,  mac 设置为 undefined, 不可为 false
-        fullscreen: os.platform() === 'win32' || undefined, // win
-        width,
-        height,
-        x: 0,
-        y: 0,
-        transparent: true,
-        frame: false,
-        skipTaskbar: true,
-        autoHideMenuBar: true,
-        movable: false,
-        resizable: false,
-        enableLargerThanScreen: true, // mac
-        hasShadow: false,
-    });
-
-    captureWin.setAlwaysOnTop(true, 'screen-saver'); // mac
-    captureWin.setVisibleOnAllWorkspaces(true); // mac
-    captureWin.setFullScreenable(false);// mac
-
-    captureWin.loadFile(path.join(__dirname, './views/capture.html'));
-
-    captureWin.openDevTools();
-
-    captureWin.on('closed', () => {
-        captureWin = null
-    })
-}
-
 //登陆成功
 ipcMain.on('loginSuccess', () => {
-    // loginSuccess();
-    // win.hide();
-    captureScreen()
+    loginSuccess();
+    win.hide();
 });
 
-//截屏推题
-ipcMain.on('capture-screen', () => {
-    captureScreen()
-});
