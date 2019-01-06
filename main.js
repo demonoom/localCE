@@ -3,6 +3,7 @@ const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron');
 const os = require('os');
 const path = require('path');
 const url = require('url');
+const {useCapture} = require('./public/capture-main');
 let electronScreen;
 
 app.on('ready', () => {
@@ -21,6 +22,9 @@ app.on('ready', () => {
 let win = null;
 
 function ant_createWin() {
+    // 初始化截图
+    useCapture();
+
     win = new BrowserWindow({
         width: 412,
         height: 462,
