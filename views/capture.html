@@ -22,8 +22,8 @@
         <div id="judge_que">判断题</div>
     </div>
     <ul id="judge_answer" class="my_flex" style="display: none">
-        <li><span class="inputCont"><i id="judge_yes" class="checkIcon"></i></span>对</li>
-        <li><span class="inputCont"><i id="judge_no" class="checkIcon"></i></span>错</li>
+        <li><span class="inputCont"><i id="judge_yes" class="checkIcon" data-judge="false"></i></span>对</li>
+        <li><span class="inputCont"><i id="judge_no" class="checkIcon" data-judge="false"></i></span>错</li>
     </ul>
     <ul id="choose_answer" class="my_flex">
         <li><span class="inputCont"><i class="checkIcon choose_selection" data-choosen='false'></i></span>A</li>
@@ -38,6 +38,7 @@
 </div>
 <!--<script src="../renderProcess/capture.js"></script>-->
 <script src="../public/jquery.min.js"></script>
+<script src="../public/layer/layer.js"></script>
 <script src="../renderProcess/capture-renderer.js"></script>
 </body>
 </html>
