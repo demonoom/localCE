@@ -4,72 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../style/capture.css">
     <title>Document</title>
     <style>
         @import "../assets/iconfont/iconfont.css";
-
-        html, body, div {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .image-canvas {
-            position: absolute;
-            display: none;
-            z-index: 1;
-        }
-
-        .size-info {
-            position: absolute;
-            color: #ffffff;
-            font-size: 12px;
-            background: rgba(40, 40, 40, 0.8);
-            padding: 5px 10px;
-            border-radius: 2px;
-            font-family: Arial Consolas sans-serif;
-            display: none;
-            z-index: 2;
-        }
-
-        .toolbar {
-            position: absolute;
-            color: #343434;
-            font-size: 12px;
-            background: #f5f5f5;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-family: Arial Consolas sans-serif;
-            display: none;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-            z-index: 2;
-            align-items: center;
-        }
-
-        .toolbar .iconfont {
-            font-size: 24px;
-            padding: 2px 5px;
-        }
-        .icon-duihao{
-            color: red;
-        }
     </style>
 </head>
 
@@ -78,18 +16,21 @@
 <div id="js-mask" class="mask"></div>
 <canvas id="js-canvas" class="image-canvas"></canvas>
 <div id="js-size-info" class="size-info"></div>
-<div id="js-toolbar" class="toolbar">
-    <div>选择题</div>
-    <div>判断题</div>
-    <ul>
-        <li>正确 <input type="checkbox"></li>
-        <li>错误 <input type="checkbox"></li>
+<div id="js-toolbar" class="toolbar my_flex">
+    <div class="titleType my_flex">
+        <div>选择题</div>
+        <div>判断题</div>
+    </div>
+
+    <ul class="my_flex">
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon check"></i></span>对</li>
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>错</li>
     </ul>
-    <ul>
-        <li>A <input type="checkbox"></li>
-        <li>B <input type="checkbox"></li>
-        <li>C <input type="checkbox"></li>
-        <li>D <input type="checkbox"></li>
+    <ul class="my_flex">
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>A</li>
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>B</li>
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>C</li>
+        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>D</li>
     </ul>
     <div class="iconfont icon-zhongzhi" id="js-tool-reset"></div>
     <!--<div class="iconfont icon-xiazai" id="js-tool-save"></div>-->

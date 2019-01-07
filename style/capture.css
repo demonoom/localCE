@@ -1,0 +1,127 @@
+html, body, div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+ul,li{
+    list-style: none;
+}
+.my_flex{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+}
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image-canvas {
+    position: absolute;
+    display: none;
+    z-index: 1;
+}
+
+.size-info {
+    position: absolute;
+    color: #ffffff;
+    font-size: 12px;
+    background: rgba(40, 40, 40, 0.8);
+    padding: 5px 10px;
+    border-radius: 2px;
+    display: none;
+    z-index: 2;
+}
+
+.toolbar {
+    position: absolute;
+    color: #343434;
+    background: white;
+    padding: 11px 6px;
+    display: none;
+    z-index: 2;
+    align-items: center;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.toolbar .iconfont {
+    font-size: 24px;
+    padding: 0px 10px;
+}
+.icon-guanbi{
+    color: #FF0600;
+}
+.icon-duihao{
+    color: #51A938;
+}
+.titleType div{
+    padding: 0 10px;
+    position: relative;
+}
+.titleType div:first-child::after{
+    content: '';
+    background: #D2D2D2;
+    height: 100%;
+    width: 1px;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+li{
+    margin-right: 15px;
+}
+.inputCont{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    margin-left: 10px;
+}
+.inputCont input{
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: 5;
+    opacity: 0.2;
+    /*-webkit-appearance: none;*/
+}
+.checkIcon{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px #A0A0A0 solid;
+}
+.checkIcon.check{
+    border: 1px #3672ED solid;
+    background: #3672ED;
+    position: relative;
+}
+.checkIcon.check::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    left: 2px;
+    top:2px;
+    -webkit-transform: rotateX(135deg);
+    -moz-transform: rotateX(135deg);
+    -ms-transform: rotateX(135deg);
+    -o-transform: rotateX(135deg);
+    transform: rotateX(135deg);
+
+}
