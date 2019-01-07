@@ -44,9 +44,11 @@ function ant_createWin() {
     win.setMenuBarVisibility(false);
 }
 
+let win_ball = null;
+
 function loginSuccess() {
     const size = electronScreen.getPrimaryDisplay().size;
-    let win_ball = new BrowserWindow({
+    win_ball = new BrowserWindow({
         width: 100,
         height: 100,
         frame: false,
@@ -70,4 +72,17 @@ ipcMain.on('loginSuccess', () => {
     loginSuccess();
     win.hide();
 });
+
+ipcMain.on('capture-screen', (e, {type = 'start', screenId, src} = {}) => {
+    if (type === 'complete') {
+        //选取图片完毕，获得线上地址,发送至渲染进程发送消息服务
+        win_ball.webContents.send('pushQue', src)
+    }
+});
+
+//全局变量-存储当前登录账号信息
+global.loginUser = {
+    account: '',
+    password: '',
+};
 
