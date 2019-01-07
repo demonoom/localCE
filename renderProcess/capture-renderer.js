@@ -1,40 +1,86 @@
 const {
     ipcRenderer, clipboard, nativeImage, remote,
-} = require('electron')
+} = require('electron');
 
-const fs = require('fs')
-const {getScreenSources} = require('../public/desktop-capturer')
-const {CaptureEditor} = require('../public/capture-editor')
-const {getCurrentScreen} = require('../public/utils')
+const fs = require('fs');
+const {getScreenSources} = require('../public/desktop-capturer');
+const {CaptureEditor} = require('../public/capture-editor');
+const {getCurrentScreen} = require('../public/utils');
 
-const $canvas = document.getElementById('js-canvas')
-const $bg = document.getElementById('js-bg')
-const $sizeInfo = document.getElementById('js-size-info')
-const $toolbar = document.getElementById('js-toolbar')
+const $canvas = document.getElementById('js-canvas');
+const $bg = document.getElementById('js-bg');
+const $sizeInfo = document.getElementById('js-size-info');
+const $toolbar = document.getElementById('js-toolbar');
 
-const $btnClose = document.getElementById('js-tool-close')
-const $btnOk = document.getElementById('js-tool-ok')
+const $btnClose = document.getElementById('js-tool-close');
+const $btnOk = document.getElementById('js-tool-ok');
 // const $btnSave = document.getElementById('js-tool-save')
-const $btnReset = document.getElementById('js-tool-reset')
+const $btnReset = document.getElementById('js-tool-reset');
 
-const audio = new Audio()
-audio.src = '../assets/audio/capture.mp3'
+const audio = new Audio();
+audio.src = '../assets/audio/capture.mp3';
 
-const currentScreen = getCurrentScreen()
+const currentScreen = getCurrentScreen();
 
 // 右键取消截屏
 document.body.addEventListener('mousedown', (e) => {
     if (e.button === 2) {
         window.close()
     }
-}, true)
+}, true);
 
-// console.time('capture')
+//初始化选题按钮
+const initQue = () => {
+    $('#judge_answer').hide();
+    $('#choose_answer').show();
+    $('#judge_que').removeClass('active');
+    $('#choose_que').addClass('active');
+    $('#judge_yes').removeClass('active');
+    $('#judge_no').removeClass('active');
+};
+
+//选择题
+$('#choose_que').click(function () {
+    $('#judge_answer').hide();
+    $('#choose_answer').show();
+    $('#judge_que').removeClass('active');
+    $('#choose_que').addClass('active');
+});
+
+//选择题答案
+$('.choose_selection').each((i, e) => {
+    $(e).click(function () {
+        if ($(this).attr('data-choosen') === 'false') {
+            $(this).attr('data-choosen', "true");
+            $(this).addClass('active')
+        } else {
+            $(this).attr('data-choosen', "false");
+            $(this).removeClass('active')
+        }
+    })
+});
+
+//判断题
+$('#judge_que').click(function () {
+    $('#judge_answer').show();
+    $('#choose_answer').hide();
+    $('#judge_que').addClass('active');
+    $('#choose_que').removeClass('active');
+});
+
+//判断题对
+$('#judge_yes').click(function () {
+    $(this).addClass('active');
+    $('#judge_no').removeClass('active');
+});
+
+//判断题错
+$('#judge_no').click(function () {
+    $(this).addClass('active');
+    $('#judge_yes').removeClass('active');
+});
+
 getScreenSources({}, (imgSrc) => {
-
-    // console.timeEnd('capture')
-
-
     let capture = new CaptureEditor($canvas, $bg, imgSrc)
 
     let onDrag = (selectRect) => {
@@ -53,10 +99,11 @@ getScreenSources({}, (imgSrc) => {
 
     let onDragEnd = () => {
         if (capture.selectRect) {
+            initQue();
             ipcRenderer.send('capture-screen', {
                 type: 'select',
                 screenId: currentScreen.id,
-            })
+            });
             const {
                 r, b,
             } = capture.selectRect;
@@ -70,7 +117,7 @@ getScreenSources({}, (imgSrc) => {
             $toolbar.style.right = `${window.screen.width / 2 - 200}px`;
         }
     };
-    capture.on('end-dragging', onDragEnd)
+    capture.on('end-dragging', onDragEnd);
 
     ipcRenderer.on('capture-screen', (e, {type, screenId}) => {
         if (type === 'select') {
@@ -78,23 +125,23 @@ getScreenSources({}, (imgSrc) => {
                 capture.disable()
             }
         }
-    })
+    });
 
     capture.on('reset', () => {
-        $toolbar.style.display = 'none'
+        $toolbar.style.display = 'none';
         $sizeInfo.style.display = 'none'
-    })
+    });
 
     $btnClose.addEventListener('click', () => {
         ipcRenderer.send('capture-screen', {
             type: 'close',
-        })
+        });
         window.close()
-    })
+    });
 
     $btnReset.addEventListener('click', () => {
         capture.reset()
-    })
+    });
 
     const getBlobBydataURI = (dataURI) => {
         var binary = atob(dataURI.split(',')[1]);
@@ -180,7 +227,7 @@ getScreenSources({}, (imgSrc) => {
             selectCapture()
         }
     })
-})
+});
 
 
 
