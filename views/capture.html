@@ -18,18 +18,18 @@
 <div id="js-size-info" class="size-info"></div>
 <div id="js-toolbar" class="toolbar my_flex">
     <div class="titleType my_flex">
-        <div class="active">选择题</div>
-        <div>判断题</div>
+        <div id="choose_que" class="active">选择题</div>
+        <div id="judge_que">判断题</div>
     </div>
-    <ul class="my_flex">
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon active"></i></span>对</li>
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>错</li>
+    <ul id="judge_answer" class="my_flex" style="display: none">
+        <li><span class="inputCont"><i id="judge_yes" class="checkIcon"></i></span>对</li>
+        <li><span class="inputCont"><i id="judge_no" class="checkIcon"></i></span>错</li>
     </ul>
-    <ul class="my_flex">
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>A</li>
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>B</li>
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>C</li>
-        <li><span class="inputCont"><input type="checkbox"><i class="checkIcon"></i></span>D</li>
+    <ul id="choose_answer" class="my_flex">
+        <li><span class="inputCont"><i class="checkIcon choose_selection" data-choosen='false'></i></span>A</li>
+        <li><span class="inputCont"><i class="checkIcon choose_selection" data-choosen='false'></i></span>B</li>
+        <li><span class="inputCont"><i class="checkIcon choose_selection" data-choosen='false'></i></span>C</li>
+        <li><span class="inputCont"><i class="checkIcon choose_selection" data-choosen='false'></i></span>D</li>
     </ul>
     <div class="iconfont icon-zhongzhi" id="js-tool-reset"></div>
     <!--<div class="iconfont icon-xiazai" id="js-tool-save"></div>-->
