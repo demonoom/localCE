@@ -1,13 +1,13 @@
 body{
-    width: 102px;
-    height: 98px;
+    width: 104px;
+    height: 100px;
     overflow: hidden;
     position: relative;
     margin: 0;
 }
 #content {
     width:100%;
-    height: 57px;
+    height: 59px;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -58,18 +58,18 @@ body{
     bottom: 0;
     left: 50%;
     z-index: 6;
+    font-size: 13px;
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
+    color: #0012ff;
 }
 .textCont div{
     flex: 1;
-    height: 22px;
-    line-height: 22px;
-    font-size: 13px;
-    color: #0012ff;
+    height: 24px;
+    line-height: 24px;
     width: 40px;
     box-sizing: border-box;
     cursor: pointer;
@@ -89,7 +89,7 @@ body{
     text-align: left;
     padding-left: 10px;
 }
-#content:hover {
+#content:hover,#content.active {
     overflow: visible;
 }
 #content:hover .antIcon .antBody{
@@ -108,9 +108,41 @@ body{
     display: inline-block;
     -webkit-transition: all 2s ease;
     transition: all 2s ease;
-
 }
 #content:hover .textCont div{
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    width: 51px;
+}
+
+/*开课*/
+.startCont{
+    background: url("../images/textAll.png") no-repeat;
+    background-size:100%;
+    display: none;
+    text-align: center;
+    width: 95px;
+    height: 24px;
+    line-height: 22px;
+}
+#content.active .antIcon .antBody{
+     top: -38px;
+     height: 76px;
+ }
+#content.active .antIcon .antHand{
+     bottom: -38px;
+     z-index: 10;
+ }
+#content.active .textCont div{
+     display: inline-block;
+ }
+#content.active .textCont.pushCont{
+    display: none;
+}
+#content.active .textCont.startCont{
+    display: block;
+}
+#content.active .textCont div{
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 51px;

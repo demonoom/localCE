@@ -70,6 +70,7 @@ ul{
     font-size: 22px;
     padding-right: 10px;
     padding-left: 3px;
+    cursor: pointer;
 }
 .icon-guanbi{
     color: #FF0600;
@@ -80,6 +81,7 @@ ul{
 .titleType div{
     padding: 0 10px;
     position: relative;
+    cursor: pointer;
 }
 .titleType div.active{
     color: #3672ED;
@@ -118,6 +120,7 @@ li{
     border: 1px #A0A0A0 solid;
     display: inline-block;
     vertical-align: text-bottom;
+    cursor: pointer;
 }
 .checkIcon.active{
     border: 1px #3672ED solid;
@@ -130,7 +133,7 @@ li{
     width: 9px;
     height: 4px;
     left: 1px;
-    top: 3px;
+    top: 2px;
     border: 1px #fff solid;
     border-left: 0;
     border-bottom: 0;
