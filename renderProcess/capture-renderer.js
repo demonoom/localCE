@@ -3,9 +3,9 @@ const {
 } = require('electron')
 
 const fs = require('fs')
-const { getScreenSources } = require('../public/desktop-capturer')
-const { CaptureEditor } = require('../public/capture-editor')
-const { getCurrentScreen } = require('../public/utils')
+const {getScreenSources} = require('../public/desktop-capturer')
+const {CaptureEditor} = require('../public/capture-editor')
+const {getCurrentScreen} = require('../public/utils')
 
 const $canvas = document.getElementById('js-canvas')
 const $bg = document.getElementById('js-bg')
@@ -14,7 +14,7 @@ const $toolbar = document.getElementById('js-toolbar')
 
 const $btnClose = document.getElementById('js-tool-close')
 const $btnOk = document.getElementById('js-tool-ok')
-const $btnSave = document.getElementById('js-tool-save')
+// const $btnSave = document.getElementById('js-tool-save')
 const $btnReset = document.getElementById('js-tool-reset')
 
 const audio = new Audio()
@@ -67,7 +67,7 @@ getScreenSources({}, (imgSrc) => {
     }
     capture.on('end-dragging', onDragEnd)
 
-    ipcRenderer.on('capture-screen', (e, { type, screenId }) => {
+    ipcRenderer.on('capture-screen', (e, {type, screenId}) => {
         if (type === 'select') {
             if (screenId && screenId !== currentScreen.id) {
                 capture.disable()
@@ -95,26 +95,27 @@ getScreenSources({}, (imgSrc) => {
         if (!capture.selectRect) {
             return
         }
-        let url = capture.getImageUrl()
-        remote.getCurrentWindow().hide()
+        let url = capture.getImageUrl();
+        remote.getCurrentWindow().hide();
 
-        audio.play()
+        audio.play();
         audio.onended = () => {
             window.close()
-        }
-        clipboard.writeImage(nativeImage.createFromDataURL(url))
+        };
+        //创建图片写入剪贴板  在Linux报错
+        // clipboard.writeImage(nativeImage.createFromDataURL(url));
         ipcRenderer.send('capture-screen', {
             type: 'complete',
             url,
         })
 
-    }
-    $btnOk.addEventListener('click', selectCapture)
+    };
+    $btnOk.addEventListener('click', selectCapture);
 
-    $btnSave.addEventListener('click', () => {
-        let url = capture.getImageUrl()
+    /*$btnSave.addEventListener('click', () => {
+        let url = capture.getImageUrl();
 
-        remote.getCurrentWindow().hide()
+        remote.getCurrentWindow().hide();
         remote.dialog.showSaveDialog({
             filters: [{
                 name: 'Images',
@@ -139,7 +140,7 @@ getScreenSources({}, (imgSrc) => {
                 window.close()
             }
         })
-    })
+    });*/
 
     window.addEventListener('keypress', (e) => {
         if (e.code === 'Enter') {
