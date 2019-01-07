@@ -73,14 +73,22 @@ ul,li{
     padding: 0 10px;
     position: relative;
 }
+.titleType div.active{
+    color: #3672ED;
+}
 .titleType div:first-child::after{
     content: '';
     background: #D2D2D2;
-    height: 100%;
+    height: 85%;
     width: 1px;
     position: absolute;
     right: 0;
-    top:0;
+    top:50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 li{
     margin-right: 15px;
@@ -90,38 +98,43 @@ li{
     width: 14px;
     height: 14px;
     position: relative;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 .inputCont input{
     position: absolute;
     left: 0;
     top:0;
     z-index: 5;
-    opacity: 0.2;
-    /*-webkit-appearance: none;*/
+    opacity: 0;
+    -webkit-appearance: none;
 }
 .checkIcon{
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     border: 1px #A0A0A0 solid;
+    display: inline-block;
+    vertical-align: text-bottom;
 }
-.checkIcon.check{
+.checkIcon.active{
     border: 1px #3672ED solid;
     background: #3672ED;
     position: relative;
 }
-.checkIcon.check::after{
+.checkIcon.active::after{
     content: '';
     position: absolute;
-    width: 10px;
-    height: 2px;
-    left: 2px;
-    top:2px;
-    -webkit-transform: rotateX(135deg);
-    -moz-transform: rotateX(135deg);
-    -ms-transform: rotateX(135deg);
-    -o-transform: rotateX(135deg);
-    transform: rotateX(135deg);
+    width: 9px;
+    height: 4px;
+    left: 1px;
+    top: 3px;
+    border: 1px #fff solid;
+    border-left: 0;
+    border-bottom: 0;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
 
 }
