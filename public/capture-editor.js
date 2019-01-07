@@ -1,7 +1,3 @@
-/**
- * Created by xujian1 on 2018/10/8.
- */
-
 const Event = require('events')
 const { getCurrentScreen } = require('./utils')
 

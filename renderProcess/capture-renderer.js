@@ -59,12 +59,17 @@ getScreenSources({}, (imgSrc) => {
             })
             const {
                 r, b,
-            } = capture.selectRect
-            $toolbar.style.display = 'flex'
-            $toolbar.style.top = `${b + 15}px`
-            $toolbar.style.right = `${window.screen.width - r}px`
+            } = capture.selectRect;
+            //b是鼠标距离上边框的距离  r是鼠标距离左边框的距离
+            $toolbar.style.display = 'flex';
+            if (b >= window.screen.height - 80) {
+                $toolbar.style.top = `${200}px`;
+            } else {
+                $toolbar.style.top = `${b + 15}px`;
+            }
+            $toolbar.style.right = `${window.screen.width / 2 - 200}px`;
         }
-    }
+    };
     capture.on('end-dragging', onDragEnd)
 
     ipcRenderer.on('capture-screen', (e, {type, screenId}) => {
