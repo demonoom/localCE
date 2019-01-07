@@ -29,7 +29,7 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on('close', () => {
         win = null;
@@ -49,14 +49,14 @@ function loginSuccess() {
     let win_ball = new BrowserWindow({
         width: 100,
         height: 100,
-        // frame: false,
-        // resizable: false,
-        // transparent: true,  //使窗口透明
+        frame: false,
+        resizable: false,
+        transparent: true,  //使窗口透明
         x: size.width - 100,
         y: size.height / 2 - 150
     });
 
-    win_ball.webContents.openDevTools();
+    // win_ball.webContents.openDevTools();
 
     win_ball.loadURL(url.format({
         pathname: path.join(__dirname, './views/ball.html'),

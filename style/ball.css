@@ -1,25 +1,54 @@
 body{
     width: 102px;
+    height: 98px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
 }
 #content {
     width:100%;
     height: 57px;
-    position: relative;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     overflow: hidden;
 }
 .antIcon{
-    background: url("../images/antIcon.png") no-repeat;
-    background-size: 100%;
-    /*height: 76px;*/
+    position: relative;
+    /*-webkit-transition: all 3s ease;*/
+    /*transition: all 3s ease;*/
+
+}
+.antIcon .antBody{
     height: 35px;
     width: 67px;
-    overflow: hidden;
     position: absolute;
     top: 0;
-    left: 7px;
-    -webkit-transition: all 3s ease;
-    transition: all 3s ease;
-    z-index: 10;
+    left: 50%;
+    background: url("../images/antIcon.png") no-repeat;
+    background-size: 100%;
+    overflow: hidden;
+    z-index: 5;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.antIcon .antHand{
+    width: 58px;
+    height: 9px;
+    background: url("../images/antHand.png") no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 50%;
+    bottom: -48px;
+    z-index: 5;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 .textCont{
     display: -webkit-flex;
@@ -27,7 +56,13 @@ body{
     display: flex;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    z-index: 6;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 .textCont div{
     flex: 1;
@@ -37,8 +72,9 @@ body{
     color: white;
     width: 40px;
     box-sizing: border-box;
-    -webkit-transition: all 2s ease;
-    transition: all 2s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
 }
 .textCont div span{
     display: none;
@@ -58,17 +94,19 @@ body{
     padding-left: 10px;
 }
 #content:hover{
-    /*width:102px;*/
-    /*height: 98px;*/
     overflow: visible;
 }
-#content:hover .antIcon{
+#content:hover .antIcon .antBody{
+    top: -38px;
     height: 76px;
-    top: -36px;
-    left: 50%;
-
-    animation:antAppear 5s;
-    -webkit-animation:antAppear 5s;
+    animation:antAppear 0.8s linear;
+    -webkit-animation:antAppear 0.8s linear;
+}
+#content:hover .antIcon .antHand{
+    animation:antHandAppear 0.5s linear;
+    -webkit-animation:antHandAppear 0.5s linear;
+    bottom: -38px;
+    z-index: 10;
 }
 #content:hover .textCont div span{
     display: inline-block;
@@ -77,19 +115,41 @@ body{
     width: 51px;
 }
 @keyframes antAppear {
-    100%{
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
-        transform: translateX(-50%);
+    0%{
+        top: 0;
+        height:55px;
         overflow: visible;
     }
     50%{
-        transform: translateY(30px);
-        opacity: 0.8;
+        height: 76px;
+        top: -41px;
+        overflow: visible;
     }
+    100%{
+        height: 76px;
+        top: -38px;
+        overflow: visible;
+    }
+}
+@keyframes antHandAppear {
     0%{
-        overflow: hidden;
+        bottom: -45px;
+        z-index: 5;
+    }
+    25%{
+        bottom: -45px;
+        z-index: 5;
+    }
+    50%{
+        bottom: -40px;
+        z-index: 5;
+    }
+    75%{
+        bottom: -34px;
+        z-index: 5;
+    }
+    100%{
+        bottom: -38px;
+        z-index: 10;
     }
 }
