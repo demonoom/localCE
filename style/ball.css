@@ -89,7 +89,7 @@ body{
     text-align: left;
     padding-left: 10px;
 }
-#content:hover{
+#content:hover {
     overflow: visible;
 }
 #content:hover .antIcon .antBody{
@@ -106,8 +106,8 @@ body{
 }
 #content:hover .textCont div span{
     display: inline-block;
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
 
 }
 #content:hover .textCont div{
