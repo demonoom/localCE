@@ -91,24 +91,52 @@ getScreenSources({}, (imgSrc) => {
         capture.reset()
     })
 
+    const getBlobBydataURI = (dataURI) => {
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for (var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+    };
+
     let selectCapture = () => {
         if (!capture.selectRect) {
             return
         }
         let url = capture.getImageUrl();
+        let imgBlob = getBlobBydataURI(url);
         remote.getCurrentWindow().hide();
 
         audio.play();
         audio.onended = () => {
             window.close()
         };
+
+        let formData = new FormData();
+        formData.append("filePath", imgBlob, "file_" + Date.parse(new Date()) + ".png");
+
+        $.ajax({
+            type: "POST",
+            url: "http://60.205.86.217:8890/Excoord_Upload_Server/file/upload",
+            enctype: 'multipart/form-data',
+            data: formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData: false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType: false,
+            success: function (responseStr) {
+                ipcRenderer.send('capture-screen', {
+                    type: 'complete',
+                    src: responseStr,
+                })
+            },
+            error: function (responseStr) {
+                console.log(responseStr);
+            }
+        });
         //创建图片写入剪贴板  在Linux报错
         // clipboard.writeImage(nativeImage.createFromDataURL(url));
-        ipcRenderer.send('capture-screen', {
-            type: 'complete',
-            url,
-        })
-
     };
     $btnOk.addEventListener('click', selectCapture);
 

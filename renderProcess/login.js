@@ -1,5 +1,6 @@
 $(function () {
     const {ipcRenderer} = require('electron');
+    const remote = require('electron').remote;
 
     var machineId = '';
     var simple = new SimpleWebsocketConnection();
@@ -104,6 +105,8 @@ $(function () {
                             account: $("#act").val(),
                             password: $("#pwd").val()
                         });
+                        remote.getGlobal('loginUser').account = $("#act").val();
+                        remote.getGlobal('loginUser').password = $("#pwd").val();
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));

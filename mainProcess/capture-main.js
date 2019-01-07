@@ -5,6 +5,11 @@ const url = require('url');
 
 let captureWins = [];
 
+/**
+ * 创建一个全屏窗口加载整个桌面
+ * @param e
+ * @param args
+ */
 const captureScreen = (e, args) => {
     if (captureWins.length) {
         return
@@ -46,7 +51,7 @@ const captureScreen = (e, args) => {
             captureWin.blur()
         }
         // 调试用
-        // captureWin.openDevTools()
+        // captureWin.openDevTools();
 
         captureWin.on('closed', () => {
             let index = captureWins.indexOf(captureWin);
@@ -67,12 +72,11 @@ const useCapture = () => {
         }
     });
 
-    ipcMain.on('capture-screen', (e, {type = 'start', screenId, url} = {}) => {
+    ipcMain.on('capture-screen', (e, {type = 'start', screenId, src} = {}) => {
         if (type === 'start') {
             captureScreen()
         } else if (type === 'complete') {
-            //选取图片完毕，获得base64
-            console.log(url, 'complete');
+            //在main.js中处理，方便传给ball.js
         } else if (type === 'select') {
             captureWins.forEach(win => win.webContents.send('capture-screen', {type: 'select', screenId}))
         }
