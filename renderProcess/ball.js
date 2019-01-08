@@ -64,7 +64,7 @@
             "password": remote.getGlobal('loginUser').password,
             "account": remote.getGlobal('loginUser').account,
             "classType": 'A', //A
-            "classCode": '580', //班级
+            "classCode": remote.getGlobal('loginUser').classCode, //班级
             "userId": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length)
         }
     };

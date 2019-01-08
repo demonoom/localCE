@@ -71,6 +71,7 @@ function showClassBall() {
 //開課成功
 ipcMain.on('showClassBall', () => {
     showClassBall();
+    win.hide()
 });
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
@@ -84,5 +85,6 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 global.loginUser = {
     account: '',
     password: '',
+    classCode: '',
 };
 
