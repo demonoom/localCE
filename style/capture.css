@@ -65,6 +65,7 @@ ul{
     box-sizing: border-box;
     line-height: 1;
     overflow: hidden;
+    border-radius: 3px;
 }
 
 .toolbar .iconfont {
@@ -120,7 +121,7 @@ li{
     box-sizing: border-box;
     border: 1px #A0A0A0 solid;
     display: inline-block;
-    vertical-align: text-bottom;
+    vertical-align: bottom;
     cursor: pointer;
 }
 .checkIcon.active{

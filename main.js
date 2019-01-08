@@ -49,8 +49,8 @@ let win_ball = null;
 function loginSuccess() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 250,
-        height: 358,
+        width: 100,
+        height: 100,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
