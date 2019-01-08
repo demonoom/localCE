@@ -73,10 +73,10 @@ ipcMain.on('loginSuccess', () => {
     win.hide();
 });
 
-ipcMain.on('capture-screen', (e, {type = 'start', screenId, src} = {}) => {
+ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
     if (type === 'complete') {
         //选取图片完毕，获得线上地址,发送至渲染进程发送消息服务
-        win_ball.webContents.send('pushQue', src)
+        win_ball.webContents.send('pushQue', {src, word, subjectType})
     }
 });
 

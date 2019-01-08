@@ -22,6 +22,9 @@ audio.src = '../assets/audio/capture.mp3';
 
 const currentScreen = getCurrentScreen();
 
+//题目类型
+let subjectType = 'C';
+
 // 右键取消截屏
 document.body.addEventListener('mousedown', (e) => {
     if (e.button === 2) {
@@ -31,16 +34,22 @@ document.body.addEventListener('mousedown', (e) => {
 
 //初始化选题按钮
 const initQue = () => {
+    subjectType = 'C';
     $('#judge_answer').hide();
     $('#choose_answer').show();
     $('#judge_que').removeClass('active');
     $('#choose_que').addClass('active');
-    $('#judge_yes').removeClass('active');
-    $('#judge_no').removeClass('active');
+    $('#judge_yes').removeClass('active').attr('data-judge', 'false');
+    $('#judge_no').removeClass('active').attr('data-judge', 'false');
+    $('.choose_selection').each((i, e) => {
+        $(e).attr('data-choosen', "false");
+        $(e).removeClass('active')
+    });
 };
 
 //选择题
 $('#choose_que').click(function () {
+    subjectType = 'C';
     $('#judge_answer').hide();
     $('#choose_answer').show();
     $('#judge_que').removeClass('active');
@@ -62,6 +71,7 @@ $('.choose_selection').each((i, e) => {
 
 //判断题
 $('#judge_que').click(function () {
+    subjectType = 'J';
     $('#judge_answer').show();
     $('#choose_answer').hide();
     $('#judge_que').addClass('active');
@@ -70,32 +80,32 @@ $('#judge_que').click(function () {
 
 //判断题对
 $('#judge_yes').click(function () {
-    $(this).addClass('active');
-    $('#judge_no').removeClass('active');
+    $(this).addClass('active').attr('data-judge', "true");
+    $('#judge_no').removeClass('active').attr('data-judge', "false");
 });
 
 //判断题错
 $('#judge_no').click(function () {
-    $(this).addClass('active');
-    $('#judge_yes').removeClass('active');
+    $(this).addClass('active').attr('data-judge', "true");
+    $('#judge_yes').removeClass('active').attr('data-judge', "false");
 });
 
 getScreenSources({}, (imgSrc) => {
-    let capture = new CaptureEditor($canvas, $bg, imgSrc)
+    let capture = new CaptureEditor($canvas, $bg, imgSrc);
 
     let onDrag = (selectRect) => {
-        $toolbar.style.display = 'none'
-        $sizeInfo.style.display = 'block'
-        $sizeInfo.innerText = `${selectRect.w} * ${selectRect.h}`
+        $toolbar.style.display = 'none';
+        $sizeInfo.style.display = 'block';
+        $sizeInfo.innerText = `${selectRect.w} * ${selectRect.h}`;
         if (selectRect.y > 35) {
             $sizeInfo.style.top = `${selectRect.y - 30}px`
         } else {
             $sizeInfo.style.top = `${selectRect.y + 10}px`
         }
         $sizeInfo.style.left = `${selectRect.x}px`
-    }
-    capture.on('start-dragging', onDrag)
-    capture.on('dragging', onDrag)
+    };
+    capture.on('start-dragging', onDrag);
+    capture.on('dragging', onDrag);
 
     let onDragEnd = () => {
         if (capture.selectRect) {
@@ -152,22 +162,13 @@ getScreenSources({}, (imgSrc) => {
         return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
     };
 
-    let selectCapture = () => {
-        if (!capture.selectRect) {
-            return
-        }
-        let url = capture.getImageUrl();
-        let imgBlob = getBlobBydataURI(url);
-        remote.getCurrentWindow().hide();
-
-        audio.play();
-        audio.onended = () => {
-            window.close()
-        };
-
+    /**
+     * 获取线上地址
+     * @param imgBlob
+     */
+    const getOnlineSrc = (imgBlob, word, subjectType) => {
         let formData = new FormData();
         formData.append("filePath", imgBlob, "file_" + Date.parse(new Date()) + ".png");
-
         $.ajax({
             type: "POST",
             url: "http://60.205.86.217:8890/Excoord_Upload_Server/file/upload",
@@ -181,12 +182,72 @@ getScreenSources({}, (imgSrc) => {
                 ipcRenderer.send('capture-screen', {
                     type: 'complete',
                     src: responseStr,
+                    word,
+                    subjectType
                 })
             },
             error: function (responseStr) {
                 console.log(responseStr);
             }
         });
+    };
+
+    let selectCapture = () => {
+        let url = capture.getImageUrl();
+        let imgBlob = getBlobBydataURI(url);
+        if (subjectType === 'C') {
+            //选择题
+            let arr = [];
+            let ansStr = '';
+            $('.choose_selection').each(function (i, e) {
+                arr.push($(this).attr('data-choosen'))
+            });
+            if (arr.indexOf('true') === -1) {
+                layer.msg('请选择选项');
+                return
+            } else {
+                arr.forEach(function (v, i) {
+                    if (v === 'true') {
+                        if (i == 0) {
+                            ansStr += 'A';
+                        } else if (i == 1) {
+                            ansStr += 'B';
+                        } else if (i == 2) {
+                            ansStr += 'C';
+                        } else if (i == 3) {
+                            ansStr += 'D';
+                        }
+                    }
+                });
+                if (ansStr.length === 1) {
+                    //单选
+                    getOnlineSrc(imgBlob, ansStr, 'C');
+                } else {
+                    //多选
+                    getOnlineSrc(imgBlob, ansStr, 'MC');
+                }
+            }
+        } else {
+            //判断题
+            if ($('#judge_yes').attr('data-judge') === 'false' && $('#judge_no').attr('data-judge') === 'false') {
+                layer.msg('请选择选项');
+                return
+            } else if ($('#judge_yes').attr('data-judge') === 'true' && $('#judge_no').attr('data-judge') === 'false') {
+                getOnlineSrc(imgBlob, '正确', 'J');
+            } else {
+                getOnlineSrc(imgBlob, '错误', 'J');
+            }
+        }
+
+        if (!capture.selectRect) {
+            return
+        }
+        remote.getCurrentWindow().hide();
+
+        audio.play();
+        audio.onended = () => {
+            window.close()
+        };
         //创建图片写入剪贴板  在Linux报错
         // clipboard.writeImage(nativeImage.createFromDataURL(url));
     };

@@ -51,12 +51,11 @@
         let obj = {
             "command": "pushImageSubject",
             "data": {
-                "img": msg,
-                "subjectType": 'C',
-                "answer": 'A',
+                "img": msg.src,
+                "subjectType": msg.subjectType,
+                "answer": msg.word,
             }
         };
-        console.log(obj);
         connection.send(obj);
     })
 })();
