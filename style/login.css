@@ -187,7 +187,7 @@ input#act {
     color: #1A58FB;
 }
 
-.active::before {
+.tab > div.active::before {
     content: '';
     position: absolute;
     left: 50%;
