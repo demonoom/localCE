@@ -44,7 +44,7 @@ const captureScreen = (e, args) => {
             protocol: 'file'
         }));
 
-        let {x, y} = screen.getCursorScreenPoint()
+        let {x, y} = screen.getCursorScreenPoint();
         if (x >= display.bounds.x && x <= display.bounds.x + display.bounds.width && y >= display.bounds.y && y <= display.bounds.y + display.bounds.height) {
             captureWin.focus()
         } else {
@@ -80,7 +80,7 @@ const useCapture = () => {
         } else if (type === 'select') {
             captureWins.forEach(win => win.webContents.send('capture-screen', {type: 'select', screenId}))
         }
-    })
+    });
 };
 
 exports.useCapture = useCapture;

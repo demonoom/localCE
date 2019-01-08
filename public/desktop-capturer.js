@@ -1,39 +1,39 @@
-const { getCurrentScreen } = require('./utils')
+const { getCurrentScreen } = require('./utils');
 
-const curScreen = getCurrentScreen()
+const curScreen = getCurrentScreen();
 
 function getScreen(callback) {
-    this.callback = callback
+    this.callback = callback;
 
-    document.body.style.opacity = '0'
-    let oldCursor = document.body.style.cursor
-    document.body.style.cursor = 'none'
+    document.body.style.opacity = '0';
+    let oldCursor = document.body.style.cursor;
+    document.body.style.cursor = 'none';
 
     this.handleStream = (stream) => {
-        document.body.style.cursor = oldCursor
-        document.body.style.opacity = '1'
+        document.body.style.cursor = oldCursor;
+        document.body.style.opacity = '1';
         // Create hidden video tag
-        let video = document.createElement('video')
-        video.style.cssText = 'position:absolute;top:-10000px;left:-10000px;'
+        let video = document.createElement('video');
+        video.style.cssText = 'position:absolute;top:-10000px;left:-10000px;';
         // Event connected to stream
 
-        let loaded = false
+        let loaded = false;
         video.onloadedmetadata = () => {
             if (loaded) {
                 return
             }
-            loaded = true
+            loaded = true;
             // Set video ORIGINAL height (screenshot)
             video.style.height = video.videoHeight + 'px' // videoHeight
             video.style.width = video.videoWidth + 'px' // videoWidth
 
             // Create canvas
-            let canvas = document.createElement('canvas')
-            canvas.width = video.videoWidth
-            canvas.height = video.videoHeight
-            let ctx = canvas.getContext('2d')
+            let canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            let ctx = canvas.getContext('2d');
             // Draw video on canvas
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
             if (this.callback) {
                 // Save screenshot to png - base64
@@ -43,20 +43,20 @@ function getScreen(callback) {
             }
 
             // Remove hidden video tag
-            video.remove()
+            video.remove();
             try {
                 stream.getTracks()[0].stop()
             } catch (e) {
                 // nothing
             }
-        }
-        video.srcObject = stream
+        };
+        video.srcObject = stream;
         document.body.appendChild(video)
-    }
+    };
 
     this.handleError = (e) => {
         // console.log(e)
-    }
+    };
 
     if (require('os').platform() !== 'darwin') {
         require('electron').desktopCapturer.getSources({
@@ -102,4 +102,4 @@ function getScreen(callback) {
 
 exports.getScreenSources = ({ types = ['screen'] } = {}, callback) => {
     getScreen(callback)
-}
+};
