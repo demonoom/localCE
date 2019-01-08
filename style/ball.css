@@ -140,6 +140,10 @@ ul, li {
     width: 30px;
     box-sizing: border-box;
     cursor: pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 .textCont div#statistics{
     width: 24px;
