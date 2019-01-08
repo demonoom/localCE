@@ -84,7 +84,7 @@ let win_ball = null;
 function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 100,
+        width: 140,
         height: 100,
         frame: false,
         resizable: false,

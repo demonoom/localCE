@@ -141,11 +141,12 @@ input {
     border: 1px #D2D2D2 solid;
     line-height: 20px;
     padding: 10px 15px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     outline: none;
     width: 100%;
     box-sizing: border-box;
     font-size: 14PX;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
 
 input:focus {
@@ -168,7 +169,7 @@ input#act {
     border: 0;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 28px;
+    margin-top: 23px;
     font-family: "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
 }
 
@@ -224,7 +225,7 @@ input#act {
 .classList {
     color: #333;
     background: #F5F5F5;
-    padding-bottom: 7px;
+    height: calc(100% - 90px);
     /*display: none;*/
 }
 
@@ -255,7 +256,7 @@ input#act {
 .classList ul {
     padding: 0 20px;
     background: white;
-    height: 219px;
+    height: 214px;
     overflow-y: auto;
     margin: 0;
 }
@@ -265,7 +266,7 @@ input#act {
     line-height: 42px;
     border-bottom: 1px #EBEBEB solid;
     position: relative;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .classList ul li:last-child {
@@ -308,7 +309,10 @@ input#act {
     left: 3px;
     top: 3px;
 }
-
+.classList .btnWrap{
+    position: relative;
+    height: calc(100% - 248px);
+}
 .classList .btn {
     width: 120px;
     height: 30px;
@@ -316,8 +320,16 @@ input#act {
     font-size: 14px;
     color: white;
     text-align: center;
-    margin: 7px auto 0;
     border-radius: 4px;
     background: #3672ED;
     cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
 }

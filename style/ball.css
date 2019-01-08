@@ -4,7 +4,7 @@ body {
     margin: 0;
     border: none;
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
-    width: 104px;
+    width: 140px;
     height: 100px;
 }
 
@@ -84,6 +84,16 @@ ul, li {
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 }
+.clock{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    background: url("../images/icon_clock.png") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
 
 .textCont {
     display: -webkit-flex;
@@ -104,14 +114,18 @@ ul, li {
 }
 
 .textCont div {
-    flex: 1;
     height: 24px;
     line-height: 22px;
-    width: 40px;
+    width: 36px;
     box-sizing: border-box;
     cursor: pointer;
 }
-
+.textCont div#statistics{
+    width: 26px;
+    background: url("../images/textCenter.png") no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+}
 .textCont div span {
     display: none;
 }
@@ -159,6 +173,9 @@ ul, li {
     transition: all 0.5s ease;
     width: 51px;
 }
+.pushQuestion #content:hover .textCont div#statistics {
+    width: 38px;
+}
 
 /*开课*/
 .startCont {
@@ -194,8 +211,9 @@ ul, li {
 }
 
 .startClass #content .textCont div {
-    width: 51px;
+    width: 47px;
 }
+
 
 @keyframes antAppear {
     0% {
