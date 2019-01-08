@@ -110,7 +110,7 @@ $(function () {
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
-                    showOpenClass()
+                    getTeacherClasses();
                 } else {
                     layer.msg(res.msg);
                 }
@@ -180,7 +180,7 @@ $(function () {
                 var uuid = data.uuid;
                 //                   var user = data.user;
                 if (uuid == machineId) {
-                    showOpenClass()
+                    getTeacherClasses();
                 } else {
 
                 }
@@ -189,17 +189,56 @@ $(function () {
     };
 
     /**
-     * 登陸成功展示開課逻辑
-     */
-    showOpenClass = () => {
-        $('#logo_content').hide();
-        $('#classList').show();
-    }
-
-    /**
      * 开课
      */
     $('#openClassBtn').click(function () {
         ipcRenderer.send('showClassBall', '');
-    })
+    });
+
+    /**
+     * 获取班级名称以及classCode
+     */
+    const getTeacherClasses = () => {
+        $.ajax({
+            type: "POST",
+            url: "https://www.maaee.com/Excoord_For_Education/webservice",
+            data: {
+                params: JSON.stringify({
+                    "method": "getTeacherClasses",
+                    "ident": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length),
+                })
+            },
+            header: {
+                "content-type": "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+            success: function (data) {
+                let res = JSON.parse(data);
+                if (res.success) {
+                    if (res.response.length === 0) {
+                        layer.msg('该老师没有班级，无法开课')
+                    } else {
+                        buildClass(res.response)
+                    }
+                } else {
+                    layer.msg(res.msg);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    };
+
+    const buildClass = (arr) => {
+        let htmlStr = '';
+        arr.forEach((e) => {
+            htmlStr += `<li>
+                <span>${e.split('#')[1]}</span>
+                <i data-classCode="${e.split('#')[0]}"></i>
+            </li>`
+        });
+        $('#class_list-ul').append(htmlStr);
+        $('#logo_content').hide();
+        $('#classList').show();
+    }
 });

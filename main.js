@@ -14,13 +14,13 @@ let win = null;
 
 function ant_createWin() {
     // 初始化截图
-    useCapture()
+    useCapture();
 
     win = new BrowserWindow({
         width: 412,
         height: 462,
         title: '本地授课助手',
-        resizable: false,
+        // resizable: false,
     });
 
     win.loadURL(url.format({
@@ -29,11 +29,11 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on('close', () => {
         win = null;
-        // app.quit();
+        app.quit();
     });
 
     win.on('ready-to-show', () => {
