@@ -20,7 +20,7 @@ function ant_createWin() {
         width: 412,
         height: 462,
         title: '本地授课助手',
-        resizable: false,
+        // resizable: false,
     });
 
     win.loadURL(url.format({
@@ -29,7 +29,7 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on('close', () => {
         win = null;
@@ -49,9 +49,8 @@ let win_ball = null;
 function loginSuccess() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        // width: 100,
-        // height: 100,
-        useContentSize: true,
+        width: 100,
+        height: 100,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明

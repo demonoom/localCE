@@ -1,9 +1,13 @@
-body{
+body {
     overflow: hidden;
     position: relative;
     margin: 0;
+    border: none;
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+    width: 104px;
+    height: 100px;
 }
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -22,37 +26,33 @@ body{
 ::-webkit-scrollbar-button {
     background-color: initial;
 }
-.pushQuestion{
-    width: 104px;
-    height: 100px;
-}
-.startClass{
-    width: 250px;
-    height: 358px;
-}
 
-ul,li{
+ul, li {
     list-style: none;
 }
+
 #content {
-    width:100%;
+    width: 100%;
     height: 59px;
     position: absolute;
     left: 0;
     bottom: 0;
     overflow: hidden;
 }
-.startClass #content{
+
+.startClass #content {
     right:0;
     top: 41px;
     bottom: auto;
     left: auto;
     width: 104px;
 }
-.antIcon{
+
+.antIcon {
     position: relative;
 }
-.antIcon .antBody{
+
+.antIcon .antBody {
     height: 35px;
     width: 67px;
     position: absolute;
@@ -68,7 +68,8 @@ ul,li{
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-.antIcon .antHand{
+
+.antIcon .antHand {
     width: 58px;
     height: 9px;
     background: url("../images/antHand.png") no-repeat;
@@ -83,7 +84,8 @@ ul,li{
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-.textCont{
+
+.textCont {
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
@@ -100,211 +102,137 @@ ul,li{
     /*color: #0012ff;*/
     color: #004bb0;
 }
-.textCont div{
+
+.textCont div {
     flex: 1;
     height: 24px;
-    line-height: 24px;
+    line-height: 22px;
     width: 40px;
     box-sizing: border-box;
     cursor: pointer;
 }
-.textCont div span{
+
+.textCont div span {
     display: none;
 }
-.textCont #screenShot{
+
+.textCont #screenShot {
     background: url("../images/textLeft.png") no-repeat;
-    background-size:100% 100%;
+    background-size: 100% 100%;
     text-align: right;
     padding-right: 10px;
 }
-.textCont #pushQue{
+
+.textCont #pushQue {
     background: url("../images/textRight.png") no-repeat;
-    background-size:100% 100%;
+    background-size: 100% 100%;
     text-align: left;
     padding-left: 10px;
 }
-.pushQuestion #content:hover,.startClass #content{
+
+.pushQuestion #content:hover, .startClass #content {
     overflow: visible;
 }
-.pushQuestion #content:hover .antIcon .antBody{
+
+.pushQuestion #content:hover .antIcon .antBody {
     top: -38px;
     height: 76px;
-    animation:antAppear 0.8s linear;
-    -webkit-animation:antAppear 0.8s linear;
+    animation: antAppear 0.8s linear;
+    -webkit-animation: antAppear 0.8s linear;
 }
-.pushQuestion #content:hover .antIcon .antHand{
-    animation:antHandAppear 0.5s linear;
-    -webkit-animation:antHandAppear 0.5s linear;
+
+.pushQuestion #content:hover .antIcon .antHand {
+    animation: antHandAppear 0.5s linear;
+    -webkit-animation: antHandAppear 0.5s linear;
     bottom: -38px;
     z-index: 10;
 }
-.pushQuestion #content:hover .textCont div span{
+
+.pushQuestion #content:hover .textCont div span {
     display: inline-block;
     -webkit-transition: all 2s ease;
     transition: all 2s ease;
 }
-.pushQuestion #content:hover .textCont div{
+
+.pushQuestion #content:hover .textCont div {
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 51px;
 }
 
 /*开课*/
-.startCont{
+.startCont {
     background: url("../images/textAll.png") no-repeat;
-    background-size:100%;
+    background-size: 100%;
     display: none;
     text-align: center;
     width: 95px;
     height: 24px;
     line-height: 20px;
 }
-.startClass #content .antIcon .antBody{
-     top: -38px;
-     height: 76px;
- }
-.startClass #content .antIcon .antHand{
-     bottom: -38px;
-     z-index: 10;
- }
-.startClass #content .textCont div{
-     display: inline-block;
- }
-.startClass #content .textCont.pushCont{
+
+.startClass #content .antIcon .antBody {
+    top: -38px;
+    height: 76px;
+}
+
+.startClass #content .antIcon .antHand {
+    bottom: -38px;
+    z-index: 10;
+}
+
+.startClass #content .textCont div {
+    display: inline-block;
+}
+
+.startClass #content .textCont.pushCont {
     display: none;
 }
-.startClass #content .textCont.startCont{
+
+.startClass #content .textCont.startCont {
     display: block;
 }
-.startClass #content .textCont div{
+
+.startClass #content .textCont div {
     width: 51px;
 }
-.classList{
-    color: #333;
-    position: absolute;
-    top: 108px;
-    right: 0;
-    width: 250px;
-    background: #F5F5F5;
-    /*display: none;*/
-}
-.classList .title{
-    background: #F5F5F5;
-    height: 34px;
-    line-height: 34px;
-    font-size: 15px;
-    padding: 0 15px;
-    position: relative;
-}
-.classList .icon-guanbi{
-    color: #888;
-    font-size: 18px;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-.classList ul{
-    padding: 0 15px;
-    background: white;
-    height: 219px;
-    overflow-y: auto;
-    margin: 0;
-}
-.classList ul li{
-    height: 43px;
-    line-height: 43px;
-    border-bottom: 1px #EBEBEB solid;
-    position: relative;
-}
-.classList ul li:after{
-    border-bottom: none;
-}
-.classList ul li span{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    width: calc(100% - 25px);
-}
-.classList ul li i{
-    display: block;
-    width: 14px;
-    height: 14px;
-    border: 1px #AAAAAA solid;
-    border-radius: 50%;
-    background: #F5F5F5;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-.classList ul li i.active:after{
-    content: '';
-    border-radius: 50%;
-    width: 8px;
-    height: 8px;
-    background: #0768AC;
-    position: absolute;
-    left: 3px;
-    top:3px;
-}
-.classList .btn{
-    width: 120px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14px;
-    color: white;
-    text-align: center;
-    margin: 7px auto;
-    border-radius: 15px;
-    background: #3672ED;
-}
+
 @keyframes antAppear {
-    0%{
+    0% {
         top: 0;
-        height:55px;
+        height: 55px;
         overflow: visible;
     }
-    50%{
+    50% {
         height: 76px;
         top: -41px;
         overflow: visible;
     }
-    100%{
+    100% {
         height: 76px;
         top: -38px;
         overflow: visible;
     }
 }
+
 @keyframes antHandAppear {
-    0%{
+    0% {
         bottom: -45px;
         z-index: 5;
     }
-    25%{
+    25% {
         bottom: -45px;
         z-index: 5;
     }
-    50%{
+    50% {
         bottom: -40px;
         z-index: 5;
     }
-    75%{
+    75% {
         bottom: -34px;
         z-index: 5;
     }
-    100%{
+    100% {
         bottom: -38px;
         z-index: 10;
     }
