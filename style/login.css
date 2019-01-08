@@ -30,8 +30,8 @@ input:-webkit-autofill {
 
 .login_box {
     position: absolute;
-    width: 412px;
-    height: 462px;
+    width: 350px;
+    height: 387px;
     background: white;
     top: 50%;
     left: 50%;
@@ -44,7 +44,6 @@ input:-webkit-autofill {
     color: #666;
     font-weight: bold;
     padding: 27px 0 27px;
-    margin-bottom: 25px;
     text-align: center;
     background: #F8FAFF;
 }
@@ -64,7 +63,7 @@ input:-webkit-autofill {
 }
 
 .logo_content{
-    padding: 0 35px;
+    padding: 20px 26px 0;
 }
 .tab {
     font-size: 18px;
@@ -76,6 +75,7 @@ input:-webkit-autofill {
     color: #666;
     text-align: center;
     padding-bottom: 15px;
+    line-height: 1;
     border-bottom: 1px #E0E0E0 solid;
 }
 
@@ -95,7 +95,7 @@ input:-webkit-autofill {
 }
 
 .inputWrap #actData {
-    max-height: 132px;
+    max-height: 83px;
     overflow-y: auto;
     width: 100%;
     position: absolute;
@@ -140,12 +140,12 @@ input:-webkit-autofill {
 input {
     border: 1px #D2D2D2 solid;
     line-height: 20px;
-    padding: 11px 15px;
-    margin-bottom: 24px;
+    padding: 10px 15px;
+    margin-bottom: 18px;
     outline: none;
     width: 100%;
     box-sizing: border-box;
-    font-size: 15PX;
+    font-size: 14PX;
 }
 
 input:focus {
@@ -168,7 +168,7 @@ input#act {
     border: 0;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 45px;
+    margin-top: 28px;
     font-family: "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
 }
 
@@ -206,14 +206,14 @@ input#act {
 }
 
 #scan_image {
-    width: 210px;
-    height: 210px;
+    width: 180px;
+    height: 180px;
 }
 
 .scan {
     display: none;
     text-align: center;
-    margin-top: 22px;
+    margin-top: 15px;
 }
 
 .scan div {
@@ -224,6 +224,7 @@ input#act {
 .classList {
     color: #333;
     background: #F5F5F5;
+    padding-bottom: 7px;
     /*display: none;*/
 }
 
@@ -234,6 +235,7 @@ input#act {
     font-size: 15px;
     padding: 0 15px;
     position: relative;
+    text-align: center;
 }
 
 .classList .icon-guanbi {
@@ -251,7 +253,7 @@ input#act {
 }
 
 .classList ul {
-    padding: 0 15px;
+    padding: 0 20px;
     background: white;
     height: 219px;
     overflow-y: auto;
@@ -265,7 +267,7 @@ input#act {
     position: relative;
 }
 
-.classList ul li:after {
+.classList ul li:last-child {
     border-bottom: none;
 }
 
@@ -313,7 +315,8 @@ input#act {
     font-size: 14px;
     color: white;
     text-align: center;
-    margin: 7px auto;
-    border-radius: 15px;
+    margin: 7px auto 0;
+    border-radius: 4px;
     background: #3672ED;
+    cursor: pointer;
 }

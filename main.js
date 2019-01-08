@@ -17,8 +17,8 @@ function ant_createWin() {
     useCapture()
 
     win = new BrowserWindow({
-        width: 412,
-        height: 462,
+        width: 350,
+        height: 387,
         title: '本地授课助手',
         // resizable: false,
     });
