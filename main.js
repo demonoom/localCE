@@ -5,9 +5,9 @@ const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
 let electronScreen;
-
 const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
+
 if (!gotTheLock) {
     app.quit();
 } else {
