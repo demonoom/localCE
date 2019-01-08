@@ -1,6 +1,8 @@
 (function () {
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
+    const statistics = document.querySelector('#statistics');
+    const clock = document.querySelector('#clock');
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
 
@@ -40,6 +42,20 @@
         ipcRenderer.send('capture-screen');
     };
 
+    //统计
+    statistics.onclick = () => {
+        ipcRenderer.send('open_statistics')
+    };
+
+    //下课
+    clock.onclick = () => {
+        let obj = {
+            "command": "classOver",
+        };
+        connection.send(obj);
+        ipcRenderer.send('class_over');
+    }
+
     //连接推题消息
     let connection = new ClazzConnection();
     connection.clazzWsListener = {
@@ -55,6 +71,9 @@
         onMessage: function (info) {
             var data = info.data;
             console.log(info);
+            if (info.command === 'teacherLogin') {
+                remote.getGlobal('loginUser').vid = data.vid
+            }
         }
     };
     //构建登录课堂的协议信息

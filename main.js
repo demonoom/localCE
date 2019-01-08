@@ -90,8 +90,8 @@ function showClassBall() {
         resizable: false,
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
-        x: size.width - 100,
-        y: size.height / 2 - 150
+        x: size.width - 200,
+        y: size.height / 2 - 200
     });
 
     // win_ball.webContents.openDevTools();
@@ -118,10 +118,36 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
     }
 });
 
+//下课
+ipcMain.on('class_over', () => {
+    win.destroy();
+    app.quit();
+});
+
+ipcMain.on('open_statistics', () => {
+    let url = 'https://www.maaee.com/ant_service/edu/subject_result_web?uid=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
+    console.log(url);
+
+    let win_statistics = new BrowserWindow({
+        width: 400,
+        height: 600,
+        title: '课堂统计',
+        resizable: false,
+        icon: './images/logoo.png'
+    });
+
+    win_statistics.loadURL(url);
+
+    win_statistics.setMenuBarVisibility(false);
+
+    // win_statistics.webContents.openDevTools();
+});
+
 //全局变量-存储当前登录账号信息
 global.loginUser = {
     account: '',
     password: '',
     classCode: '',
+    vid: '',
 };
 
