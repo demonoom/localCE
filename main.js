@@ -3,6 +3,7 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
+const createTray = require('./mainProcess/tray');
 let electronScreen;
 
 app.on('ready', () => {
@@ -18,9 +19,10 @@ function ant_createWin() {
 
     win = new BrowserWindow({
         width: 350,
-        height: 387,
+        height: 394,
         title: '本地授课助手',
         resizable: false,
+        icon: './images/window_logo.png'
     });
 
     win.loadURL(url.format({
@@ -31,9 +33,14 @@ function ant_createWin() {
 
     // win.webContents.openDevTools();
 
-    win.on('close', () => {
-        win = null;
-        app.quit();
+    win.on('close', (event) => {
+        // win = null;
+        // app.quit();
+
+        win.hide();
+        //隐藏任务栏图标
+        win.setSkipTaskbar(true)
+        event.preventDefault()
     });
 
     win.on('ready-to-show', () => {
@@ -42,6 +49,8 @@ function ant_createWin() {
     });
 
     win.setMenuBarVisibility(false);
+
+    createTray(win, app);
 }
 
 let win_ball = null;
@@ -66,12 +75,16 @@ function showClassBall() {
         protocol: 'file',
         slashes: true
     }));
+
+    win_ball.setSkipTaskbar(true)
 }
 
 //開課成功
-ipcMain.on('showClassBall', () => {
+ipcMain.on('showClassBall', (event) => {
     showClassBall();
     win.hide()
+    win.setSkipTaskbar(true)
+    event.preventDefault()
 });
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {

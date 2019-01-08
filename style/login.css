@@ -31,7 +31,7 @@ input:-webkit-autofill {
 .login_box {
     position: absolute;
     width: 350px;
-    height: 387px;
+    height: 394px;
     background: white;
     top: 50%;
     left: 50%;
@@ -261,10 +261,11 @@ input#act {
 }
 
 .classList ul li {
-    height: 43px;
-    line-height: 43px;
+    height: 42px;
+    line-height: 42px;
     border-bottom: 1px #EBEBEB solid;
     position: relative;
+    font-size: 15px;
 }
 
 .classList ul li:last-child {
