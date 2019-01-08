@@ -230,15 +230,24 @@ $(function () {
     };
 
     const buildClass = (arr) => {
+        remote.getGlobal('loginUser').classCode = arr[0].split('#')[0];
         let htmlStr = '';
-        arr.forEach((e) => {
+        arr.forEach((e, i) => {
             htmlStr += `<li>
                 <span>${e.split('#')[1]}</span>
-                <i data-classCode="${e.split('#')[0]}"></i>
+                <i onclick="classCheck(this,${e.split('#')[0]})" class="${i === 0 ? 'active check_i' : 'check_i'}"></i>
             </li>`
         });
         $('#class_list-ul').append(htmlStr);
         $('#logo_content').hide();
         $('#classList').show();
-    }
+    };
 });
+
+function classCheck(e, classCode) {
+    require('electron').remote.getGlobal('loginUser').classCode = classCode;
+    $('.check_i').each(function () {
+        $(this).removeClass('active')
+    });
+    $(e).addClass('active');
+}
