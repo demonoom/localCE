@@ -141,11 +141,12 @@ input {
     border: 1px #D2D2D2 solid;
     line-height: 20px;
     padding: 10px 15px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     outline: none;
     width: 100%;
     box-sizing: border-box;
     font-size: 14PX;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
 
 input:focus {
@@ -168,7 +169,7 @@ input#act {
     border: 0;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 28px;
+    margin-top: 25px;
     font-family: "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
 }
 
@@ -265,6 +266,7 @@ input#act {
     line-height: 43px;
     border-bottom: 1px #EBEBEB solid;
     position: relative;
+    font-size: 14px;
 }
 
 .classList ul li:last-child {
@@ -319,4 +321,5 @@ input#act {
     border-radius: 4px;
     background: #3672ED;
     cursor: pointer;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
