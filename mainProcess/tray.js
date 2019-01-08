@@ -30,13 +30,7 @@ function createTray(win,app) {
 
     //为系统托盘图标添加事件
     tray.on('click', () => {
-        if(win.isVisible()) {
-            win.hide()
-            win.setSkipTaskbar(true)
-        } else {
-            win.show()
-            win.setSkipTaskbar(false)
-        }
+
     });
 
     tray.setToolTip('本地开课助手');

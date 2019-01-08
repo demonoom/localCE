@@ -6,12 +6,38 @@ const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
 let electronScreen;
 
-app.on('ready', () => {
-    ant_createWin();
-    electronScreen = require('electron').screen;
-});
-
+const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
+if (!gotTheLock) {
+    app.quit();
+} else {
+    app.on('second-instance', () => {
+        if (win) {
+            if (win.isMinimized()) win.restore();
+            win.focus();
+        }
+    });
+    app.on('ready', function () {
+        ant_createWin();
+        electronScreen = require('electron').screen;
+        // setTimeout(function () {
+        //     checkForUpdates();
+        // }, 5000);
+    });
+
+    app.on('window-all-closed', function () {
+        if (process.platform !== 'darwin') {
+            app.quit()
+        }
+    });
+
+    app.on('activate', function () {
+        if (win === null) {
+            ant_createWin();
+        }
+    });
+    app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+}
 
 function ant_createWin() {
     // 初始化截图
@@ -22,7 +48,7 @@ function ant_createWin() {
         height: 394,
         title: '本地授课助手',
         resizable: false,
-        icon: './images/window_logo.png'
+        icon: './images/logoo.png'
     });
 
     win.loadURL(url.format({
@@ -82,9 +108,7 @@ function showClassBall() {
 //開課成功
 ipcMain.on('showClassBall', (event) => {
     showClassBall();
-    win.hide()
-    win.setSkipTaskbar(true)
-    event.preventDefault()
+    win.close();
 });
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
