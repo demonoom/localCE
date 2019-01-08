@@ -6,7 +6,33 @@
 
     ////截屏
     shot_btn.onclick = () => {
-        alert(1)
+        // 获取屏幕数量
+        const displays = require('electron').screen.getAllDisplays();
+        // 每个屏幕都截图一个
+        // desktopCapturer.getSources可以一次获取所有桌面的截图
+        const getDesktopCapturer = displays.map((display, i) => {
+            return new Promise((resolve, reject) => {
+                require('electron').desktopCapturer.getSources({
+                    types: ['screen'],
+                    thumbnailSize: display.size
+                }, (error, sources) => {
+                    if (!error) {
+                        return resolve({
+                            display,
+                            thumbnail: sources[i].thumbnail.toDataURL()
+                        })
+                    }
+                    return reject(error)
+                })
+            })
+        });
+
+        Promise.all(getDesktopCapturer)
+            .then(sources => {
+                let imgBlob = getBlobBydataURI(sources[0].thumbnail);
+                getOnlineSrc(imgBlob);
+            })
+            .catch(error => console.log(error))
     };
 
     //截图推题
@@ -57,5 +83,50 @@
             }
         };
         connection.send(obj);
-    })
+    });
+
+    /**
+     * base64转成blob对象
+     * @param dataURI
+     * @returns {Blob}
+     */
+    const getBlobBydataURI = (dataURI) => {
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for (var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+    };
+
+    /**
+     * 获取线上地址
+     * @param imgBlob
+     */
+    const getOnlineSrc = (imgBlob) => {
+        let formData = new FormData();
+        formData.append("filePath", imgBlob, "file_" + Date.parse(new Date()) + ".png");
+        $.ajax({
+            type: "POST",
+            url: "http://60.205.86.217:8890/Excoord_Upload_Server/file/upload",
+            enctype: 'multipart/form-data',
+            data: formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData: false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType: false,
+            success: function (responseStr) {
+                let obj = {
+                    "command": "pushHandout",
+                    "data": {
+                        "url": responseStr,
+                    }
+                };
+                connection.send(obj);
+            },
+            error: function (responseStr) {
+                console.log(responseStr);
+            }
+        });
+    };
 })();

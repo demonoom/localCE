@@ -153,6 +153,11 @@ getScreenSources({}, (imgSrc) => {
         capture.reset()
     });
 
+    /**
+     * base64转成blob对象
+     * @param dataURI
+     * @returns {Blob}
+     */
     const getBlobBydataURI = (dataURI) => {
         var binary = atob(dataURI.split(',')[1]);
         var array = [];

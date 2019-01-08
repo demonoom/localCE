@@ -49,11 +49,13 @@ let win_ball = null;
 function loginSuccess() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 100,
-        height: 100,
+        // width: 100,
+        // height: 100,
+        useContentSize: true,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
+        alwaysOnTop: true,
         x: size.width - 100,
         y: size.height / 2 - 150
     });
