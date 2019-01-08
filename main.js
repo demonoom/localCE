@@ -14,13 +14,13 @@ let win = null;
 
 function ant_createWin() {
     // 初始化截图
-    useCapture()
+    useCapture();
 
     win = new BrowserWindow({
         width: 350,
         height: 387,
         title: '本地授课助手',
-        // resizable: false,
+        resizable: false,
     });
 
     win.loadURL(url.format({
@@ -29,11 +29,11 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.on('close', () => {
         win = null;
-        // app.quit();
+        app.quit();
     });
 
     win.on('ready-to-show', () => {
@@ -46,7 +46,7 @@ function ant_createWin() {
 
 let win_ball = null;
 
-function loginSuccess() {
+function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
         width: 100,
@@ -68,10 +68,9 @@ function loginSuccess() {
     }));
 }
 
-//登陆成功
-ipcMain.on('loginSuccess', () => {
-    loginSuccess();
-    win.hide();
+//開課成功
+ipcMain.on('showClassBall', () => {
+    showClassBall();
 });
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
