@@ -94,7 +94,28 @@ ul, li {
     background-size: cover;
     cursor: pointer;
 }
-
+.clock span{
+    opacity: 0;
+    position: absolute;
+    right: -10px;
+    top: 27px;
+    font-size: 12px;
+    width: 38px;
+    /*background: #e9eff3;*/
+    background:rgba(0,0,0,0.5);
+    text-align: center;
+    /*color: #004bb0;*/
+    color: #fff;
+    border-radius: 3px;
+    padding-top: 1px;
+    line-height: 20px;
+    z-index: 21;
+}
+.clock:hover span{
+    opacity: 1;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
 .textCont {
     display: -webkit-flex;
     display: -moz-flex;
@@ -116,12 +137,12 @@ ul, li {
 .textCont div {
     height: 24px;
     line-height: 22px;
-    width: 36px;
+    width: 30px;
     box-sizing: border-box;
     cursor: pointer;
 }
 .textCont div#statistics{
-    width: 26px;
+    width: 24px;
     background: url("../images/textCenter.png") no-repeat;
     background-size: 100% 100%;
     text-align: center;
@@ -134,14 +155,14 @@ ul, li {
     background: url("../images/textLeft.png") no-repeat;
     background-size: 100% 100%;
     text-align: right;
-    padding-right: 10px;
+    padding-right: 6px;
 }
 
 .textCont #pushQue {
     background: url("../images/textRight.png") no-repeat;
     background-size: 100% 100%;
     text-align: left;
-    padding-left: 10px;
+    padding-left: 6px;
 }
 
 .pushQuestion #content:hover, .startClass #content {
@@ -171,7 +192,7 @@ ul, li {
 .pushQuestion #content:hover .textCont div {
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    width: 51px;
+    width: 46px;
 }
 .pushQuestion #content:hover .textCont div#statistics {
     width: 38px;
@@ -214,7 +235,14 @@ ul, li {
     width: 47px;
 }
 
-
+@keyframes clock {
+    0% {
+        transform: rotate(8deg);
+    }
+    100% {
+        transform: rotate(-8deg);
+    }
+}
 @keyframes antAppear {
     0% {
         top: 0;
