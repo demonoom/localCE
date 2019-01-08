@@ -110,8 +110,7 @@ $(function () {
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
-                    ipcRenderer.send('loginSuccess', '');
-                    // window.location.href = 'syncClassroom.html?teacherId=' + res.response.colUid + '&teacherName=' + res.response.userName + '';
+                    showOpenClass()
                 } else {
                     layer.msg(res.msg);
                 }
@@ -159,6 +158,7 @@ $(function () {
             $("#actData").css("display", "none");
         }, 300)
     });
+
     $("#act").focus(function () {
         accountArr = JSON.parse(localStorage.getItem("accountData")) == null ? accountArr : JSON.parse(localStorage.getItem("accountData"));
         $("#actData").css("display", "block");
@@ -180,11 +180,26 @@ $(function () {
                 var uuid = data.uuid;
                 //                   var user = data.user;
                 if (uuid == machineId) {
-                    ipcRenderer.send('loginSuccess', '');
+                    showOpenClass()
                 } else {
 
                 }
             }
         }
     };
+
+    /**
+     * 登陸成功展示開課逻辑
+     */
+    showOpenClass = () => {
+        $('#logo_content').hide();
+        $('#classList').show();
+    }
+
+    /**
+     * 开课
+     */
+    $('#openClassBtn').click(function () {
+        ipcRenderer.send('showClassBall', '');
+    })
 });
