@@ -7,11 +7,9 @@
     ////截屏
     shot_btn.onclick = () => {
         // 获取屏幕数量
-        // screen为electron的模块
         const displays = require('electron').screen.getAllDisplays();
         // 每个屏幕都截图一个
         // desktopCapturer.getSources可以一次获取所有桌面的截图
-        // 但由于thumbnailSize不一样所以就采用了每个桌面尺寸都捕获一张
         const getDesktopCapturer = displays.map((display, i) => {
             return new Promise((resolve, reject) => {
                 require('electron').desktopCapturer.getSources({
@@ -85,7 +83,7 @@
             }
         };
         connection.send(obj);
-    })
+    });
 
     /**
      * base64转成blob对象
@@ -118,7 +116,13 @@
             // 告诉jQuery不要去设置Content-Type请求头
             contentType: false,
             success: function (responseStr) {
-                console.log(responseStr);
+                let obj = {
+                    "command": "pushHandout",
+                    "data": {
+                        "url": responseStr,
+                    }
+                };
+                connection.send(obj);
             },
             error: function (responseStr) {
                 console.log(responseStr);
