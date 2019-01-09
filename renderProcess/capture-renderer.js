@@ -36,7 +36,7 @@ document.body.addEventListener('mousedown', (e) => {
 const initQue = () => {
     subjectType = 'C';
     $('#judge_answer').hide();
-    $('#choose_answer').show();
+    // $('#choose_answer').show();
     $('#judge_que').removeClass('active');
     $('#choose_que').addClass('active');
     $('#judge_yes').removeClass('active').attr('data-judge', 'false');
@@ -51,7 +51,7 @@ const initQue = () => {
 $('#choose_que').click(function () {
     subjectType = 'C';
     $('#judge_answer').hide();
-    $('#choose_answer').show();
+    // $('#choose_answer').show();
     $('#judge_que').removeClass('active');
     $('#choose_que').addClass('active');
 });
@@ -72,7 +72,7 @@ $('.choose_selection').each((i, e) => {
 //判断题
 $('#judge_que').click(function () {
     subjectType = 'J';
-    $('#judge_answer').show();
+    // $('#judge_answer').show();
     $('#choose_answer').hide();
     $('#judge_que').addClass('active');
     $('#choose_que').removeClass('active');
@@ -208,8 +208,9 @@ getScreenSources({}, (imgSrc) => {
                 arr.push($(this).attr('data-choosen'))
             });
             if (arr.indexOf('true') === -1) {
-                layer.msg('请选择选项');
-                return
+                // layer.msg('请选择选项');
+                // return
+                getOnlineSrc(imgBlob, '', 'C');
             } else {
                 arr.forEach(function (v, i) {
                     if (v === 'true') {
@@ -235,8 +236,9 @@ getScreenSources({}, (imgSrc) => {
         } else {
             //判断题
             if ($('#judge_yes').attr('data-judge') === 'false' && $('#judge_no').attr('data-judge') === 'false') {
-                layer.msg('请选择选项');
-                return
+                // layer.msg('请选择选项');
+                // return
+                getOnlineSrc(imgBlob, '', 'J');
             } else if ($('#judge_yes').attr('data-judge') === 'true' && $('#judge_no').attr('data-judge') === 'false') {
                 getOnlineSrc(imgBlob, '正确', 'J');
             } else {

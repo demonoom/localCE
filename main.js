@@ -105,6 +105,26 @@ function showClassBall() {
     win_ball.setSkipTaskbar(true)
 }
 
+function afterPushQue() {
+    let win_afterPushQue = new BrowserWindow({
+        width: 400,
+        height: 600,
+        title: '123',
+        resizable: false,
+        icon: './images/logoo.png'
+    });
+
+    win_afterPushQue.loadURL(url.format({
+        pathname: path.join(__dirname, './views/afterPushQue.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    win_afterPushQue.setMenuBarVisibility(false);
+
+    // win_afterPushQue.webContents.openDevTools();
+}
+
 //開課成功
 ipcMain.on('showClassBall', (event) => {
     showClassBall();
@@ -115,6 +135,7 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
     if (type === 'complete') {
         //选取图片完毕，获得线上地址,发送至渲染进程发送消息服务
         win_ball.webContents.send('pushQue', {src, word, subjectType})
+        afterPushQue();
     }
 });
 
@@ -124,9 +145,9 @@ ipcMain.on('class_over', () => {
     app.quit();
 });
 
+//课堂统计
 ipcMain.on('open_statistics', () => {
     let url = 'https://www.maaee.com/ant_service/edu/subject_result_web?uid=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
-    console.log(url);
 
     let win_statistics = new BrowserWindow({
         width: 400,
@@ -149,5 +170,6 @@ global.loginUser = {
     password: '',
     classCode: '',
     vid: '',
+    sid: '',
 };
 

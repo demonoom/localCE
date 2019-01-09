@@ -6,7 +6,7 @@
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
 
-    ////截屏
+    //截屏
     shot_btn.onclick = () => {
         // 获取屏幕数量
         const displays = require('electron').screen.getAllDisplays();
@@ -54,7 +54,7 @@
         };
         connection.send(obj);
         ipcRenderer.send('class_over');
-    }
+    };
 
     //连接推题消息
     let connection = new ClazzConnection();
@@ -73,6 +73,8 @@
             console.log(info);
             if (info.command === 'teacherLogin') {
                 remote.getGlobal('loginUser').vid = data.vid
+            } else if (info.command === "pushImageSubjectTo") {
+                remote.getGlobal('loginUser').sid = data.sid
             }
         }
     };
@@ -94,11 +96,11 @@
     //截屏推题，发送消息
     ipcRenderer.on('pushQue', (e, msg) => {
         let obj = {
-            "command": "pushImageSubject",
+            "command": "pushImageSubjectTo",
             "data": {
                 "img": msg.src,
                 "subjectType": msg.subjectType,
-                "answer": msg.word,
+                // "answer": msg.word,
             }
         };
         connection.send(obj);
@@ -148,4 +150,5 @@
             }
         });
     };
+
 })();

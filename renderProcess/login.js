@@ -1,6 +1,7 @@
 $(function () {
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
+    const requestLittleAntApi = require('../public/webServiceUtil');
 
     var machineId = '';
     var simple = new SimpleWebsocketConnection();
@@ -34,27 +35,18 @@ $(function () {
      * 获取二维码
      */
     function getLoginTeachSystemEwm() {
-        $.ajax({
-            type: "POST",
-            url: "https://www.maaee.com/Excoord_For_Education/webservice",
-            data: {
-                params: JSON.stringify({
-                    "method": "getLoginTeachSystemEwm",
-                    "uuid": machineId,
-                })
-            },
-            header: {
-                "content-type": "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-            success: function (data) {
-                var res = JSON.parse(data);
-                if (res.success) {
-                    $('#scan_image').attr('src', res.response)
+        let param = {
+            "method": "getLoginTeachSystemEwm",
+            "uuid": machineId,
+        };
+        requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.success) {
+                    $('#scan_image').attr('src', result.response)
                 }
-
             },
-            error: function (e) {
-                console.log(e);
+            onError: function (error) {
+                // message.error(error);
             }
         });
     }
@@ -84,22 +76,14 @@ $(function () {
             alert('请输入密码');
             return;
         }
-        $.ajax({
-            type: "POST",
-            url: "https://www.maaee.com/Excoord_For_Education/webservice",
-            data: {
-                params: JSON.stringify({
-                    "method": "login",
-                    "username": $('#act').val().trim(),
-                    "password": $('#pwd').val().trim()
-                })
-            },
-            header: {
-                "content-type": "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-            success: function (data) {
-                var res = JSON.parse(data);
-                if (res.success) {
+        let param = {
+            "method": 'login',
+            "username": $('#act').val().trim(),
+            "password": $('#pwd').val().trim()
+        };
+        requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.success) {
                     if ($("#act").val() !== "" && $("#pwd").val() !== "") {
                         accountArr.push({
                             account: $("#act").val(),
@@ -112,11 +96,11 @@ $(function () {
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
                     getTeacherClasses();
                 } else {
-                    layer.msg(res.msg);
+                    layer.msg(result.msg);
                 }
             },
-            error: function (e) {
-                console.log(e);
+            onError: function (error) {
+                // message.error(error);
             }
         });
     });
@@ -199,32 +183,24 @@ $(function () {
      * 获取班级名称以及classCode
      */
     const getTeacherClasses = () => {
-        $.ajax({
-            type: "POST",
-            url: "https://www.maaee.com/Excoord_For_Education/webservice",
-            data: {
-                params: JSON.stringify({
-                    "method": "getTeacherClasses",
-                    "ident": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length),
-                })
-            },
-            header: {
-                "content-type": "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-            success: function (data) {
-                let res = JSON.parse(data);
-                if (res.success) {
-                    if (res.response.length === 0) {
+        let param = {
+            "method": "getTeacherClasses",
+            "ident": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length),
+        };
+        requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.success) {
+                    if (result.response.length === 0) {
                         layer.msg('该老师没有班级，无法开课')
                     } else {
-                        buildClass(res.response)
+                        buildClass(result.response)
                     }
                 } else {
-                    layer.msg(res.msg);
+                    layer.msg(result.msg);
                 }
             },
-            error: function (e) {
-                console.log(e);
+            onError: function (error) {
+                // message.error(error);
             }
         });
     };
