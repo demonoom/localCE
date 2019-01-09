@@ -44,6 +44,8 @@ const captureScreen = (e, args) => {
             protocol: 'file'
         }));
 
+        captureWin.setSkipTaskbar(true);
+
         let {x, y} = screen.getCursorScreenPoint();
         if (x >= display.bounds.x && x <= display.bounds.x + display.bounds.width && y >= display.bounds.y && y <= display.bounds.y + display.bounds.height) {
             captureWin.focus()

@@ -105,13 +105,19 @@ function showClassBall() {
     win_ball.setSkipTaskbar(true)
 }
 
+/**
+ * 推题之后选择知识点
+ */
 function afterPushQue() {
     let win_afterPushQue = new BrowserWindow({
         width: 400,
         height: 600,
-        title: '123',
-        resizable: false,
-        icon: './images/logoo.png'
+        title: '设置知识点，公布答案',
+        // resizable: false,
+        icon: './images/logoo.png',
+        // minimizable: false,
+        // maximizable: false,
+        // closable: false,
     });
 
     win_afterPushQue.loadURL(url.format({
@@ -122,10 +128,12 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
+
+    win_afterPushQue.setSkipTaskbar(true)
 }
 
-//開課成功
+//开课成功
 ipcMain.on('showClassBall', (event) => {
     showClassBall();
     win.close();
