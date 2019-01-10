@@ -1,0 +1,146 @@
+body, html {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+}
+
+ul, li {
+    list-style: none;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+:-webkit-autofill {
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.my_flex{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    height: 100%;
+}
+.content{
+    width: 352px;
+    height: 326px;
+    overflow: hidden;
+}
+.title{
+    text-align: center;
+    line-height: 57px;
+    height: 57px;
+    color: white;
+    font-size: 18px;
+    background: url("../images/icon_title.png") no-repeat;
+    background-size: cover;
+}
+#set_knowledge{
+
+}
+.knowledge_cont{
+    padding: 25px 26px 0;
+    height: 40px;
+}
+.knowledge_cont input{
+    line-height: 18px;
+    padding: 10px 15px;
+    border: 1px #A0A0A0 solid;
+    color: #333;
+    width:calc(100% - 70px);
+    box-sizing: border-box;
+}
+#add{
+    float: right;
+    background: #3672ED;
+    width: 70px;
+    line-height: 40px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+
+}
+.blueBtn{
+    line-height: 44px;
+    height: 44px;
+    background: #3672ed;
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 26px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#knowledge_list{
+    height:118px;
+    overflow: hidden;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 11px;
+    padding: 0;
+}
+#knowledge_list li {
+    border: 1px #3672ED solid;
+    height: 32px;
+    box-sizing: border-box;
+    padding: 5px 12px;
+    margin: 24px 15px 0 15px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+}
+#knowledge_list li .close{
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: url("../images/icon_close.png") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+#announceAnswer li {
+    height: 20px;
+    line-height: 20px;
+}
+.checkIcon{
+    width: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px #A0A0A0 solid;
+    display: inline-block;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+.checkIcon.active{
+    border: 1px #3672ED solid;
+    background: #3672ED;
+    position: relative;
+}
+.checkIcon.active::after{
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    left: 2px;
+    top: 4px;
+    border: 1px #fff solid;
+    border-left: 0;
+    border-bottom: 0;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+
+}

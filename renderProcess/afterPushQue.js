@@ -3,7 +3,15 @@ let konwLedegArr = [];
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
     const requestLittleAntApi = require('../public/webServiceUtil');
-    const subjectType = remote.getGlobal('loginUser').subjectType;
+    let subjectType = remote.getGlobal('loginUser').subjectType;
+
+    if (subjectType === 'C') {
+        $('#choose_ans').show();
+        $('#judge_ans').hide();
+    } else {
+        $('#choose_ans').hide();
+        $('#judge_ans').show();
+    }
 
     $('#add').click(() => {
         if ($('#knowledge').val().trim() == '') {
@@ -33,7 +41,68 @@ let konwLedegArr = [];
     });
 
     $('#updateClassSubjectAnswer').click(() => {
-        updateClassSubjectAnswer();
+        if (subjectType === 'C') {
+            //选择题
+            let arr = [];
+            let ansStr = '';
+            $('.choose_selection').each(function (i, e) {
+                arr.push($(this).attr('data-choosen'))
+            });
+            if (arr.indexOf('true') === -1) {
+                layer.msg('请选择选项');
+                return
+            } else {
+                arr.forEach(function (v, i) {
+                    if (v === 'true') {
+                        if (i == 0) {
+                            ansStr += 'A,';
+                        } else if (i == 1) {
+                            ansStr += 'B,';
+                        } else if (i == 2) {
+                            ansStr += 'C,';
+                        } else if (i == 3) {
+                            ansStr += 'D,';
+                        }
+                    }
+                });
+                updateClassSubjectAnswer(ansStr.slice(0, ansStr.length - 1));
+            }
+        } else {
+            //判断题
+            if ($('#judge_yes').attr('data-judge') === 'false' && $('#judge_no').attr('data-judge') === 'false') {
+                layer.msg('请选择选项');
+                return
+            } else if ($('#judge_yes').attr('data-judge') === 'true' && $('#judge_no').attr('data-judge') === 'false') {
+                updateClassSubjectAnswer('正确');
+            } else {
+                updateClassSubjectAnswer('错误');
+            }
+        }
+    });
+
+    //选择题答案
+    $('.choose_selection').each((i, e) => {
+        $(e).click(function () {
+            if ($(this).attr('data-choosen') === 'false') {
+                $(this).attr('data-choosen', "true");
+                $(this).addClass('active')
+            } else {
+                $(this).attr('data-choosen', "false");
+                $(this).removeClass('active')
+            }
+        })
+    });
+
+    //判断题对
+    $('#judge_yes').click(function () {
+        $(this).addClass('active').attr('data-judge', "true");
+        $('#judge_no').removeClass('active').attr('data-judge', "false");
+    });
+
+    //判断题错
+    $('#judge_no').click(function () {
+        $(this).addClass('active').attr('data-judge', "true");
+        $('#judge_yes').removeClass('active').attr('data-judge', "false");
     });
 
     /**
@@ -85,12 +154,12 @@ let konwLedegArr = [];
     /**
      * public boolean updateClassSubjectAnswer(String vid,String sid,String answer)
      */
-    function updateClassSubjectAnswer() {
+    function updateClassSubjectAnswer(answer) {
         let param = {
             "method": "updateClassSubjectAnswer",
             "sid": remote.getGlobal('loginUser').sid,
             "vid": remote.getGlobal('loginUser').vid,
-            "answer": 'A',
+            "answer": answer,
         };
         requestLittleAntApi(JSON.stringify(param), {
             onResponse: function (result) {
@@ -116,8 +185,8 @@ function removeKnowLedge(str) {
     let htmlStr = '';
     konwLedegArr.forEach((e, i) => {
         htmlStr += `<li>
-                    ${e}
-                </li><i onclick="removeKnowLedge(this)">x</i>`
+                    ${e}<i class="close" onclick="removeKnowLedge(this)"></i>
+                </li>`
     });
     $('#knowledge_list').empty();
     $('#knowledge_list').append(htmlStr);
