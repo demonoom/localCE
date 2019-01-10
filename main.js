@@ -109,6 +109,7 @@ function showClassBall() {
  * 推题之后选择知识点
  */
 function afterPushQue() {
+    console.log('afterPushQue');
     let win_afterPushQue = new BrowserWindow({
         width: 400,
         height: 600,

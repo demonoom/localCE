@@ -7,9 +7,32 @@
 </head>
 <body>
 <div class="content">
-    <input id='act' type="text" placeholder="请输入小蚂蚁账号">
+    <div id="set_knowledge">
+        <div>
+            <input id='knowledge' type="text" placeholder="请输入知识点">
+            <button id="add">添加</button>
+        </div>
+        <ul id="knowledge_list">
+
+        </ul>
+        <button id="pushSubjectWithTag">确定</button>
+    </div>
+    <div id="announceAnswer" style="display: none">
+        <ul>
+            A：<input type="checkbox">
+            B：<input type="checkbox">
+            C：<input type="checkbox">
+            D：<input type="checkbox">
+        </ul>
+        <ul>
+            正确：<input type="checkbox">
+            错误：<input type="checkbox">
+            <button id="updateClassSubjectAnswer">公布</button>
+        </ul>
+    </div>
 </div>
 <script src="../public/jquery.min.js"></script>
+<script src="../public/layer/layer.js"></script>
 <script src="../renderProcess/afterPushQue.js"></script>
 </body>
 </html>
