@@ -23,18 +23,18 @@
         </ul>
         <div class="blueBtn" id="pushSubjectWithTag">确 定</div>
     </div>
-    <div id="announceAnswer"  style="display: none">
+    <div id="announceAnswer" style="display: none">
         <div class="title">选择正确答案</div>
         <div class="announce_cont">
-            <ul class="my_flex">
-                <li> <i class="checkIcon active"></i>A</li>
-                <li> <i class="checkIcon"></i>B</li>
-                <li> <i class="checkIcon"></i>C</li>
-                <li> <i class="checkIcon"></i>D</li>
+            <ul id="choose_ans" class="my_flex">
+                <li><i class="checkIcon choose_selection" data-choosen='false'></i>A</li>
+                <li><i class="checkIcon choose_selection" data-choosen='false'></i>B</li>
+                <li><i class="checkIcon choose_selection" data-choosen='false'></i>C</li>
+                <li><i class="checkIcon choose_selection" data-choosen='false'></i>D</li>
             </ul>
-            <ul class="my_flex">
-                <li><i class="checkIcon"></i>正确</li>
-                <li><i class="checkIcon"></i>错误</li>
+            <ul id="judge_ans" class="my_flex">
+                <li><i id="judge_yes" class="checkIcon" data-judge="false"></i>正确</li>
+                <li><i id="judge_no" class="checkIcon" data-judge="false"></i>错误</li>
             </ul>
         </div>
         <div class="blueBtn" id="updateClassSubjectAnswer">公布答案</div>

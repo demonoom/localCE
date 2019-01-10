@@ -143,7 +143,8 @@ ipcMain.on('showClassBall', (event) => {
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
     if (type === 'complete') {
         //选取图片完毕，获得线上地址,发送至渲染进程发送消息服务
-        win_ball.webContents.send('pushQue', {src, word, subjectType})
+        win_ball.webContents.send('pushQue', {src, word, subjectType});
+        global.loginUser.subjectType = subjectType;
         afterPushQue();
     }
 });
@@ -180,5 +181,6 @@ global.loginUser = {
     classCode: '',
     vid: '',
     sid: '',
+    subjectType: ''
 };
 
