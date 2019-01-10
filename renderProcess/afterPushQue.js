@@ -18,6 +18,10 @@ let konwLedegArr = [];
             layer.msg('请选择知识点');
             return
         }
+        if ($('#knowledge').val().trim().length > 6) {
+            layer.msg('知识点不能超过六个字');
+            return
+        }
         //1.清空输入框  2.在ul中显示已选择的标签
         addUpdateKnowledgeList($('#knowledge').val().trim());
         $('#knowledge').val('')
@@ -135,15 +139,15 @@ let konwLedegArr = [];
 
     function addUpdateKnowledgeList(str) {
         if (konwLedegArr.indexOf(str) == -1) {
-            if (konwLedegArr.length === 9) {
-                layer.msg('最多只能添加9个知识点')
+            if (konwLedegArr.length === 4) {
+                layer.msg('最多只能添加4个知识点')
                 return
             }
             konwLedegArr.push($('#knowledge').val().trim());
             let htmlStr = '';
             konwLedegArr.forEach((e, i) => {
                 htmlStr += `<li>
-                    ${e}<i class="close" onclick="removeKnowLedge(this)"></i>
+                    <span>${e}</span><i class="close" onclick="removeKnowLedge(this)"></i>
                 </li>`
             })
             $('#knowledge_list').empty();
@@ -163,9 +167,9 @@ let konwLedegArr = [];
         };
         requestLittleAntApi(JSON.stringify(param), {
             onResponse: function (result) {
-                console.log(result);
                 if (result.success) {
-
+                    layer.msg('公布成功');
+                    ipcRenderer.send('updateClassSubjectAnswer', '');
                 } else {
                     layer.msg(result.msg);
                 }
@@ -185,7 +189,7 @@ function removeKnowLedge(str) {
     let htmlStr = '';
     konwLedegArr.forEach((e, i) => {
         htmlStr += `<li>
-                    ${e}<i class="close" onclick="removeKnowLedge(this)"></i>
+                    <span>${e}</span><i class="close" onclick="removeKnowLedge(this)"></i>
                 </li>`
     });
     $('#knowledge_list').empty();

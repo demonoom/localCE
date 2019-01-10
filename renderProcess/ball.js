@@ -74,6 +74,7 @@
             if (info.command === 'teacherLogin') {
                 remote.getGlobal('loginUser').vid = data.vid
             } else if (info.command === "pushImageSubjectTo") {
+                console.log(data);
                 remote.getGlobal('loginUser').sid = data.sid
             }
         }

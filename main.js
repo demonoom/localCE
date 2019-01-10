@@ -105,20 +105,22 @@ function showClassBall() {
     win_ball.setSkipTaskbar(true)
 }
 
+let win_afterPushQue = null;
+
 /**
  * 推题之后选择知识点
  */
 function afterPushQue() {
     console.log('afterPushQue');
-    let win_afterPushQue = new BrowserWindow({
-        width: 400,
-        height: 600,
+    win_afterPushQue = new BrowserWindow({
+        width: 355,
+        height: 400,
         title: '设置知识点，公布答案',
-        // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
-        // minimizable: false,
-        // maximizable: false,
-        // closable: false,
+        minimizable: false,
+        maximizable: false,
+        closable: false,
     });
 
     win_afterPushQue.loadURL(url.format({
@@ -129,9 +131,34 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
+}
+
+function open_statistics() {
+    // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
+    // http://jiaoxue.maaee.com:8091/#/classPractice?userId=23836&vid=35255
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
+
+    console.log(url);
+
+    let win_statistics = new BrowserWindow({
+        width: 400,
+        height: 600,
+        title: '课堂统计',
+        // resizable: false,
+        icon: './images/logoo.png',
+        webPreferences: {
+            nodeIntegration: false  //加载带有jquery的项目时
+        }
+    });
+
+    win_statistics.loadURL(url);
+
+    win_statistics.setMenuBarVisibility(false);
+
+    win_statistics.webContents.openDevTools();
 }
 
 //开课成功
@@ -163,7 +190,7 @@ ipcMain.on('open_statistics', () => {
         width: 400,
         height: 600,
         title: '课堂统计',
-        resizable: false,
+        // resizable: false,
         icon: './images/logoo.png'
     });
 
@@ -171,8 +198,19 @@ ipcMain.on('open_statistics', () => {
 
     win_statistics.setMenuBarVisibility(false);
 
-    // win_statistics.webContents.openDevTools();
+    win_statistics.webContents.openDevTools();
 });
+
+//公布答案
+ipcMain.on('updateClassSubjectAnswer', () => {
+    //关闭小窗口
+    //打开大窗口
+    setTimeout(() => {
+        win_afterPushQue.destroy();
+    }, 1000)
+    open_statistics()
+
+})
 
 //全局变量-存储当前登录账号信息
 global.loginUser = {
