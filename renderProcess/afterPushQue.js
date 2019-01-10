@@ -3,10 +3,11 @@ let konwLedegArr = [];
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
     const requestLittleAntApi = require('../public/webServiceUtil');
+    const subjectType = remote.getGlobal('loginUser').subjectType;
 
     $('#add').click(() => {
         if ($('#knowledge').val().trim() == '') {
-            layer.msg('请选择知识点')
+            layer.msg('请选择知识点');
             return
         }
         //1.清空输入框  2.在ul中显示已选择的标签
@@ -19,7 +20,7 @@ let konwLedegArr = [];
             layer.msg('尚未添加知识点')
             return
         }
-        let arr = []
+        let arr = [];
         konwLedegArr.forEach((e, i) => {
             arr.push({
                 id: '0',
@@ -27,7 +28,7 @@ let konwLedegArr = [];
                 tagContent: e,
                 uid: remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length),
             })
-        })
+        });
         pushSubjectWithTag(arr)
     });
 
@@ -49,7 +50,9 @@ let konwLedegArr = [];
             onResponse: function (result) {
                 if (result.success) {
                     //公布答案
-                    $('#set_knowledge').hide()
+                    console.log(remote.getGlobal('loginUser').sid);
+                    console.log(remote.getGlobal('loginUser').vid);
+                    $('#set_knowledge').hide();
                     $('#announceAnswer').show()
                 } else {
                     layer.msg(result.msg);
@@ -73,7 +76,7 @@ let konwLedegArr = [];
                 htmlStr += `<li>
                     ${e}
                 </li><i onclick="removeKnowLedge(this)">x</i>`
-            })
+            });
             $('#knowledge_list').empty();
             $('#knowledge_list').append(htmlStr);
         }
@@ -103,19 +106,19 @@ let konwLedegArr = [];
             }
         });
     }
-})()
+})();
 
 function removeKnowLedge(str) {
     let word = $(str).prev().html()
     konwLedegArr = konwLedegArr.filter((e) => {
         return e != word.trim()
-    })
+    });
     let htmlStr = '';
     konwLedegArr.forEach((e, i) => {
         htmlStr += `<li>
                     ${e}
                 </li><i onclick="removeKnowLedge(this)">x</i>`
-    })
+    });
     $('#knowledge_list').empty();
     $('#knowledge_list').append(htmlStr);
 }
