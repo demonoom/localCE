@@ -113,8 +113,8 @@ function removeKnowLedge(str) {
     let htmlStr = '';
     konwLedegArr.forEach((e, i) => {
         htmlStr += `<li>
-                    ${e}
-                </li><i onclick="removeKnowLedge(this)">x</i>`
+                    ${e}<i class="close" onclick="removeKnowLedge(this)"></i>
+                </li>`
     })
     $('#knowledge_list').empty();
     $('#knowledge_list').append(htmlStr);
