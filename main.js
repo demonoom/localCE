@@ -8,6 +8,8 @@ let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
 
+let hello_win = null;
+
 if (!gotTheLock) {
     app.quit();
 } else {
@@ -18,8 +20,14 @@ if (!gotTheLock) {
         }
     });
     app.on('ready', function () {
-        ant_createWin();
         electronScreen = require('electron').screen;
+        // showClassBall()
+        create_helloWin()
+        setTimeout(() => {
+            hello_win.hide()
+            // hello_win.destroy()
+            showClassBall()
+        }, 2000)
         // setTimeout(function () {
         //     checkForUpdates();
         // }, 5000);
@@ -33,10 +41,42 @@ if (!gotTheLock) {
 
     app.on('activate', function () {
         if (win === null) {
-            ant_createWin();
+            showClassBall()
         }
     });
     app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+}
+
+function create_helloWin() {
+    const size = electronScreen.getPrimaryDisplay().size;
+    hello_win = new BrowserWindow({
+        width: size.width,
+        height: size.height,
+        x: 0,
+        y: 0,
+        transparent: true,
+        frame: false,
+        movable: false,
+        resizable: false,
+        enableLargerThanScreen: true,
+        hasShadow: false,
+        webPreferences: {
+            webSecurity: false
+        }
+    });
+    hello_win.setAlwaysOnTop(true, 'screen-saver');
+    hello_win.setVisibleOnAllWorkspaces(true);
+    hello_win.setFullScreenable(false);
+
+    hello_win.loadURL(url.format({
+        pathname: path.join(__dirname, './views/hello.html'),
+        slashes: true,
+        protocol: 'file'
+    }));
+
+    hello_win.setSkipTaskbar(true);
+
+    // hello_win.webContents.openDevTools();
 }
 
 function ant_createWin() {
@@ -60,13 +100,10 @@ function ant_createWin() {
     // win.webContents.openDevTools();
 
     win.on('close', (event) => {
-        // win = null;
-        // app.quit();
-
-        win.hide();
-        //隐藏任务栏图标
-        win.setSkipTaskbar(true)
-        event.preventDefault()
+        if (win) {
+            win.hide();
+            win = null;
+        }
     });
 
     win.on('ready-to-show', () => {
@@ -75,8 +112,6 @@ function ant_createWin() {
     });
 
     win.setMenuBarVisibility(false);
-
-    createTray(win, app);
 }
 
 let win_ball = null;
@@ -84,25 +119,27 @@ let win_ball = null;
 function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 140,
-        height: 100,
+        width: 129,
+        height: 253,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
-        x: size.width - 200,
+        x: size.width - 129,
         y: size.height / 2 - 200
     });
 
     // win_ball.webContents.openDevTools();
 
     win_ball.loadURL(url.format({
-        pathname: path.join(__dirname, './views/ball.html'),
+        pathname: path.join(__dirname, './views/ball_new.html'),
         protocol: 'file',
         slashes: true
     }));
 
     win_ball.setSkipTaskbar(true)
+
+    createTray(win_ball, app);
 }
 
 let win_afterPushQue = null;
@@ -113,8 +150,8 @@ let win_afterPushQue = null;
 function afterPushQue() {
     console.log('afterPushQue');
     win_afterPushQue = new BrowserWindow({
-        width: 355,
-        height: 400,
+        width: 354,
+        height: 356,
         title: '设置知识点，公布答案',
         resizable: false,
         icon: './images/logoo.png',
@@ -141,13 +178,11 @@ function open_statistics() {
     // http://jiaoxue.maaee.com:8091/#/classPractice?userId=23836&vid=35255
     let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
 
-    console.log(url);
-
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
         title: '课堂统计',
-        // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
             nodeIntegration: false  //加载带有jquery的项目时
@@ -158,14 +193,24 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-    win_statistics.webContents.openDevTools();
+    // win_statistics.webContents.openDevTools();
 }
 
-//开课成功
-ipcMain.on('showClassBall', (event) => {
-    showClassBall();
-    win.close();
+//展示登陆页面
+ipcMain.on('showLogin', (event) => {
+    if (!win) {
+        ant_createWin()
+    }
 });
+
+//开课成功,销毁login窗口
+ipcMain.on('loginSuccess', () => {
+    if (win) {
+        win.hide();
+        win = null;
+    }
+    win_ball.webContents.send('loginSuccess')
+})
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
     if (type === 'complete') {
@@ -178,19 +223,18 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 
 //下课
 ipcMain.on('class_over', () => {
-    win.destroy();
-    app.quit();
+    console.log('class_over')
 });
 
 //课堂统计
 ipcMain.on('open_statistics', () => {
-    let url = 'https://www.maaee.com/ant_service/edu/subject_result_web?uid=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
 
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
         title: '课堂统计',
-        // resizable: false,
+        resizable: false,
         icon: './images/logoo.png'
     });
 
@@ -198,18 +242,17 @@ ipcMain.on('open_statistics', () => {
 
     win_statistics.setMenuBarVisibility(false);
 
-    win_statistics.webContents.openDevTools();
+    // win_statistics.webContents.openDevTools();
 });
 
 //公布答案
 ipcMain.on('updateClassSubjectAnswer', () => {
     //关闭小窗口
     //打开大窗口
-    setTimeout(() => {
-        win_afterPushQue.destroy();
+    setTimeout(function () {
+        open_statistics()
     }, 1000)
-    open_statistics()
-
+    win_afterPushQue.destroy();
 })
 
 //全局变量-存储当前登录账号信息

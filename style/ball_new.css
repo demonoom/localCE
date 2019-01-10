@@ -1,0 +1,144 @@
+body {
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    border: none;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 129px;
+    height: 253px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* 这是针对缺省样式 (必须的) */
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+}
+
+/* 滑块颜色 */
+
+::-webkit-scrollbar-button {
+    background-color: initial;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.startClass{
+    width: 108px;
+    height: 216px;
+    background: url("../images/icon_start.gif") no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    top:50%;
+    margin-top: -108px;
+    /*-webkit-transition: all 0.5s ease;*/
+    /*transition: all 0.5s ease;*/
+}
+.startClass .shade{
+    background: url("../images/icon_shade_right.png");
+    background-size: cover;
+    position: absolute;
+    left: 1px;
+    bottom: 1px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+#content{
+    background: url("../images/icon_ballBg_right.png") no-repeat;
+    width: 129px;
+    height: 253px;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+.circle{
+    background: url("../images/icon_ballCenter.png") no-repeat;
+    background-size: cover;
+    width: 126px;
+    height: 126px;
+    position: absolute;
+    right: -70px;
+    top: 56px;
+    animation:circle 10s linear infinite;
+    -webkit-animation:circle 10s linear infinite;
+
+}
+.textCont{
+    color: #0045e3;
+    font-size: 16px;
+}
+.textCont > div{
+    cursor: pointer;
+}
+#pushQue{
+    width: 57px;
+    height: 43px;
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    transform: rotate(-46deg);
+    border-top-right-radius: 77%;
+    overflow: hidden;
+}
+#pushQue span{
+    position: absolute;
+    left: 0;
+    top:0
+}
+#pushQue span:first-child{
+    position: absolute;
+    left: 0;
+    top:0
+}
+#screenShot{
+    width: 57px;
+    height: 43px;
+    position: absolute;
+    top: 64px;
+    right: 57px;
+    transform: rotate(-78deg);
+    border-top-right-radius: 46%;
+    overflow: hidden;
+}
+#statistics{
+    width: 60px;
+    height: 38px;
+    position: absolute;
+    top: 134px;
+    right: 53px;
+    transform: rotate(-108deg);
+    border-radius: 30%;
+    overflow: hidden;
+}
+#clock{
+    width: 60px;
+    height: 38px;
+    position: absolute;
+    top: 181px;
+    right: 1px;
+    transform: rotate(31deg);
+    border-radius: 30%;
+    overflow: hidden;
+}
+@keyframes circle
+{
+    0% {
+        transform:rotate(0)
+    }
+
+    100% {
+        transform:rotate(360deg)
+    }
+}

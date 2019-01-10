@@ -1,0 +1,59 @@
+#all {
+    /*width: 100%;*/
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    animation: vertical-animation 2s .5s;
+    animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+}
+
+#light {
+    background: url("../images/light.png") no-repeat;
+    width: 222px;
+    height: 222px;
+    background-size: cover;
+    animation: hor-animation 2s linear .5s;
+}
+
+@-moz-keyframes hor-animation {
+    0% {
+        transform: translateX(0px) rotate(0);
+    }
+    100% {
+        transform: translateX(1000px) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes hor-animation {
+    0% {
+        transform: translateX(0px) rotate(0);
+    }
+    100% {
+        transform: translateX(1000px) rotate(360deg);
+    }
+}
+
+@-moz-keyframes vertical-animation {
+    0% {
+        transform: translateY(-400px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@-webkit-keyframes vertical-animation {
+    0% {
+        transform: translateY(-400px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+
+}

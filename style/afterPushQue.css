@@ -43,8 +43,8 @@ input:-webkit-autofill {
     justify-content: center;
 }
 .content{
-    width: 352px;
-    height: 326px;
+    width: 354px;
+    height: 356px;
     overflow: hidden;
 }
 .title{
@@ -130,8 +130,9 @@ input:-webkit-autofill {
 #knowledge_list li {
     border: 1px #3672ED solid;
     height: 32px;
+    line-height: 32px;
     box-sizing: border-box;
-    padding: 5px 12px;
+    padding: 0 12px;
     margin: 24px 15px 0 15px;
     position: relative;
     font-size: 14px;
@@ -163,7 +164,7 @@ input:-webkit-autofill {
 }
 .announce_cont{
     padding-top: 50px;
-    height: calc(100% - 191px);
+    height: calc(100% - 223px);
 }
 .checkIcon{
     width: 20px;

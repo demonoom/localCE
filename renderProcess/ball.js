@@ -3,8 +3,14 @@
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
     const clock = document.querySelector('#clock');
+    const startClass = document.querySelector('#startClass');
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
+
+    //开课，调用登陆页面
+    startClass.onclick = () => {
+        ipcRenderer.send('showLogin')
+    }
 
     //截屏
     shot_btn.onclick = () => {
@@ -53,6 +59,8 @@
             "command": "classOver",
         };
         connection.send(obj);
+        $('#startClass').show();
+        $('#content').hide();
         ipcRenderer.send('class_over');
     };
 
@@ -79,20 +87,6 @@
             }
         }
     };
-    //构建登录课堂的协议信息
-    const loginPro = {
-        "command": "teacherLogin",
-        "data": {
-            "password": remote.getGlobal('loginUser').password,
-            "account": remote.getGlobal('loginUser').account,
-            "classType": 'A', //A
-            "classCode": remote.getGlobal('loginUser').classCode, //班级
-            "userId": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length)
-        }
-    };
-
-    //连接登入课堂
-    connection.connect(loginPro);
 
     //截屏推题，发送消息
     ipcRenderer.on('pushQue', (e, msg) => {
@@ -105,6 +99,25 @@
             }
         };
         connection.send(obj);
+    });
+
+    ipcRenderer.on('loginSuccess', () => {
+        //构建登录课堂的协议信息
+        const loginPro = {
+            "command": "teacherLogin",
+            "data": {
+                "password": remote.getGlobal('loginUser').password,
+                "account": remote.getGlobal('loginUser').account,
+                "classType": 'A', //A
+                "classCode": remote.getGlobal('loginUser').classCode, //班级
+                "userId": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length)
+            }
+        };
+
+        //连接登入课堂
+        connection.connect(loginPro);
+        $('#startClass').hide();
+        $('#content').show()
     });
 
     /**

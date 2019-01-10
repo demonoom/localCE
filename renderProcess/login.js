@@ -176,7 +176,7 @@ $(function () {
      * 开课
      */
     $('#openClassBtn').click(function () {
-        ipcRenderer.send('showClassBall', '');
+        ipcRenderer.send('loginSuccess', '');
     });
 
     /**

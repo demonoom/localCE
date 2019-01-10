@@ -311,7 +311,7 @@ input#act {
 }
 .classList .btnWrap{
     position: relative;
-    height: calc(100% - 248px);
+    height: calc(100% - 258px);
 }
 .classList .btn {
     width: 120px;
