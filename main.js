@@ -84,8 +84,8 @@ let win_ball = null;
 function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 140,
-        height: 100,
+        width: 129,
+        height: 253,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
@@ -97,7 +97,7 @@ function showClassBall() {
     // win_ball.webContents.openDevTools();
 
     win_ball.loadURL(url.format({
-        pathname: path.join(__dirname, './views/ball.html'),
+        pathname: path.join(__dirname, './views/ball_new.html'),
         protocol: 'file',
         slashes: true
     }));
@@ -111,10 +111,10 @@ function showClassBall() {
 function afterPushQue() {
     console.log('afterPushQue');
     let win_afterPushQue = new BrowserWindow({
-        width: 400,
-        height: 600,
+        width: 352,
+        height: 326,
         title: '设置知识点，公布答案',
-        // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
         // minimizable: false,
         // maximizable: false,
@@ -129,7 +129,7 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
 }
