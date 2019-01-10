@@ -1,0 +1,199 @@
+body, html {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+}
+
+ul, li {
+    list-style: none;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* 这是针对缺省样式 (必须的) */
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+}
+
+/* 滑块颜色 */
+
+::-webkit-scrollbar-button {
+    background-color: initial;
+}
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+:-webkit-autofill {
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.my_flex{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    justify-content: center;
+}
+.content{
+    width: 352px;
+    height: 326px;
+    overflow: hidden;
+}
+.title{
+    text-align: center;
+    line-height: 57px;
+    height: 57px;
+    color: white;
+    font-size: 18px;
+    background: url("../images/icon_title.png") no-repeat;
+    background-size: cover;
+}
+.knowledge_cont{
+    margin: 25px 26px 0;
+    height: 40px;
+    position: relative;
+}
+.knowledge_cont input{
+    line-height: 18px;
+    padding: 10px 15px;
+    border: 1px #A0A0A0 solid;
+    color: #333;
+    width:calc(100% - 70px);
+    box-sizing: border-box;
+}
+.knowledge_cont .select_list{
+    border: 1px #A0A0A0 solid;
+    border-top: 0;
+    padding: 0 5px;
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    top:40px;
+    left: 0;
+    font-size: 14px;
+    color: #333;
+    max-height: 173px;
+    margin: 0;
+    z-index: 10;
+    background: white;
+    overflow-y: auto;
+}
+.knowledge_cont .select_list li{
+    line-height: 43px;
+    border-bottom: 1px #EEEEEE solid;
+    padding: 0px 9px;
+    cursor: pointer;
+}
+.knowledge_cont .select_list li:last-child{
+    border-bottom: 0;
+}
+#add{
+    float: right;
+    background: #3672ED;
+    width: 70px;
+    line-height: 40px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+
+}
+.blueBtn{
+    line-height: 44px;
+    height: 44px;
+    background: #3672ed;
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 26px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#knowledge_list{
+    height:118px;
+    overflow: hidden;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 11px;
+    padding: 0;
+}
+#knowledge_list li {
+    border: 1px #3672ED solid;
+    height: 32px;
+    box-sizing: border-box;
+    padding: 5px 12px;
+    margin: 24px 15px 0 15px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+}
+#knowledge_list li .close{
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: url("../images/icon_close.png") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+#announceAnswer{
+    height: 100%;
+}
+#announceAnswer li {
+    height: 20px;
+    line-height: 20px;
+    padding-right: 19px;
+}
+#announceAnswer ul{
+    margin: 0 10px 20px;
+    padding: 0;
+}
+.announce_cont{
+    padding-top: 50px;
+    height: calc(100% - 191px);
+}
+.checkIcon{
+    width: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px #A0A0A0 solid;
+    display: inline-block;
+    vertical-align: bottom;
+    cursor: pointer;
+    margin: 0 16px;
+}
+.checkIcon.active{
+    border: 1px #3672ED solid;
+    background: #3672ED;
+    position: relative;
+}
+.checkIcon.active::after{
+    content: '';
+    position: absolute;
+    width: 13px;
+    height: 6px;
+    left: 2px;
+    top: 4px;
+    border: 1px #fff solid;
+    border-left: 0;
+    border-bottom: 0;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+
+}
