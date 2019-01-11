@@ -1,24 +1,18 @@
 #all {
-    /*width: 100%;*/
     position: fixed;
     left: 50%;
     top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-
-    animation: vertical-animation 2s .5s;
-    animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+    margin-left: -100px;
+    margin-top: -100px;
+    animation: vertical-animation 1.8s ease-in-out 0.2s;
 }
 
 #light {
     background: url("../images/light.png") no-repeat;
-    width: 222px;
-    height: 222px;
+    width: 80px;
+    height: 80px;
     background-size: cover;
-    animation: hor-animation 2s linear .5s;
+    animation: hor-animation 1.8s ease-in-out .2s;
 }
 
 @-moz-keyframes hor-animation {
@@ -41,19 +35,24 @@
 
 @-moz-keyframes vertical-animation {
     0% {
-        transform: translateY(-400px);
+        transform: translateY(0);
+    }
+    25% {
+        transform:translateY(-50%);
     }
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 }
 
 @-webkit-keyframes vertical-animation {
     0% {
-        transform: translateY(-400px);
+        transform: translateY(0);
+    }
+    25% {
+        transform:translateY(-50%);
     }
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
-
 }
