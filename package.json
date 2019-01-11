@@ -41,7 +41,7 @@
     "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
-    "electron-updater": "^3.1.6",
+    "electron-updater": "^4.0.0",
     "hashmap": "^2.3.0",
     "ws": "^6.1.0",
     "app-root-path": "^2.1.0",

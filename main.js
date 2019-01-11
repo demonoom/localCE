@@ -178,7 +178,7 @@ function open_statistics() {
         width: 400,
         height: 600,
         title: '课堂统计',
-        // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
             nodeIntegration: false  //加载带有jquery的项目时
@@ -189,7 +189,7 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-    win_statistics.webContents.openDevTools();
+    // win_statistics.webContents.openDevTools();
 }
 
 //展示登陆页面
@@ -231,7 +231,10 @@ ipcMain.on('open_statistics', () => {
         height: 600,
         title: '课堂统计',
         resizable: false,
-        icon: './images/logoo.png'
+        icon: './images/logoo.png',
+        webPreferences: {
+            nodeIntegration: false  //加载带有jquery的项目时
+        }
     });
 
     win_statistics.loadURL(url);

@@ -39,7 +39,7 @@ function createTray(win, app) {
     tray.setContextMenu(menu);
 
     setTimeout(function () {
-        checkForUpdates(tray);
+        // checkForUpdates(tray);
     }, 5000);
 
 
