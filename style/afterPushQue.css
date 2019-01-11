@@ -68,6 +68,7 @@ input:-webkit-autofill {
     color: #333;
     width:calc(100% - 70px);
     box-sizing: border-box;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
 .knowledge_cont .select_list{
     border: 1px #A0A0A0 solid;

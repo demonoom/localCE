@@ -152,7 +152,7 @@ function afterPushQue() {
     win_afterPushQue = new BrowserWindow({
         width: 354,
         height: 356,
-        title: '设置知识点，公布答案',
+        title: '本地授课助手',
         resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
