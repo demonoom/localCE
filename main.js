@@ -6,6 +6,7 @@ const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
 let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
+const {autoUpdater} = require('electron-updater');
 let win = null;
 
 let hello_win = null;
@@ -25,12 +26,11 @@ if (!gotTheLock) {
         create_helloWin()
         setTimeout(() => {
             hello_win.hide()
-            // hello_win.destroy()
             showClassBall()
         }, 2000)
-        // setTimeout(function () {
-        //     checkForUpdates();
-        // }, 5000);
+        setTimeout(function () {
+            checkForUpdates();
+        }, 5000);
     });
 
     app.on('window-all-closed', function () {
@@ -140,7 +140,7 @@ function showClassBall() {
     win_ball.setSkipTaskbar(true)
 
     createTray(win_ball, app);
-}
+};
 
 let win_afterPushQue = null;
 
@@ -182,7 +182,7 @@ function open_statistics() {
         width: 400,
         height: 600,
         title: '课堂统计',
-        resizable: false,
+        // resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
             nodeIntegration: false  //加载带有jquery的项目时
@@ -193,7 +193,53 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-    // win_statistics.webContents.openDevTools();
+    win_statistics.webContents.openDevTools();
+}
+
+/**
+ * 自动更新
+ */
+function checkForUpdates() {
+    try {
+        // 配置安装包远端服务器
+        autoUpdater.setFeedURL("http://60.205.86.217/upload5/winRelease/");
+        // 下面是自动更新的整个生命周期所发生的事件
+        autoUpdater.on('error', function (message) {
+            console.log("error:" + message);
+        });
+        autoUpdater.on('checking-for-update', function (message) {
+            console.log("checking-for-update:" + message);
+        });
+        autoUpdater.on('update-available', function (message) {
+            console.log("update-available:" + message);
+            var msg = {};
+            msg.command = 'update-available';
+            mainWindow.webContents.send('auto-update', msg);
+        });
+        autoUpdater.on('update-not-available', function (message) {
+            console.log("update-not-available:" + message);
+        });
+        // 更新下载进度事件
+        autoUpdater.on('download-progress', function (progressObj) {
+            console.log("download-progress:" + progressObj);
+            var msg = {};
+            msg.command = 'download-progress';
+            msg.progressObj = progressObj;
+            mainWindow.webContents.send('auto-update', msg);
+        });
+        // 更新下载完成事件
+        autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
+            console.log("update-downloaded");
+            var msg = {};
+            msg.command = 'update-downloaded';
+            mainWindow.webContents.send('auto-update', msg);
+            autoUpdater.quitAndInstall();
+        });
+        //执行自动更新检查
+        autoUpdater.checkForUpdates();
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 //展示登陆页面
@@ -210,7 +256,7 @@ ipcMain.on('loginSuccess', () => {
         win = null;
     }
     win_ball.webContents.send('loginSuccess')
-})
+});
 
 ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectType} = {}) => {
     if (type === 'complete') {
@@ -253,7 +299,7 @@ ipcMain.on('updateClassSubjectAnswer', () => {
         open_statistics()
     }, 1000)
     win_afterPushQue.destroy();
-})
+});
 
 //全局变量-存储当前登录账号信息
 global.loginUser = {
@@ -264,4 +310,5 @@ global.loginUser = {
     sid: '',
     subjectType: ''
 };
+
 
