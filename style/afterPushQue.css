@@ -45,6 +45,10 @@ input:-webkit-autofill {
 .content{
     width: 354px;
     height: 356px;
+    background: -webkit-linear-gradient(white, #a2c1ff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(white, #a2c1ff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(white, #a2c1ff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(white, #a2c1ff); /* 标准的语法 */
     overflow: hidden;
 }
 .title{
@@ -68,6 +72,7 @@ input:-webkit-autofill {
     color: #333;
     width:calc(100% - 70px);
     box-sizing: border-box;
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
 .knowledge_cont .select_list{
     border: 1px #A0A0A0 solid;

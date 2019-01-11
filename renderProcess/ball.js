@@ -6,11 +6,12 @@
     const startClass = document.querySelector('#startClass');
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
+    var timer = null;
 
     //开课，调用登陆页面
     startClass.onclick = () => {
         ipcRenderer.send('showLogin')
-    }
+    };
 
     //截屏
     shot_btn.onclick = () => {
@@ -62,6 +63,8 @@
         $('#startClass').show();
         $('#content').hide();
         ipcRenderer.send('class_over');
+        clearTimeout(timer);
+        overClass()
     };
 
     //连接推题消息
@@ -117,7 +120,12 @@
         //连接登入课堂
         connection.connect(loginPro);
         $('#startClass').hide();
-        $('#content').show()
+        $('#content').show();
+
+        //开启计时器
+        timer = setTimeout(() => {
+            openClass();
+        }, 1000 * 60 * 37);
     });
 
     /**
@@ -164,5 +172,13 @@
             }
         });
     };
+
+    const openClass = () => {
+        $('#overClass').addClass('overClass');
+    };
+
+    const overClass = () => {
+        $('#overClass').removeClass('overClass');
+    }
 
 })();
