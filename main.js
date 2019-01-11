@@ -126,7 +126,7 @@ function showClassBall() {
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
         x: size.width - 129,
-        y: size.height / 2 - 200
+        y: size.height / 2 - 100
     });
 
     // win_ball.webContents.openDevTools();
