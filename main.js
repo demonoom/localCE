@@ -6,7 +6,6 @@ const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
 let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
-const {autoUpdater} = require('electron-updater');
 let win = null;
 
 let hello_win = null;
@@ -28,9 +27,6 @@ if (!gotTheLock) {
             hello_win.hide()
             showClassBall()
         }, 2000)
-        setTimeout(function () {
-            checkForUpdates();
-        }, 5000);
     });
 
     app.on('window-all-closed', function () {
@@ -194,52 +190,6 @@ function open_statistics() {
     win_statistics.setMenuBarVisibility(false);
 
     win_statistics.webContents.openDevTools();
-}
-
-/**
- * 自动更新
- */
-function checkForUpdates() {
-    try {
-        // 配置安装包远端服务器
-        autoUpdater.setFeedURL("http://60.205.86.217/upload5/winRelease/");
-        // 下面是自动更新的整个生命周期所发生的事件
-        autoUpdater.on('error', function (message) {
-            console.log("error:" + message);
-        });
-        autoUpdater.on('checking-for-update', function (message) {
-            console.log("checking-for-update:" + message);
-        });
-        autoUpdater.on('update-available', function (message) {
-            console.log("update-available:" + message);
-            var msg = {};
-            msg.command = 'update-available';
-            mainWindow.webContents.send('auto-update', msg);
-        });
-        autoUpdater.on('update-not-available', function (message) {
-            console.log("update-not-available:" + message);
-        });
-        // 更新下载进度事件
-        autoUpdater.on('download-progress', function (progressObj) {
-            console.log("download-progress:" + progressObj);
-            var msg = {};
-            msg.command = 'download-progress';
-            msg.progressObj = progressObj;
-            mainWindow.webContents.send('auto-update', msg);
-        });
-        // 更新下载完成事件
-        autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
-            console.log("update-downloaded");
-            var msg = {};
-            msg.command = 'update-downloaded';
-            mainWindow.webContents.send('auto-update', msg);
-            autoUpdater.quitAndInstall();
-        });
-        //执行自动更新检查
-        autoUpdater.checkForUpdates();
-    } catch (e) {
-        console.log(e);
-    }
 }
 
 //展示登陆页面
