@@ -83,7 +83,7 @@ function ant_createWin() {
         width: 350,
         height: 394,
         title: '小蚂蚁教学助手',
-        //resizable: false,
+        resizable: false,
         icon: './images/logoo.png'
     });
 
@@ -93,7 +93,7 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.on('close', (event) => {
         if (win) {
@@ -117,15 +117,15 @@ function showClassBall() {
     win_ball = new BrowserWindow({
         width: 118,
         height: 231,
-        // frame: false,
-        // resizable: false,
-        // transparent: true,  //使窗口透明
+        frame: false,
+        resizable: false,
+        transparent: true,  //使窗口透明
         alwaysOnTop: true,
         x: size.width - 118,
         y: size.height / 2 - 100
     });
 
-    win_ball.webContents.openDevTools();
+    // win_ball.webContents.openDevTools();
 
     win_ball.loadURL(url.format({
         pathname: path.join(__dirname, './views/ball_new.html'),
@@ -133,7 +133,7 @@ function showClassBall() {
         slashes: true
     }));
 
-    win_ball.setSkipTaskbar(true)
+    win_ball.setSkipTaskbar(true);
 
     createTray(win_ball, app);
 };
@@ -149,7 +149,7 @@ function afterPushQue() {
         width: 354,
         height: 356,
         title: '本地授课助手',
-       // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +164,7 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
 }
@@ -179,15 +179,21 @@ function openPubWin() {
         title: ''
     });
 
-    /*win_publicScreen.loadURL(url.format({
-        pathname: path.join(__dirname, './views/afterPushQue.html'),
+    win_publicScreen.loadURL(url.format({
+        pathname: path.join(__dirname, './views/classDanmu.html'),
         protocol: 'file',
         slashes: true
-    }));*/
+    }));
 
     win_publicScreen.setMenuBarVisibility(false);
 
-    // win_publicScreen.webContents.openDevTools();
+    win_publicScreen.webContents.openDevTools();
+
+    win_publicScreen.on('close', (event) => {
+        if (win_publicScreen) {
+            win_publicScreen = null;
+        }
+    });
 }
 
 function open_statistics() {
@@ -285,14 +291,25 @@ ipcMain.on('clazzWsListener', (e, info) => {
     }
 });
 
+/**
+ * 消息转发到公屏
+ */
+ipcMain.on('classDanmu', (e, info) => {
+    if (win_publicScreen) {
+        win_publicScreen.webContents.send('classDanmu', info);
+    }
+});
+
 //全局变量-存储当前登录账号信息
 global.loginUser = {
     account: '',
+    colUid: '',
     password: '',
     classCode: '',
     vid: '',
     sid: '',
-    subjectType: ''
+    subjectType: '',
+    msgArr: []
 };
 
 
