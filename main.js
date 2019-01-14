@@ -83,7 +83,7 @@ function ant_createWin() {
         width: 350,
         height: 394,
         title: '小蚂蚁教学助手',
-        resizable: false,
+        //resizable: false,
         icon: './images/logoo.png'
     });
 
@@ -93,7 +93,7 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on('close', (event) => {
         if (win) {
@@ -149,7 +149,7 @@ function afterPushQue() {
         width: 354,
         height: 356,
         title: '本地授课助手',
-        resizable: false,
+       // resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +164,7 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
 }
