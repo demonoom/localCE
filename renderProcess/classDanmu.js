@@ -1,9 +1,10 @@
+let msgArr = [];
 $(function () {
     const remote = require('electron').remote;
     const {ipcRenderer} = require('electron');
 
     //获取本地消息记录，加载历史消息
-    var msgArr = remote.getGlobal('loginUser').msgArr;
+    msgArr = remote.getGlobal('loginUser').msgArr;
     if (msgArr.length !== 0) {
         buildMesList(msgArr);
     }
@@ -31,7 +32,7 @@ $(function () {
                         <span>${e.message.fromUser.userName}</span>            
                     </div>
                     <div>
-                        <img src=${e.message.attachment.address} alt="">
+                        <img onclick="img_onclick(this)" src=${e.message.attachment.address} alt="">
                     </div>
                 </li>`
             } else {
@@ -51,3 +52,12 @@ $(function () {
         $('#content>ul').append(htmlStr);
     }
 });
+
+function img_onclick(e) {
+    console.log(e.src);
+    var arr = msgArr.filter((e) => {
+        return e.message.attachment != null
+    }).map((e) => {
+        return e.message.attachment.address;
+    });
+}
