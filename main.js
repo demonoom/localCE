@@ -188,7 +188,7 @@ function openPubWin() {
 
     win_publicScreen.setMenuBarVisibility(false);
 
-    win_publicScreen.webContents.openDevTools();
+    // win_publicScreen.webContents.openDevTools();
 
     win_publicScreen.on('close', (event) => {
         if (win_publicScreen) {
@@ -247,7 +247,8 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 
 //下课
 ipcMain.on('class_over', () => {
-    console.log('class_over')
+    console.log('class_over');
+    global.loginUser.msgArr = []
 });
 
 //课堂统计
@@ -334,7 +335,7 @@ ipcMain.on('classDanmu', (e, info) => {
 
 //禁言与否
 ipcMain.on('stopDanMu', (e, msg) => {
-    console.log(msg);
+    win_ball.webContents.send('stopDanMu', msg);
 });
 
 //全局变量-存储当前登录账号信息
