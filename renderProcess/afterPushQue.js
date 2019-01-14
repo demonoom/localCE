@@ -4,7 +4,6 @@ let konwLedegArr = [];
     const remote = require('electron').remote;
     const requestLittleAntApi = require('../public/webServiceUtil');
     let subjectType = remote.getGlobal('loginUser').subjectType;
-
     ipcRenderer.on('clazzWsListener', (e, info) => {
         console.log(info, 'clazzWsListener');
         if(info==undefined){
@@ -12,6 +11,7 @@ let konwLedegArr = [];
         }
         if(info.command=='studentSubjectsCommit'){
             var studentId=info.data.uid;
+            console.log(remote.getGlobal('loginUser').classCode);
         }
     });
 
@@ -136,7 +136,9 @@ let konwLedegArr = [];
                     console.log(remote.getGlobal('loginUser').sid);
                     console.log(remote.getGlobal('loginUser').vid);
                     $('#set_knowledge').hide();
-                    $('#announceAnswer').show()
+                    $('#announceAnswer').show();
+                    var clazzId=remote.getGlobal('loginUser').classCode;
+                    initStudentInfo(clazzId,requestLittleAntApi);
                 } else {
                     layer.msg(result.msg);
                 }
@@ -206,18 +208,36 @@ function removeKnowLedge(str) {
     $('#knowledge_list').append(htmlStr);
 }
 function getStudentInfoById(studentId) {
+
+
+
+}
+function initStudentInfo(classId,requestLittleAntApi) {
+
     let param = {
-        "method": "getUserById",
-        "ident": studentId,
+        "method": "getClassStudents",
+        "clazzId": classId,
     };
     requestLittleAntApi(JSON.stringify(param), {
         onResponse: function (result) {
             if (result.success) {
-                //公布答案
-                console.log(remote.getGlobal('loginUser').sid);
-                console.log(remote.getGlobal('loginUser').vid);
-                $('#set_knowledge').hide();
-                $('#announceAnswer').show()
+                console.log(result);
+                var students=result.response;
+                if(students==undefined||students.length==0){
+                    return;
+                }
+                for (var i = 0; i < students.length; i++) {
+                    var user=students[i];
+                    var template = $("#student_template");
+                    template.find("#student_name").text(user.userName);
+                    template.find("#student_avatar").attr("src", user.avatar);
+                    template.find(".signIcon_green").attr("id", "imageTip"+user.colUid);
+                    template.find(".signIcon").attr("id", "signTip"+user.colUid);
+                    $("#student_list_container").append(template.html());
+                    template.find(".signIcon_green").attr("id", "imageTip"+-1);
+                    template.find(".signIcon").attr("id", "signTip"+-1);
+
+                }
             } else {
                 layer.msg(result.msg);
             }

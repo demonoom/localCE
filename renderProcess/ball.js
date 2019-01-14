@@ -87,7 +87,7 @@
             } else if (info.command === "pushImageSubjectTo") {
                 console.log(data);
                 remote.getGlobal('loginUser').sid = data.sid
-            } else if (info.command === 'studentSubjectsCommit') {
+            } else if (info.command === 'studentSubjectsCommit'||info.command==='pushSubjecShowContentUrl') {
                 ipcRenderer.send('clazzWsListener', info);
             }
         }

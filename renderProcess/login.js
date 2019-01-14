@@ -91,6 +91,7 @@ $(function () {
                         });
                         remote.getGlobal('loginUser').account = $("#act").val();
                         remote.getGlobal('loginUser').password = $("#pwd").val();
+                        remote.getGlobal('loginUser').colUid=result.response.colUid;
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
@@ -185,7 +186,7 @@ $(function () {
     const getTeacherClasses = () => {
         let param = {
             "method": "getTeacherClasses",
-            "ident": remote.getGlobal('loginUser').account.slice(2, remote.getGlobal('loginUser').account.length),
+            "ident": remote.getGlobal('loginUser').colUid,
         };
         requestLittleAntApi(JSON.stringify(param), {
             onResponse: function (result) {
