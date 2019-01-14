@@ -1,4 +1,5 @@
 //项目入口文件
+const electron = require('electron');
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
@@ -148,7 +149,7 @@ function afterPushQue() {
     win_afterPushQue = new BrowserWindow({
         width: 354,
         height: 356,
-        title: '本地授课助手',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
@@ -173,10 +174,10 @@ let win_publicScreen = null;
 
 function openPubWin() {
     win_publicScreen = new BrowserWindow({
-        width: 800,
-        height: 600,
+        minWidth: 750,
+        minHeight: 700,
         icon: './images/logoo.png',
-        title: ''
+        title: '小蚂蚁教学助手'
     });
 
     win_publicScreen.loadURL(url.format({
@@ -204,7 +205,7 @@ function open_statistics() {
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
-        title: '课堂统计',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
@@ -256,7 +257,7 @@ ipcMain.on('open_statistics', () => {
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
-        title: '课堂统计',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
@@ -291,6 +292,37 @@ ipcMain.on('clazzWsListener', (e, info) => {
     }
 });
 
+
+//跳转ar页面
+ipcMain.on('toArPage', (e) => {
+    const {width, height} = electron.screen.getPrimaryDisplay().workArea;
+    const window = new BrowserWindow({
+        width:width,
+        height:height,
+        webPreferences: {webSecurity: false},
+        title: '小蚂蚁教学助手',
+        icon: './images/logoo.png'
+    });
+    window.setMenu(null);
+    //window.openDevTools();
+    window.loadURL("https://www.maaee.com:6443/arBook/arsycPlay.html");
+});
+
+//跳转展台页面
+ipcMain.on('toBoothPage', (e) => {
+    const {width, height} = electron.screen.getPrimaryDisplay().workArea;
+    const window = new BrowserWindow({
+        width: width,
+        height: height,
+        webPreferences: {webSecurity: false},
+        title: '小蚂蚁教学助手',
+        icon: './images/logoo.png'
+    });
+    window.setMenu(null);
+    //window.openDevTools();
+    var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
+    window.loadURL(url);
+});
 /**
  * 消息转发到公屏
  */

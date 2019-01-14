@@ -27,23 +27,23 @@ $(function () {
             if (e.message.attachment != null && e.message.content === '[图片]') {
                 //图片
                 htmlStr += `<li>
-                    <div>
+                    <div class="userImg">
                         <img src=${e.message.fromUser.avatar} alt="">
-                        <span>${e.message.fromUser.userName}</span>            
                     </div>
-                    <div>
+                    <div class="imgCont">
+                        <span>${e.message.fromUser.userName}</span>            
                         <img onclick="img_onclick(this)" src=${e.message.attachment.address} alt="">
                     </div>
                 </li>`
             } else {
                 //文字
                 htmlStr += `<li>
-                    <div>
+                    <div class="userImg">
                         <img src=${e.message.fromUser.avatar} alt="">
-                        <span>${e.message.fromUser.userName}</span>            
                     </div>
-                    <div>
-                        ${e.message.content}
+                    <div class="textCont">
+                        <span>${e.message.fromUser.userName}</span>            
+                        <div>${e.message.content}</div>
                     </div>
                 </li>`
             }
@@ -60,4 +60,5 @@ function img_onclick(e) {
     }).map((e) => {
         return e.message.attachment.address;
     });
+    $("#preview_img").attr("src", e.src);
 }
