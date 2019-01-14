@@ -149,7 +149,7 @@ function afterPushQue() {
     win_afterPushQue = new BrowserWindow({
         width: 354,
         height: 356,
-        title: '本地授课助手',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
@@ -174,10 +174,10 @@ let win_publicScreen = null;
 
 function openPubWin() {
     win_publicScreen = new BrowserWindow({
-        width: 800,
-        height: 600,
+        minWidth: 750,
+        minHeight: 700,
         icon: './images/logoo.png',
-        title: ''
+        title: '小蚂蚁教学助手'
     });
 
     win_publicScreen.loadURL(url.format({
@@ -205,7 +205,7 @@ function open_statistics() {
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
-        title: '课堂统计',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
@@ -257,7 +257,7 @@ ipcMain.on('open_statistics', () => {
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
-        title: '课堂统计',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
@@ -297,8 +297,8 @@ ipcMain.on('clazzWsListener', (e, info) => {
 ipcMain.on('toArPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
     const window = new BrowserWindow({
-        width:width,
-        height:height,
+        width: width,
+        height: height,
         webPreferences: {webSecurity: false},
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png'
@@ -330,6 +330,11 @@ ipcMain.on('classDanmu', (e, info) => {
     if (win_publicScreen) {
         win_publicScreen.webContents.send('classDanmu', info);
     }
+});
+
+//禁言与否
+ipcMain.on('stopDanMu', (e, msg) => {
+    console.log(msg);
 });
 
 //全局变量-存储当前登录账号信息
