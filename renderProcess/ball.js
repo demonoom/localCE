@@ -75,11 +75,11 @@
         overClass()
     };
 
-    AR.onclick = function(){
+    AR.onclick = function () {
         ipcRenderer.send('toArPage');
     };
 
-    booth.onclick = function(){
+    booth.onclick = function () {
         ipcRenderer.send('toBoothPage');
     };
 
@@ -97,7 +97,7 @@
         // 显示消息
         onMessage: function (info) {
             var data = info.data;
-            // console.log(info);
+            console.log(info);
             if (info.command === 'teacherLogin') {
                 remote.getGlobal('loginUser').vid = data.vid
             } else if (info.command === "pushImageSubjectTo") {
@@ -129,6 +129,29 @@
         connection.send(obj);
     });
 
+    //禁言与否
+    ipcRenderer.on('stopDanMu', (e, msg) => {
+        if (msg == 0) {
+            //解除禁言
+            let obj = {
+                "command": "screen_lock",
+                "data": {
+                    "screen_lock": false,
+                }
+            };
+            connection.send(obj);
+        } else if (msg == 1) {
+            //禁言
+            let obj = {
+                "command": "screen_lock",
+                "data": {
+                    "screen_lock": true,
+                }
+            };
+            connection.send(obj);
+        }
+    });
+
     ipcRenderer.on('loginSuccess', () => {
         //构建登录课堂的协议信息
         const loginPro = {
@@ -146,6 +169,17 @@
         connection.connect(loginPro);
         $('#startClass').hide();
         $('#content').show();
+
+        setTimeout(function () {
+            //默认禁言
+            let obj = {
+                "command": "screen_lock",
+                "data": {
+                    "screen_lock": true,
+                }
+            };
+            connection.send(obj);
+        }, 2000);
 
         //开启计时器
         timer = setTimeout(() => {

@@ -1,7 +1,47 @@
 let msgArr = [];
+let this_src;
 $(function () {
     const remote = require('electron').remote;
     const {ipcRenderer} = require('electron');
+
+    $('.icon_close').click(() => {
+        $("#mask").hide();
+    });
+
+    $('.icon_right').click(() => {
+        var arr = msgArr.filter((e) => {
+            return e.message.attachment != null
+        }).map((e) => {
+            return e.message.attachment.address;
+        });
+        for (var i = 0; i <= arr.length; i++) {
+            if (arr[i] === this_src) {
+                if (i != arr.length - 1) {
+                    $("#preview_img").attr("src", arr[i + 1]);
+                    this_src = $("#preview_img").attr('src');
+                    break
+                }
+            }
+        }
+    });
+
+    $('.icon_left').click(() => {
+        var arr = msgArr.filter((e) => {
+            return e.message.attachment != null
+        }).map((e) => {
+            return e.message.attachment.address;
+        });
+
+        for (var i = 0; i <= arr.length; i++) {
+            if (arr[i] === this_src) {
+                if (i != 0) {
+                    $("#preview_img").attr("src", arr[i - 1]);
+                    this_src = $("#preview_img").attr('src');
+                    break
+                }
+            }
+        }
+    });
 
     //获取本地消息记录，加载历史消息
     msgArr = remote.getGlobal('loginUser').msgArr;
@@ -22,6 +62,7 @@ $(function () {
      * @param arr
      */
     function buildMesList(arr) {
+        $('.empty').hide();
         let htmlStr = '';
         arr.forEach((e, i) => {
             if (e.message.attachment != null && e.message.content === '[图片]') {
@@ -50,16 +91,14 @@ $(function () {
         });
         $('#content>ul').empty();
         $('#content>ul').append(htmlStr);
+
+        document.querySelector('#content').scrollTop = document.querySelector('#content').scrollHeight
+
     }
 });
 
 function img_onclick(e) {
-    console.log(e.src);
-    var arr = msgArr.filter((e) => {
-        return e.message.attachment != null
-    }).map((e) => {
-        return e.message.attachment.address;
-    });
+    this_src = e.src;
     $("#preview_img").attr("src", e.src);
     $("#mask").show();
 }

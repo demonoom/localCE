@@ -10,7 +10,7 @@ honeySwitch.init = function () {
         }
         if ($(this).hasClass("switch-on")) {
             $('.title').text('解除禁言');
-            ipcRenderer.send('stopDanMu', 'liftingOfTheBan');
+            ipcRenderer.send('stopDanMu', '0');
             $(this).removeClass("switch-on").addClass("switch-off");
             $(".switch-off").css({
                 'border-color': '#dfdfdf',
@@ -19,7 +19,7 @@ honeySwitch.init = function () {
             });
         } else {
             $('.title').text('禁言');
-            ipcRenderer.send('stopDanMu', 'forbiddenWords');
+            ipcRenderer.send('stopDanMu', '1');
             $(this).removeClass("switch-off").addClass("switch-on");
             if (honeySwitch.themeColor) {
                 var c = honeySwitch.themeColor;
