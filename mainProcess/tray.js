@@ -39,7 +39,7 @@ function createTray(win, app) {
     tray.setContextMenu(menu);
 
     setTimeout(function () {
-        // checkForUpdates(tray);
+        checkForUpdates(tray);
     }, 5000);
 
 
@@ -49,7 +49,8 @@ function createTray(win, app) {
     function checkForUpdates(tray) {
         try {
             // 配置安装包远端服务器
-            autoUpdater.setFeedURL("http://192.168.43.151:8200/a/");
+            //autoUpdater.setFeedURL("http://172.16.2.35:5000/files/");
+            autoUpdater.setFeedURL("http://60.205.86.217/upload5/localTeachingRelease/");
             // 下面是自动更新的整个生命周期所发生的事件
             autoUpdater.on('error', function (message) {
                 console.log('error' + message)

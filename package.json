@@ -32,8 +32,8 @@
   "author": "noom",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.10",
-    "electron-builder": "^20.31.0",
+    "electron": "3.0.10",
+    "electron-builder": "20.31.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -41,7 +41,7 @@
     "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
-    "electron-updater": "^4.0.0",
+    "electron-updater": "3.1.6",
     "hashmap": "^2.3.0",
     "ws": "^6.1.0",
     "app-root-path": "^2.1.0",
