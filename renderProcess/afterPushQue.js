@@ -7,6 +7,12 @@ let konwLedegArr = [];
 
     ipcRenderer.on('clazzWsListener', (e, info) => {
         console.log(info, 'clazzWsListener');
+        if(info==undefined){
+            return;
+        }
+        if(info.command=='studentSubjectsCommit'){
+            var studentId=info.data.uid;
+        }
     });
 
     if (subjectType === 'C') {
