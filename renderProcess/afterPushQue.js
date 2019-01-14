@@ -195,3 +195,25 @@ function removeKnowLedge(str) {
     $('#knowledge_list').empty();
     $('#knowledge_list').append(htmlStr);
 }
+function getStudentInfoById(studentId) {
+    let param = {
+        "method": "getUserById",
+        "ident": studentId,
+    };
+    requestLittleAntApi(JSON.stringify(param), {
+        onResponse: function (result) {
+            if (result.success) {
+                //公布答案
+                console.log(remote.getGlobal('loginUser').sid);
+                console.log(remote.getGlobal('loginUser').vid);
+                $('#set_knowledge').hide();
+                $('#announceAnswer').show()
+            } else {
+                layer.msg(result.msg);
+            }
+        },
+        onError: function (error) {
+            // message.error(error);
+        }
+    });
+}
