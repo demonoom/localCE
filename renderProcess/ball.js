@@ -51,7 +51,12 @@
 
     //统计
     statistics.onclick = () => {
-        ipcRenderer.send('open_statistics')
+        // ipcRenderer.send('open_statistics')
+    };
+
+    //公屏
+    statistics.onclick = () => {
+        ipcRenderer.send('public_screen')
     };
 
     //下课
@@ -81,7 +86,7 @@
         // 显示消息
         onMessage: function (info) {
             var data = info.data;
-            // console.log(info);
+            console.log(info);
             if (info.command === 'teacherLogin') {
                 remote.getGlobal('loginUser').vid = data.vid
             } else if (info.command === "pushImageSubjectTo") {

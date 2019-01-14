@@ -117,15 +117,15 @@ function showClassBall() {
     win_ball = new BrowserWindow({
         width: 118,
         height: 231,
-        frame: false,
-        resizable: false,
-        transparent: true,  //使窗口透明
+        // frame: false,
+        // resizable: false,
+        // transparent: true,  //使窗口透明
         alwaysOnTop: true,
         x: size.width - 118,
         y: size.height / 2 - 100
     });
 
-    // win_ball.webContents.openDevTools();
+    win_ball.webContents.openDevTools();
 
     win_ball.loadURL(url.format({
         pathname: path.join(__dirname, './views/ball_new.html'),
@@ -167,6 +167,27 @@ function afterPushQue() {
     // win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
+}
+
+let win_publicScreen = null;
+
+function openPubWin() {
+    win_publicScreen = new BrowserWindow({
+        width: 800,
+        height: 600,
+        icon: './images/logoo.png',
+        title: ''
+    });
+
+    /*win_publicScreen.loadURL(url.format({
+        pathname: path.join(__dirname, './views/afterPushQue.html'),
+        protocol: 'file',
+        slashes: true
+    }));*/
+
+    win_publicScreen.setMenuBarVisibility(false);
+
+    // win_publicScreen.webContents.openDevTools();
 }
 
 function open_statistics() {
@@ -241,7 +262,10 @@ ipcMain.on('open_statistics', () => {
 
     win_statistics.setMenuBarVisibility(false);
 
-    // win_statistics.webContents.openDevTools();
+});
+
+ipcMain.on('public_screen', () => {
+    openPubWin();
 });
 
 //公布答案
