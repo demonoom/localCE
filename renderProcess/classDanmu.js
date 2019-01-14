@@ -61,4 +61,5 @@ function img_onclick(e) {
         return e.message.attachment.address;
     });
     $("#preview_img").attr("src", e.src);
+    $("#mask").show();
 }
