@@ -81,7 +81,8 @@
         // 显示消息
         onMessage: function (info) {
             var data = info.data;
-            console.log(info);
+            // console.log(info);
+            ipcRenderer.send('clazzWsListener', info);
             if (info.command === 'teacherLogin') {
                 remote.getGlobal('loginUser').vid = data.vid
             } else if (info.command === "pushImageSubjectTo") {

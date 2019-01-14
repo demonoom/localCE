@@ -149,7 +149,7 @@ function afterPushQue() {
         width: 354,
         height: 356,
         title: '本地授课助手',
-        resizable: false,
+        // resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +164,7 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
 }
@@ -250,8 +250,15 @@ ipcMain.on('updateClassSubjectAnswer', () => {
     //打开大窗口
     setTimeout(function () {
         open_statistics()
-    }, 1000)
+    }, 1000);
     win_afterPushQue.destroy();
+});
+
+//消息转发到afterPushQue
+ipcMain.on('clazzWsListener', (e, info) => {
+    if (win_afterPushQue) {
+        win_afterPushQue.webContents.send('clazzWsListener', info);
+    }
 });
 
 //全局变量-存储当前登录账号信息

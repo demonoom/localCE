@@ -5,6 +5,10 @@ let konwLedegArr = [];
     const requestLittleAntApi = require('../public/webServiceUtil');
     let subjectType = remote.getGlobal('loginUser').subjectType;
 
+    ipcRenderer.on('clazzWsListener', (e, info) => {
+        console.log(info, 'clazzWsListener');
+    });
+
     if (subjectType === 'C') {
         $('#choose_ans').show();
         $('#judge_ans').hide();
