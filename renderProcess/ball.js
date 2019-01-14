@@ -2,6 +2,7 @@
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
+    const publicScreen = document.querySelector('#publicScreen');
     const clock = document.querySelector('#clock');
     const startClass = document.querySelector('#startClass');
     const {ipcRenderer} = require('electron');
@@ -51,11 +52,11 @@
 
     //统计
     statistics.onclick = () => {
-        // ipcRenderer.send('open_statistics')
+        ipcRenderer.send('open_statistics')
     };
 
     //公屏
-    statistics.onclick = () => {
+    publicScreen.onclick = () => {
         ipcRenderer.send('public_screen')
     };
 
