@@ -1,5 +1,5 @@
 const {Tray, Menu, dialog} = require('electron');
-const {autoUpdater} = require('electron-updater');
+// const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
 function createTray(win, app) {
@@ -34,7 +34,7 @@ function createTray(win, app) {
 
     });
 
-    tray.setToolTip('本地开课助手');
+    tray.setToolTip('小蚂蚁教学助手');
 
     tray.setContextMenu(menu);
 

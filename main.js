@@ -82,7 +82,7 @@ function ant_createWin() {
     win = new BrowserWindow({
         width: 350,
         height: 394,
-        title: '本地授课助手',
+        title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png'
     });
