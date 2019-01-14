@@ -14,7 +14,8 @@ let konwLedegArr = [];
             console.log(remote.getGlobal('loginUser').classCode);
         }
     });
-
+    var clazzId=remote.getGlobal('loginUser').classCode;
+    initStudentInfo(clazzId,requestLittleAntApi);
     if (subjectType === 'C') {
         $('#choose_ans').show();
         $('#judge_ans').hide();
@@ -137,8 +138,7 @@ let konwLedegArr = [];
                     console.log(remote.getGlobal('loginUser').vid);
                     $('#set_knowledge').hide();
                     $('#announceAnswer').show();
-                    var clazzId=remote.getGlobal('loginUser').classCode;
-                    initStudentInfo(clazzId,requestLittleAntApi);
+
                 } else {
                     layer.msg(result.msg);
                 }
@@ -208,8 +208,8 @@ function removeKnowLedge(str) {
     $('#knowledge_list').append(htmlStr);
 }
 function getStudentInfoById(studentId) {
-
-
+    $("#imageTip"+studentId).show();
+    $("#signTip"+studentId).remove();
 
 }
 function initStudentInfo(classId,requestLittleAntApi) {
@@ -231,11 +231,13 @@ function initStudentInfo(classId,requestLittleAntApi) {
                     var template = $("#student_template");
                     template.find("#student_name").text(user.userName);
                     template.find("#student_avatar").attr("src", user.avatar);
+                    template.find("#student_item").attr("id", "itemId"+user.colUid);
                     template.find(".signIcon_green").attr("id", "imageTip"+user.colUid);
                     template.find(".signIcon").attr("id", "signTip"+user.colUid);
                     $("#student_list_container").append(template.html());
                     template.find(".signIcon_green").attr("id", "imageTip"+-1);
                     template.find(".signIcon").attr("id", "signTip"+-1);
+                    template.find("#student_item").attr("id", "itemId"+-1);
 
                 }
             } else {
