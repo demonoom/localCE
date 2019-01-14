@@ -86,7 +86,7 @@ ul, li {
     /*background: salmon;*/
     font-size: 0;
 }
-#pushQue{
+.pushQue{
     width: 42px;
     height: 60px;
     position: absolute;
@@ -97,17 +97,17 @@ ul, li {
     border-bottom-right-radius: 45%;
     overflow: hidden;
 }
-#pushQue span{
+.pushQue span{
     position: absolute;
     left: 0;
     top:0
 }
-#pushQue span:first-child{
+.pushQue span:first-child{
     position: absolute;
     left: 0;
     top:0
 }
-#screenShot{
+.screenShot{
     width: 66px;
     height: 40px;
     position: absolute;
@@ -118,7 +118,7 @@ ul, li {
     overflow: hidden;
     border-top-left-radius: 45%;
 }
-#statistics{
+.statistics{
     width: 69px;
     height: 40px;
     position: absolute;
