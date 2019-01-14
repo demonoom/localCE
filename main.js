@@ -84,7 +84,7 @@ function ant_createWin() {
         width: 350,
         height: 394,
         title: '小蚂蚁教学助手',
-        //resizable: false,
+        resizable: false,
         icon: './images/logoo.png'
     });
 
@@ -94,7 +94,7 @@ function ant_createWin() {
         protocol: 'file'
     }));
 
-    //win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.on('close', (event) => {
         if (win) {
@@ -134,7 +134,7 @@ function showClassBall() {
         slashes: true
     }));
 
-    win_ball.setSkipTaskbar(true)
+    win_ball.setSkipTaskbar(true);
 
     createTray(win_ball, app);
 };
@@ -150,7 +150,7 @@ function afterPushQue() {
         width: 354,
         height: 356,
         title: '本地授课助手',
-       // resizable: false,
+        resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -165,9 +165,36 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
 
-    win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
 
     win_afterPushQue.setSkipTaskbar(true)
+}
+
+let win_publicScreen = null;
+
+function openPubWin() {
+    win_publicScreen = new BrowserWindow({
+        width: 800,
+        height: 600,
+        icon: './images/logoo.png',
+        title: ''
+    });
+
+    win_publicScreen.loadURL(url.format({
+        pathname: path.join(__dirname, './views/classDanmu.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    win_publicScreen.setMenuBarVisibility(false);
+
+    win_publicScreen.webContents.openDevTools();
+
+    win_publicScreen.on('close', (event) => {
+        if (win_publicScreen) {
+            win_publicScreen = null;
+        }
+    });
 }
 
 function open_statistics() {
@@ -242,7 +269,10 @@ ipcMain.on('open_statistics', () => {
 
     win_statistics.setMenuBarVisibility(false);
 
-    // win_statistics.webContents.openDevTools();
+});
+
+ipcMain.on('public_screen', () => {
+    openPubWin();
 });
 
 //公布答案
@@ -261,6 +291,7 @@ ipcMain.on('clazzWsListener', (e, info) => {
         win_afterPushQue.webContents.send('clazzWsListener', info);
     }
 });
+
 
 //跳转ar页面
 ipcMain.on('toArPage', (e) => {
@@ -281,26 +312,36 @@ ipcMain.on('toArPage', (e) => {
 ipcMain.on('toBoothPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
     const window = new BrowserWindow({
-        width:width,
-        height:height,
+        width: width,
+        height: height,
         webPreferences: {webSecurity: false},
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png'
     });
     window.setMenu(null);
     //window.openDevTools();
-    var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid="+global.loginUser.vid;
+    var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
     window.loadURL(url);
+});
+/**
+ * 消息转发到公屏
+ */
+ipcMain.on('classDanmu', (e, info) => {
+    if (win_publicScreen) {
+        win_publicScreen.webContents.send('classDanmu', info);
+    }
 });
 
 //全局变量-存储当前登录账号信息
 global.loginUser = {
     account: '',
+    colUid: '',
     password: '',
     classCode: '',
     vid: '',
     sid: '',
-    subjectType: ''
+    subjectType: '',
+    msgArr: []
 };
 
 

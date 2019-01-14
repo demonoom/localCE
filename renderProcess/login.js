@@ -215,6 +215,7 @@ $(function () {
                 <i onclick="classCheck(this,${e.split('#')[0]})" class="${i === 0 ? 'active check_i' : 'check_i'}"></i>
             </li>`
         });
+        $('#class_list-ul').empty();
         $('#class_list-ul').append(htmlStr);
         $('#logo_content').hide();
         $('#classList').show();

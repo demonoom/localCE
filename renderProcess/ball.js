@@ -2,6 +2,7 @@
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
+    const publicScreen = document.querySelector('#publicScreen');
     const clock = document.querySelector('#clock');
     const startClass = document.querySelector('#startClass');
     const AR = document.querySelector("#AR");
@@ -56,6 +57,11 @@
         ipcRenderer.send('open_statistics')
     };
 
+    //公屏
+    publicScreen.onclick = () => {
+        ipcRenderer.send('public_screen')
+    };
+
     //下课
     clock.onclick = () => {
         let obj = {
@@ -97,8 +103,15 @@
             } else if (info.command === "pushImageSubjectTo") {
                 console.log(data);
                 remote.getGlobal('loginUser').sid = data.sid
-            } else if (info.command === 'studentSubjectsCommit'||info.command==='pushSubjecShowContentUrl') {
+            } else if (info.command === 'studentSubjectsCommit' || info.command === 'pushSubjecShowContentUrl') {
                 ipcRenderer.send('clazzWsListener', info);
+            } else if (info.command === 'classDanmu') {
+                //公屏   公屏消息需要两步处理  1.如果窗口被打开，将新消息Push过去加到后方  2.在全局构建本地消息数据存储
+                var msg = info.data;
+                var arr = remote.getGlobal('loginUser').msgArr;
+                arr.push(msg);
+                remote.getGlobal('loginUser').msgArr = arr;
+                ipcRenderer.send('classDanmu', info.data)
             }
         }
     };

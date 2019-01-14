@@ -33,7 +33,7 @@ ul, li {
     list-style: none;
 }
 
-.startClass{
+.startClass {
     width: 108px;
     height: 216px;
     background: url("../images/icon_startBg.png");
@@ -42,7 +42,8 @@ ul, li {
     right: 0;
     bottom: 0;
 }
-.startClass .shade{
+
+.startClass .shade {
     width: 100%;
     height: 100%;
     background: url("../images/icon_startTop.png") no-repeat;
@@ -52,11 +53,11 @@ ul, li {
     bottom: 0;
     cursor: pointer;
     z-index: 10;
-    animation:startClass 5s ease-in-out infinite;
-    -webkit-animation:startClass 5s ease-in-out infinite;
+    animation: startClass 5s ease-in-out infinite;
+    -webkit-animation: startClass 5s ease-in-out infinite;
 }
 
-#content{
+#content {
     background: url("../images/icon_ballBg_right.png") no-repeat;
     width: 100%;
     height: 100%;
@@ -64,7 +65,8 @@ ul, li {
     overflow: hidden;
     position: relative;
 }
-.circle{
+
+.circle {
     background: url("../images/icon_ballCenter.png") no-repeat;
     background-size: cover;
     width: 126px;
@@ -73,20 +75,22 @@ ul, li {
     right: -70px;
     top: 50%;
     margin-top: -63px;
-    animation:circle 20s linear infinite;
-    -webkit-animation:circle 20s linear infinite;
-
+    animation: circle 20s linear infinite;
+    -webkit-animation: circle 20s linear infinite;
 }
-.textCont{
+
+.textCont {
     color: #0045e3;
     font-size: 16px;
 }
-.textCont > div{
+
+.textCont > div {
     cursor: pointer;
     /*background: salmon;*/
     font-size: 0;
 }
-.pushQue{
+
+.pushQue {
     width: 42px;
     height: 60px;
     position: absolute;
@@ -97,17 +101,20 @@ ul, li {
     border-bottom-right-radius: 45%;
     overflow: hidden;
 }
-.pushQue span{
+
+.pushQue span {
     position: absolute;
     left: 0;
-    top:0
+    top: 0
 }
-.pushQue span:first-child{
+
+.pushQue span:first-child {
     position: absolute;
     left: 0;
-    top:0
+    top: 0
 }
-.screenShot{
+
+.screenShot {
     width: 66px;
     height: 40px;
     position: absolute;
@@ -118,7 +125,8 @@ ul, li {
     overflow: hidden;
     border-top-left-radius: 45%;
 }
-.statistics{
+
+.statistics {
     width: 69px;
     height: 40px;
     position: absolute;
@@ -131,7 +139,7 @@ ul, li {
 }
 
 
-.publicScreen{
+.publicScreen {
     width: 71px;
     height: 40px;
     position: absolute;
@@ -142,7 +150,8 @@ ul, li {
     overflow: hidden;
     border-top-left-radius: 45%;
 }
-.AR{
+
+.AR {
     width: 69px;
     height: 40px;
     position: absolute;
@@ -153,7 +162,8 @@ ul, li {
     overflow: hidden;
     border-top-left-radius: 45%;
 }
-.booth{
+
+.booth {
     width: 42px;
     height: 63px;
     position: absolute;
@@ -164,7 +174,8 @@ ul, li {
     border-top-left-radius: 45%;
     border-top-right-radius: 45%;
 }
-#clock{
+
+#clock {
     width: 90px;
     height: 90px;
     position: absolute;
@@ -175,7 +186,8 @@ ul, li {
     cursor: pointer;
     border-radius: 50%;
 }
-.centerText{
+
+.centerText {
     position: absolute;
     top: 90px;
     right: 0;
@@ -185,9 +197,10 @@ ul, li {
     height: 83px;
     z-index: 10;
 }
-.overClass{
+
+.overClass {
     position: absolute;
-    top:90px;
+    top: 90px;
     right: 0;
     background: url("../images/icon_ballOver02.png") no-repeat;
     background-size: cover;
@@ -195,19 +208,21 @@ ul, li {
     height: 83px;
     z-index: 10;
 }
-.overClass i{
+
+.overClass i {
     display: block;
     position: absolute;
     top: 0;
     right: 0;
     background: url("../images/icon_ballOver01.png") no-repeat;
     background-size: cover;
-    width:100%;
+    width: 100%;
     height: 100%;
     z-index: 11;
-    animation:startClass 3s linear infinite;
-    -webkit-animation:startClass 3s linear infinite;
+    animation: startClass 3s linear infinite;
+    -webkit-animation: startClass 3s linear infinite;
 }
+
 @keyframes startClass {
     0% {
         opacity: 1;
@@ -219,13 +234,13 @@ ul, li {
         opacity: 1;
     }
 }
-@keyframes circle
-{
+
+@keyframes circle {
     0% {
-        transform:rotate(0)
+        transform: rotate(0)
     }
 
     100% {
-        transform:rotate(360deg)
+        transform: rotate(360deg)
     }
 }
