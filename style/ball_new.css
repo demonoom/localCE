@@ -6,8 +6,8 @@ body {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     border-radius: 50%;
     font-size: 14px;
-    width: 118px;
-    height: 231px;
+    width: 137px;
+    height: 265px;
 }
 
 ::-webkit-scrollbar {
@@ -71,7 +71,8 @@ ul, li {
     height: 126px;
     position: absolute;
     right: -70px;
-    top: 56px;
+    top: 50%;
+    margin-top: -63px;
     animation:circle 20s linear infinite;
     -webkit-animation:circle 20s linear infinite;
 
@@ -82,15 +83,18 @@ ul, li {
 }
 .textCont > div{
     cursor: pointer;
+    /*background: salmon;*/
+    font-size: 0;
 }
 #pushQue{
-    width: 81px;
-    height: 46px;
+    width: 42px;
+    height: 60px;
     position: absolute;
-    top: 18px;
-    right: 1px;
-    transform: rotate(-29deg);
-    border-radius: 36%;
+    top: 8px;
+    right: 4px;
+    transform: rotate(-21deg);
+    border-bottom-left-radius: 45%;
+    border-bottom-right-radius: 45%;
     overflow: hidden;
 }
 #pushQue span{
@@ -104,24 +108,61 @@ ul, li {
     top:0
 }
 #screenShot{
-    width: 77px;
-    height: 47px;
+    width: 66px;
+    height: 40px;
     position: absolute;
-    top: 93px;
-    right: 47px;
-    transform: rotate(-88deg);
-    border-radius: 33%;
+    top: 46px;
+    right: 36px;
+    transform: rotate(-140deg);
+    border-bottom-left-radius: 45%;
     overflow: hidden;
+    border-top-left-radius: 45%;
 }
 #statistics{
-    width: 80px;
-    height: 45px;
+    width: 69px;
+    height: 40px;
     position: absolute;
-    top: 172px;
-    right: 2px;
-    transform: rotate(-153deg);
-    border-radius: 25%;
+    top: 88px;
+    right: 57px;
+    transform: rotate(-163deg);
+    border-bottom-left-radius: 45%;
     overflow: hidden;
+    border-top-left-radius: 45%;
+}
+
+
+.publicScreen{
+    width: 71px;
+    height: 40px;
+    position: absolute;
+    top: 137px;
+    right: 57px;
+    transform: rotate(-199deg);
+    border-bottom-left-radius: 45%;
+    overflow: hidden;
+    border-top-left-radius: 45%;
+}
+.AR{
+    width: 69px;
+    height: 40px;
+    position: absolute;
+    top: 178px;
+    right: 34px;
+    transform: rotate(-222deg);
+    border-bottom-left-radius: 45%;
+    overflow: hidden;
+    border-top-left-radius: 45%;
+}
+.booth{
+    width: 42px;
+    height: 63px;
+    position: absolute;
+    top: 194px;
+    right: 5px;
+    transform: rotate(20deg);
+    overflow: hidden;
+    border-top-left-radius: 45%;
+    border-top-right-radius: 45%;
 }
 #clock{
     width: 90px;
@@ -136,7 +177,7 @@ ul, li {
 }
 .centerText{
     position: absolute;
-    top: 78px;
+    top: 90px;
     right: 0;
     background: url("../images/icon_ballOver.png") no-repeat;
     background-size: cover;
@@ -146,7 +187,7 @@ ul, li {
 }
 .overClass{
     position: absolute;
-    top: 78px;
+    top:90px;
     right: 0;
     background: url("../images/icon_ballOver02.png") no-repeat;
     background-size: cover;

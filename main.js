@@ -115,13 +115,13 @@ let win_ball = null;
 function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 118,
-        height: 231,
+        width: 137,
+        height: 265,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
-        x: size.width - 118,
+        x: size.width - 137,
         y: size.height / 2 - 100
     });
 
