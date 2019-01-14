@@ -73,6 +73,7 @@ input:-webkit-autofill {
     width:calc(100% - 70px);
     box-sizing: border-box;
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+    font-size: 16px;
 }
 .knowledge_cont .select_list{
     border: 1px #A0A0A0 solid;
@@ -117,10 +118,11 @@ input:-webkit-autofill {
     background: #3672ed;
     text-align: center;
     font-size: 18px;
-    margin: 0 26px;
+    margin: 0 auto;
     color: white;
     border-radius: 4px;
     cursor: pointer;
+    width: 300px;
 }
 #knowledge_list{
     overflow: hidden;
@@ -128,7 +130,7 @@ input:-webkit-autofill {
     display: -webkit-flex;
     display: flex;
     flex-wrap: wrap;
-    margin: 10px 11px 34px 11px;
+    margin: 10px 11px 24px 11px;
     padding: 0;
 }
 #knowledge_list li {
@@ -304,4 +306,32 @@ input:-webkit-autofill {
     overflow-y: auto ;
     overflow-x: hidden;
     height: 300px;
+}
+.student_list_Cont{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+    color: #b2b2b2;
+}
+　　input:-moz-placeholder, textarea:-moz-placeholder{
+    color: #b2b2b2;
+}
+　　input::-moz-placeholder, textarea::-moz-placeholder{
+    color: #b2b2b2;
+}
+　　input:-ms-input-placeholder, textarea:-ms-input-placeholder{
+    color: #b2b2b2;
+}
+#set_knowledge{
+    height: 262px;
+    position: relative;
+}
+.blueBtn-first{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -150px;
 }
