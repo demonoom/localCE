@@ -38,18 +38,24 @@
         </div>
         <div class="blueBtn" id="updateClassSubjectAnswer">公布答案</div>
     </div>
-</div>
-<div id="student_template"  style="display: none;">
-    <div class="">
-        <div class="">
-            <img id="student_avatar"  />
+    <div >
+        <div class="student_list_title">
+            <span class="student_list_line student_list_lineLeft"></span>
+            学生答题情况
+            <span class="student_list_line student_list_lineRight"></span>
         </div>
-        <img class="" id="imageTip"  alt="">
-        <div class="" id="signTip">未答题</div>
-        <div id="student_name" class="studentName"></div>
+        <div class="student_itemCont" id="student_list_container"></div>
     </div>
-</div>
-<div id="student_list_container" class="content" >
+    <div id="student_template"  style="display: none;">
+            <div class="student_item">
+                <div class="student_avatar">
+                    <img id="student_avatar"  src="http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png"  />
+                </div>
+                <div class="imageTip" id="imageTip"></div>
+                <div class="signTip" id="signTip"></div>
+                <div id="student_name" class="studentName"></div>
+            </div>
+    </div>
 </div>
 <script src="../public/jquery.min.js"></script>
 <script src="../public/layer/layer.js"></script>

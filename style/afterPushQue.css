@@ -1,9 +1,13 @@
 body, html {
     margin: 0;
-    width: 100%;
-    height: 100vh;
     overflow: hidden;
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(#a2c1ff, white); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#a2c1ff, white); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#a2c1ff, white); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#a2c1ff, white); /* 标准的语法 */
 }
 
 ul, li {
@@ -43,22 +47,18 @@ input:-webkit-autofill {
     justify-content: center;
 }
 .content{
-    width: 354px;
-    height: 356px;
-    background: -webkit-linear-gradient(white, #a2c1ff); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(white, #a2c1ff); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(white, #a2c1ff); /* Firefox 3.6 - 15 */
-    background: linear-gradient(white, #a2c1ff); /* 标准的语法 */
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 .title{
     text-align: center;
-    line-height: 57px;
-    height: 57px;
+    line-height: 63px;
+    height: 63px;
     color: white;
     font-size: 18px;
     background: url("../images/icon_title.png") no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 .knowledge_cont{
     margin: 25px 26px 0;
@@ -117,19 +117,18 @@ input:-webkit-autofill {
     background: #3672ed;
     text-align: center;
     font-size: 18px;
-    margin: 20px 26px;
+    margin: 0 26px;
     color: white;
     border-radius: 4px;
     cursor: pointer;
 }
 #knowledge_list{
-    height:118px;
     overflow: hidden;
     display: -moz-flex;
     display: -webkit-flex;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 11px;
+    margin: 10px 11px 34px 11px;
     padding: 0;
 }
 #knowledge_list li {
@@ -161,7 +160,8 @@ input:-webkit-autofill {
 #announceAnswer li {
     height: 20px;
     line-height: 20px;
-    padding-right: 19px;
+    padding-right: 26px;
+    font-size: 26px;
 }
 #announceAnswer ul{
     margin: 0 10px 20px;
@@ -169,7 +169,7 @@ input:-webkit-autofill {
 }
 .announce_cont{
     padding-top: 50px;
-    height: calc(100% - 223px);
+    padding-bottom: 40px;
 }
 .checkIcon{
     width: 20px;
@@ -180,6 +180,7 @@ input:-webkit-autofill {
     vertical-align: bottom;
     cursor: pointer;
     margin: 0 16px;
+    background: #fff;
 }
 .checkIcon.active{
     border: 1px #3672ED solid;
@@ -202,4 +203,105 @@ input:-webkit-autofill {
     -o-transform: rotate(135deg);
     transform: rotate(135deg);
 
+}
+.student_avatar{
+    width: 60px;
+    height: 60px;
+    border: 2px solid #3672ED;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background: #d6d6d6;
+}
+.student_avatar-active{
+    border: 2px solid #51A938;
+    box-shadow: 0px 0px 18px 0 #71ff7e;
+}
+.student_avatar img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.studentName{
+    font-size: 18px;
+    color: #444E6F;
+    line-height: 1;
+    margin-top: 12px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.signTip, .imageTip{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+    top: 35px;
+    right: 0;
+}
+#student_list_container{
+    margin: 0 0 0 25px;
+    padding-top: 10px;
+}
+.signTip{
+    background: url("../images/icon-write.png") no-repeat #368EE8;
+}
+.imageTip{
+    background: url("../images/icon-answer.png") no-repeat #51A938;
+}
+.student_item{
+    width: 66px;
+    height: 92px;
+    position: relative;
+    text-align: center;
+    margin: 0 20px 28px 20px;
+    display: inline-block;
+}
+.student_list_title{
+    text-align: center;
+    color: #2358C4;
+    font-size: 18px;
+    line-height: 1;
+    position: relative;
+    margin: 34px 0 30px 0;
+}
+.student_list_line{
+    width: calc(50% - 80px);
+    height: 2px;
+    background: #3672ED;
+    position: absolute;
+    top:9px;
+}
+.student_list_lineLeft{
+    left: 0;
+}
+.student_list_lineLeft:before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3672ED;
+    display: inline-block;
+    position: absolute;
+    top: -4px;
+    right: -2px;
+}
+.student_list_lineRight{
+    right: 0;
+}
+.student_list_lineRight:before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3672ED;
+    display: inline-block;
+    position: absolute;
+    top: -4px;
+    left: -2px;
+}
+.student_itemCont{
+    overflow-y: auto ;
+    overflow-x: hidden;
+    height: 300px;
 }
