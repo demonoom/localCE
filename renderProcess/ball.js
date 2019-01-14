@@ -4,6 +4,8 @@
     const statistics = document.querySelector('#statistics');
     const clock = document.querySelector('#clock');
     const startClass = document.querySelector('#startClass');
+    const AR = document.querySelector("#AR");
+    const booth = document.querySelector("#booth");
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
     var timer = null;
@@ -65,6 +67,14 @@
         ipcRenderer.send('class_over');
         clearTimeout(timer);
         overClass()
+    };
+
+    AR.onclick = function(){
+        ipcRenderer.send('toArPage');
+    };
+
+    booth.onclick = function(){
+        ipcRenderer.send('toBoothPage');
     };
 
     //连接推题消息
