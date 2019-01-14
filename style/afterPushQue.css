@@ -217,6 +217,9 @@ input:-webkit-autofill {
 .student_avatar-active{
     border: 2px solid #51A938;
     box-shadow: 0px 0px 18px 0 #71ff7e;
+    animation: jump .5s linear ;
+    animation-iteration-count:2;
+    -webkit-animation-iteration-count:2; /* Safari 和 Chrome */
 }
 .student_avatar img{
     max-width: 100%;
@@ -250,6 +253,9 @@ input:-webkit-autofill {
 }
 .imageTip{
     background: url("../images/icon-answer.png") no-repeat #51A938;
+    animation: jump .5s linear ;
+    animation-iteration-count:2;
+    -webkit-animation-iteration-count:2; /* Safari 和 Chrome */
 }
 .student_item{
     width: 66px;
@@ -334,4 +340,25 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
     bottom: 0;
     left: 50%;
     margin-left: -150px;
+}
+.blueBtn-last{
+    margin-top: 25px;
+}
+@keyframes jump {
+    0% {
+        transform: translateY(0) ;
+    }
+    25% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(20px);
+
+    }
+    75% {
+        ransform: translateY(10px) ;
+    }
+    100% {
+        transform: translateY(0) ;
+    }
 }
