@@ -146,10 +146,10 @@ let win_afterPushQue = null;
  */
 function afterPushQue() {
     console.log('afterPushQue');
-    // const size = electronScreen.getPrimaryDisplay().size;
+    const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
-        width: 1000,
-        height:1000,
+        width: size.width,
+        height: size.height,
         title: '小蚂蚁教学助手',
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
