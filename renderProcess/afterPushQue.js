@@ -65,7 +65,7 @@ let konwLedegArr = [];
                 arr.push($(this).attr('data-choosen'))
             });
             if (arr.indexOf('true') === -1) {
-                layer.msg('请选择选项');
+                layer.msg('请选择正确答案');
                 return
             } else {
                 arr.forEach(function (v, i) {
@@ -86,7 +86,7 @@ let konwLedegArr = [];
         } else {
             //判断题
             if ($('#judge_yes').attr('data-judge') === 'false' && $('#judge_no').attr('data-judge') === 'false') {
-                layer.msg('请选择选项');
+                layer.msg('请选择正确答案');
                 return
             } else if ($('#judge_yes').attr('data-judge') === 'true' && $('#judge_no').attr('data-judge') === 'false') {
                 updateClassSubjectAnswer('正确');

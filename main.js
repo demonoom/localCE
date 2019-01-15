@@ -326,16 +326,21 @@ ipcMain.on('toBoothPage', (e) => {
 
 //跳转到选人
 ipcMain.on('choose_stu', () => {
+    const {width, height} = electron.screen.getPrimaryDisplay().workArea;
     const window = new BrowserWindow({
-        width: 558,
-        height: 660,
-        webPreferences: {webSecurity: false},
+        width,
+        height,
+        transparent: true,  //使窗口透明
+        webPreferences: {
+            webSecurity: false,
+            nodeIntegration: false
+        },
         title: '小蚂蚁教学助手',
-        icon: './images/logoo.png'
+        icon: './images/logoo.png',
     });
     window.setMenu(null);
-    //window.openDevTools();
-    var url = "http://192.168.50.39:6443/luckDraw/?classId=" + global.loginUser.classCode;
+    // window.openDevTools();
+    var url = "https://www.maaee.com:6443/luckDraw/?classId=" + global.loginUser.classCode;
     window.loadURL(url);
 });
 

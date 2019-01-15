@@ -163,7 +163,9 @@
         onMessage: function (info) {
             var data = info.data;
             console.log(info);
-            ipcRenderer.send('clazzWsListener', info);
+            if (info.command == 'braceletPushAnswer') {
+                ipcRenderer.send('clazzWsListener', info);
+            }
         }
     };
     simpleConnection.connect();
@@ -289,6 +291,5 @@
 
     const overClass = () => {
         $('#overClass').removeClass('overClass');
-    }
-
+    };
 })();
