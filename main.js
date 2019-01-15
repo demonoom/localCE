@@ -156,7 +156,7 @@ function afterPushQue() {
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
-        closable: false,
+        // closable: false,
     });
 
     win_afterPushQue.loadURL(url.format({
