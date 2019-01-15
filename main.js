@@ -62,7 +62,7 @@ function create_helloWin() {
         }
     });
     hello_win.setAlwaysOnTop(true, 'screen-saver');
-    hello_win.setVisibleOnAllWorkspaces(true);
+    // hello_win.setVisibleOnAllWorkspaces(true);
     hello_win.setFullScreenable(false);
 
     hello_win.loadURL(url.format({
@@ -116,13 +116,13 @@ let win_ball = null;
 function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
-        width: 137,
-        height: 265,
+        width: 108,
+        height: 392,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
-        x: size.width - 137,
+        x: size.width - 108,
         y: size.height / 2 - 100
     });
 
@@ -146,11 +146,13 @@ let win_afterPushQue = null;
  */
 function afterPushQue() {
     console.log('afterPushQue');
+    const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
-        width: 678,
-        height: 662,
+        width: size.width,
+        height: size.height,
         title: '小蚂蚁教学助手',
-        resizable: false,
+        transparent: true,  //使窗口透明
+        alwaysOnTop: true,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,8 +166,14 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
-    win_afterPushQue.setSkipTaskbar(true)
+    // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.setSkipTaskbar(true);
+
+    win_afterPushQue.on('close', (event) => {
+        if (win_afterPushQue) {
+            win_afterPushQue = null;
+        }
+    });
 }
 
 let win_publicScreen = null;
@@ -291,7 +299,6 @@ ipcMain.on('clazzWsListener', (e, info) => {
     }
 });
 
-
 //跳转ar页面
 ipcMain.on('toArPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
@@ -322,6 +329,27 @@ ipcMain.on('toBoothPage', (e) => {
     var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
     window.loadURL(url);
 });
+
+//跳转到选人
+ipcMain.on('choose_stu', () => {
+    const {width, height} = electron.screen.getPrimaryDisplay().workArea;
+    const window = new BrowserWindow({
+        width,
+        height,
+        transparent: true,  //使窗口透明
+        webPreferences: {
+            webSecurity: false,
+            nodeIntegration: false
+        },
+        title: '小蚂蚁教学助手',
+        icon: './images/logoo.png',
+    });
+    window.setMenu(null);
+    // window.openDevTools();
+    var url = "https://www.maaee.com:6443/luckDraw/?classId=" + global.loginUser.classCode;
+    window.loadURL(url);
+});
+
 /**
  * 消息转发到公屏
  */

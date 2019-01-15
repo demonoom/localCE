@@ -10,7 +10,7 @@
 <div id="startClass" class="startClass" style="-webkit-app-region:no-drag">
     <div class="shade"></div>
 </div>
-<div id="content"   style="display: none">
+<div id="content" style="display: none">
     <!--overClass-->
     <div id="overClass" class="centerText"><i></i>
         <div id="clock" class="clock" style="-webkit-app-region:no-drag"></div>
@@ -19,14 +19,19 @@
     <div class="textCont pushCont">
         <div id="pushQue" class="pushQue" style="-webkit-app-region:no-drag"></div>
         <div id="screenShot" class="screenShot" style="-webkit-app-region:no-drag"></div>
-        <div id="statistics" class="statistics" style="-webkit-app-region:no-drag"></div>
-        <div id="publicScreen" class="publicScreen"  style="-webkit-app-region:no-drag">公屏</div>
-        <div id="AR" class="AR" style="-webkit-app-region:no-drag">AR</div>
-        <div id="booth" class="booth" style="-webkit-app-region:no-drag">展台</div>
+        <div id="choice" class="choice" style="-webkit-app-region:no-drag"></div>
+        <div data-more="false" id="more" class="more" style="-webkit-app-region:no-drag"></div>
     </div>
+</div>
+<div class="moreCont" style="display: none">
+    <div id="publicScreen" class="publicScreen" style="-webkit-app-region:no-drag">公屏</div>
+    <div id="AR" class="AR" style="-webkit-app-region:no-drag">AR</div>
+    <div id="booth" class="booth" style="-webkit-app-region:no-drag">展台</div>
+    <div id="statistics" class="statistics" style="-webkit-app-region:no-drag"></div>
 </div>
 <script src="../public/jquery.min.js"></script>
 <script src="../public/pushSever_websocket.js"></script>
+<script src="../public/simple.js"></script>
 <script src="../renderProcess/ball.js"></script>
 </body>
 </html>

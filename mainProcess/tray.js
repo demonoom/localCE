@@ -14,14 +14,14 @@ function createTray(win, app) {
                 dialog.showMessageBox({
                     type: 'info',
                     title: '退出提示',
-                    message: '请问是否真的需要推出',
+                    message: '请问是否真的需要退出',
                     buttons: ['确定', '取消']
                 }, (index) => {
                     if (index == 0) {
                         //销毁图标
                         tray.destroy();
                         //销毁窗体
-                        win.destroy()
+                        win.destroy();
                         app.quit()
                     }
                 })
@@ -41,6 +41,13 @@ function createTray(win, app) {
     setTimeout(function () {
         checkForUpdates(tray);
     }, 5000);
+
+    /**
+     * 登录成功之后也检查更新
+     */
+    ipcMain.on('loginSuccess', () => {
+        checkForUpdates(tray);
+    });
 
 
     /**
@@ -90,4 +97,4 @@ function createTray(win, app) {
     }
 }
 
-module.exports = createTray
+module.exports = createTray;

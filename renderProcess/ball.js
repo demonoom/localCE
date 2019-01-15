@@ -2,6 +2,8 @@
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
+    const more = document.querySelector('#more');
+    const choice = document.querySelector('#choice');
     const publicScreen = document.querySelector('#publicScreen');
     const clock = document.querySelector('#clock');
     const startClass = document.querySelector('#startClass');
@@ -52,6 +54,22 @@
         ipcRenderer.send('capture-screen');
     };
 
+    //选人
+    choice.onclick = () => {
+        ipcRenderer.send('choose_stu');
+    };
+
+    //更多
+    more.onclick = () => {
+        if ($(more).attr('data-more') === 'false') {
+            $(more).attr('data-more', "true");
+            $('.moreCont').show().height(198)
+        } else {
+            $(more).attr('data-more', "false");
+            $('.moreCont').hide().height(0)
+        }
+    };
+
     //统计
     statistics.onclick = () => {
         ipcRenderer.send('open_statistics')
@@ -64,15 +82,25 @@
 
     //下课
     clock.onclick = () => {
-        let obj = {
-            "command": "classOver",
-        };
-        connection.send(obj);
-        $('#startClass').show();
-        $('#content').hide();
-        ipcRenderer.send('class_over');
-        clearTimeout(timer);
-        overClass()
+        remote.dialog.showMessageBox({
+            type: 'info',
+            title: '下课提示',
+            message: '请问是否要下课',
+            buttons: ['确定', '取消']
+        }, (index) => {
+            if (index == 0) {
+                let obj = {
+                    "command": "classOver",
+                };
+                connection.send(obj);
+                $('#startClass').show();
+                $('#content').hide();
+                ipcRenderer.send('class_over');
+                clearTimeout(timer);
+                overClass();
+                $('.moreCont').hide().height(0)
+            }
+        });
     };
 
     AR.onclick = function () {
@@ -88,7 +116,12 @@
     connection.clazzWsListener = {
         onError: function (errorMsg) {
             //强制退出课堂
-            console.log(errorMsg);
+            $('#startClass').show();
+            $('#content').hide();
+            ipcRenderer.send('class_over');
+            clearTimeout(timer);
+            overClass();
+            remote.dialog.showErrorBox('错误', errorMsg);
         },
 
         onWarn: function (warnMsg) {
@@ -115,7 +148,27 @@
             }
         }
     };
+    //连接推题消息
+    let simpleConnection = new SimpleWebsocketConnection();
+    simpleConnection.msgWsListener = {
+        onError: function (errorMsg) {
+            //强制退出课堂
+            console.log(errorMsg);
+        },
 
+        onWarn: function (warnMsg) {
+            message.warn(warnMsg);
+        },
+        // 显示消息
+        onMessage: function (info) {
+            var data = info.data;
+            console.log(info);
+            if (info.command == 'braceletPushAnswer') {
+                ipcRenderer.send('clazzWsListener', info);
+            }
+        }
+    };
+    simpleConnection.connect();
     //截屏推题，发送消息
     ipcRenderer.on('pushQue', (e, msg) => {
         let obj = {
@@ -238,6 +291,5 @@
 
     const overClass = () => {
         $('#overClass').removeClass('overClass');
-    }
-
+    };
 })();
