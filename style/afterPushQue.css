@@ -4,7 +4,7 @@ body, html {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: rgba(0,0,0,0.6);
 }
 
 ul, li {
@@ -263,8 +263,8 @@ input:-webkit-autofill {
 }
 .student_list_title{
     text-align: center;
-    color: #2358C4;
-    font-size: 18px;
+    color: #97beff;
+    font-size: 20px;
     line-height: 1;
     position: relative;
     margin: 34px 0 30px 0;
@@ -272,7 +272,7 @@ input:-webkit-autofill {
 .student_list_line{
     width: calc(50% - 80px);
     height: 2px;
-    background: #3672ED;
+    background: #97beff;
     position: absolute;
     top:9px;
 }
@@ -284,7 +284,7 @@ input:-webkit-autofill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #3672ED;
+    background: #97beff;
     display: inline-block;
     position: absolute;
     top: -4px;
@@ -298,7 +298,7 @@ input:-webkit-autofill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #3672ED;
+    background: #97beff;
     display: inline-block;
     position: absolute;
     top: -4px;
@@ -336,10 +336,10 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: -webkit-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Firefox 3.6 - 15 */
-    background: linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* 标准的语法 */
+    background: -webkit-linear-gradient(rgba(162,193,255,0.8), rgba(255,255,255,0.8)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(162,193,255,0.8), rgba(255,255,255,0.8)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(162,193,255,0.8), rgba(255,255,255,0.8)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(162,193,255,0.8), rgba(255,255,255,0.8)); /* 标准的语法 */
     z-index: 10;
 }
 .blueBtn-first{

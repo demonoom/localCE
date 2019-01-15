@@ -58,11 +58,11 @@ function create_helloWin() {
         enableLargerThanScreen: true,
         hasShadow: false,
         webPreferences: {
-            webSecurity: false
+        webSecurity: false
         }
     });
     hello_win.setAlwaysOnTop(true, 'screen-saver');
-    hello_win.setVisibleOnAllWorkspaces(true);
+   // hello_win.setVisibleOnAllWorkspaces(true);
     hello_win.setFullScreenable(false);
 
     hello_win.loadURL(url.format({
@@ -166,7 +166,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-    win_afterPushQue.webContents.openDevTools();
+    //win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 
