@@ -4,7 +4,7 @@ body, html {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
 }
 
 ul, li {
@@ -65,7 +65,7 @@ input:-webkit-autofill {
 .knowledge_cont input{
     line-height: 18px;
     padding: 10px 15px;
-    border: 1px #A0A0A0 solid;
+    border: 1px transparent solid;
     color: #333;
     width:calc(100% - 70px);
     box-sizing: border-box;
@@ -140,6 +140,7 @@ input:-webkit-autofill {
     position: relative;
     font-size: 14px;
     color: #333;
+    background: #fff;
 }
 #knowledge_list li .close{
     position: absolute;
@@ -258,7 +259,7 @@ input:-webkit-autofill {
     height: 92px;
     position: relative;
     text-align: center;
-    margin: 0 20px 28px 20px;
+    margin: 0 25px 35px 25px;
     display: inline-block;
 }
 .student_list_title{
@@ -307,7 +308,7 @@ input:-webkit-autofill {
 .student_itemCont{
     overflow-y: auto ;
     overflow-x: hidden;
-    height: calc(100% - 84px);
+    height: calc(100vh - 84px);
 }
 .student_list_Cont{
     position: absolute;
