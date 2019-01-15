@@ -1,5 +1,5 @@
 const {Tray, Menu, dialog} = require('electron');
-//const {autoUpdater} = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
 function createTray(win, app) {
