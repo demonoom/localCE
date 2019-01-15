@@ -6,17 +6,17 @@ let konwLedegArr = [];
     let subjectType = remote.getGlobal('loginUser').subjectType;
     ipcRenderer.on('clazzWsListener', (e, info) => {
         console.log(info, 'clazzWsListener');
-        if(info==undefined){
+        if (info == undefined) {
             return;
         }
-        if(info.command=='studentSubjectsCommit'||info.command=='braceletPushAnswer'){
-            var studentId=info.data.uid;
+        if (info.command == 'studentSubjectsCommit' || info.command == 'braceletPushAnswer') {
+            var studentId = info.data.uid;
             console.log(remote.getGlobal('loginUser').classCode);
             getStudentInfoById(studentId);
         }
     });
-    var clazzId=remote.getGlobal('loginUser').classCode;
-    initStudentInfo(clazzId,requestLittleAntApi);
+    var clazzId = remote.getGlobal('loginUser').classCode;
+    initStudentInfo(clazzId, requestLittleAntApi);
     if (subjectType === 'C') {
         $('#choose_ans').show();
         $('#judge_ans').hide();
@@ -208,13 +208,15 @@ function removeKnowLedge(str) {
     $('#knowledge_list').empty();
     $('#knowledge_list').append(htmlStr);
 }
+
 function getStudentInfoById(studentId) {
-    $("#avatarDiv"+studentId).addClass("student_avatar-active");
-    $("#imageTip"+studentId).show();
-    $("#signTip"+studentId).remove();
+    $("#avatarDiv" + studentId).addClass("student_avatar-active");
+    $("#imageTip" + studentId).show();
+    $("#signTip" + studentId).remove();
 
 }
-function initStudentInfo(classId,requestLittleAntApi) {
+
+function initStudentInfo(classId, requestLittleAntApi) {
 
     let param = {
         "method": "getClassStudents",
@@ -224,23 +226,23 @@ function initStudentInfo(classId,requestLittleAntApi) {
         onResponse: function (result) {
             if (result.success) {
                 console.log(result);
-                var students=result.response;
-                if(students==undefined||students.length==0){
+                var students = result.response;
+                if (students == undefined || students.length == 0) {
                     return;
                 }
                 for (var i = 0; i < students.length; i++) {
-                    var user=students[i];
+                    var user = students[i];
                     var template = $("#student_template");
                     template.find("#student_name").text(user.userName);
                     template.find("#student_avatar").attr("src", user.avatar);
-                    template.find(".student_item").attr("id", "itemId"+user.colUid);
-                    template.find("#student_avatar").parent().attr("id", "avatarDiv"+user.colUid);
-                    template.find(".imageTip").attr("id", "imageTip"+user.colUid);
-                    template.find(".signTip").attr("id", "signTip"+user.colUid);
+                    template.find(".student_item").attr("id", "itemId" + user.colUid);
+                    template.find("#student_avatar").parent().attr("id", "avatarDiv" + user.colUid);
+                    template.find(".imageTip").attr("id", "imageTip" + user.colUid);
+                    template.find(".signTip").attr("id", "signTip" + user.colUid);
                     $("#student_list_container").append(template.html());
-                    template.find(".imageTip").attr("id", "imageTip"+-1);
-                    template.find(".signTip").attr("id", "signTip"+-1);
-                    template.find(".student_item").attr("id", "itemId"+-1);
+                    template.find(".imageTip").attr("id", "imageTip" + -1);
+                    template.find(".signTip").attr("id", "signTip" + -1);
+                    template.find(".student_item").attr("id", "itemId" + -1);
 
                 }
             } else {

@@ -167,7 +167,13 @@ function afterPushQue() {
 
     win_afterPushQue.setMenuBarVisibility(false);
     // win_afterPushQue.webContents.openDevTools();
-    win_afterPushQue.setSkipTaskbar(true)
+    win_afterPushQue.setSkipTaskbar(true);
+
+    win_afterPushQue.on('close', (event) => {
+        if (win_afterPushQue) {
+            win_afterPushQue = null;
+        }
+    });
 }
 
 let win_publicScreen = null;
