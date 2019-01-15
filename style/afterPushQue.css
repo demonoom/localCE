@@ -208,6 +208,7 @@ input:-webkit-autofill {
     border-radius: 50%;
     box-sizing: border-box;
     background: #d6d6d6;
+    margin: 0 auto;
 }
 .student_avatar-active{
     border: 2px solid #51A938;
@@ -255,11 +256,11 @@ input:-webkit-autofill {
     -webkit-animation-iteration-count:2; /* Safari 和 Chrome */
 }
 .student_item{
-    width: 66px;
+    width: 80px;
     height: 92px;
     position: relative;
     text-align: center;
-    margin: 0 25px 35px 25px;
+    margin: 0 22px 35px 22px;
     display: inline-block;
 }
 .student_list_title{
