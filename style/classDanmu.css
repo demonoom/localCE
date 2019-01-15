@@ -136,8 +136,8 @@ li {
     height: 45px;
     background: url("../images/icon_closeImage.png") no-repeat;
     background-size: cover;
-    right: 10px;
-    top: 10px;
+    left: 10px;
+    bottom: 10px;
     position: absolute;
     cursor: pointer
 }
@@ -205,6 +205,10 @@ li {
 #userName {
     color: #fff;
     width: 100%;
-    text-align: center;
     font-size: 24px;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }

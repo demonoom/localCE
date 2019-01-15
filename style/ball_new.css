@@ -6,8 +6,8 @@ body {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     border-radius: 50%;
     font-size: 14px;
-    width: 137px;
-    height: 265px;
+    width: 108px;
+    height: 392px;
 }
 
 ::-webkit-scrollbar {
@@ -59,8 +59,8 @@ ul, li {
 
 #content {
     background: url("../images/icon_ballBg_right.png") no-repeat;
-    width: 100%;
-    height: 100%;
+    width: 108px;
+    height: 209px;
     background-size: cover;
     overflow: hidden;
     position: relative;
@@ -91,15 +91,14 @@ ul, li {
 }
 
 .pushQue {
-    width: 42px;
-    height: 60px;
+    width: 63px;
+    height: 43px;
     position: absolute;
     top: 8px;
     right: 4px;
-    transform: rotate(-21deg);
-    border-bottom-left-radius: 45%;
-    border-bottom-right-radius: 45%;
+    transform: rotate(-25deg);
     overflow: hidden;
+    border-radius: 40%;
 }
 
 .pushQue span {
@@ -115,64 +114,87 @@ ul, li {
 }
 
 .screenShot {
-    width: 66px;
-    height: 40px;
+    width: 63px;
+    height: 44px;
     position: absolute;
-    top: 46px;
+    top: 64px;
+    right: 48px;
+    transform: rotate(-70deg);
+    overflow: hidden;
+    border-radius: 35%;
+}
+.choice {
+    width: 63px;
+    height: 44px;
+    position: absolute;
+    top: 131px;
     right: 36px;
-    transform: rotate(-140deg);
-    border-bottom-left-radius: 45%;
+    transform: rotate(-128deg);
     overflow: hidden;
-    border-top-left-radius: 45%;
+    border-radius: 35%;
+}
+.more{
+    width: 42px;
+    height: 38px;
+    position: absolute;
+    top: 167px;
+    right: 0;
+    transform: rotate(-166deg);
+    overflow: hidden;
+    border-radius: 38%;
 }
 
+.moreCont{
+    position: absolute;
+    top: 194px;
+    right: 0;
+    background: url("../images/icon_ballSelect.png") no-repeat;
+    background-size: cover;
+    width: 55px;
+    height: 0;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+/*body:hover .moreCont{*/
+    /*height: 198px;*/
+/*}*/
+.moreCont > div{
+    font-size: 0;
+}
 .statistics {
-    width: 69px;
+    width: 55px;
     height: 40px;
     position: absolute;
-    top: 88px;
-    right: 57px;
-    transform: rotate(-163deg);
-    border-bottom-left-radius: 45%;
+    bottom: 4px;
+    right: 0;
     overflow: hidden;
-    border-top-left-radius: 45%;
 }
-
 
 .publicScreen {
-    width: 71px;
+    width: 55px;
     height: 40px;
     position: absolute;
-    top: 137px;
-    right: 57px;
-    transform: rotate(-199deg);
-    border-bottom-left-radius: 45%;
+    top: 19px;
+    right: 0;
     overflow: hidden;
-    border-top-left-radius: 45%;
 }
 
 .AR {
-    width: 69px;
+    width: 55px;
     height: 40px;
     position: absolute;
-    top: 178px;
-    right: 34px;
-    transform: rotate(-222deg);
-    border-bottom-left-radius: 45%;
+    top: 64px;
+    right: 0;
     overflow: hidden;
-    border-top-left-radius: 45%;
 }
 
 .booth {
-    width: 42px;
-    height: 63px;
+    width: 55px;
+    height: 40px;
     position: absolute;
-    top: 194px;
-    right: 5px;
-    transform: rotate(20deg);
+    top: 109px;
+    right: 0;
     overflow: hidden;
-    border-top-left-radius: 45%;
-    border-top-right-radius: 45%;
 }
 
 #clock {
@@ -189,7 +211,7 @@ ul, li {
 
 .centerText {
     position: absolute;
-    top: 90px;
+    top: 62px;
     right: 0;
     background: url("../images/icon_ballOver.png") no-repeat;
     background-size: cover;
@@ -200,7 +222,7 @@ ul, li {
 
 .overClass {
     position: absolute;
-    top: 90px;
+    top: 62px;
     right: 0;
     background: url("../images/icon_ballOver02.png") no-repeat;
     background-size: cover;
@@ -222,6 +244,7 @@ ul, li {
     animation: startClass 3s linear infinite;
     -webkit-animation: startClass 3s linear infinite;
 }
+
 
 @keyframes startClass {
     0% {
