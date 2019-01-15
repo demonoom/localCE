@@ -58,11 +58,11 @@ function create_helloWin() {
         enableLargerThanScreen: true,
         hasShadow: false,
         webPreferences: {
-        webSecurity: false
+            webSecurity: false
         }
     });
     hello_win.setAlwaysOnTop(true, 'screen-saver');
-   // hello_win.setVisibleOnAllWorkspaces(true);
+    // hello_win.setVisibleOnAllWorkspaces(true);
     hello_win.setFullScreenable(false);
 
     hello_win.loadURL(url.format({
@@ -166,7 +166,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 
@@ -321,6 +321,21 @@ ipcMain.on('toBoothPage', (e) => {
     window.setMenu(null);
     //window.openDevTools();
     var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
+    window.loadURL(url);
+});
+
+//跳转到选人
+ipcMain.on('choose_stu', () => {
+    const window = new BrowserWindow({
+        width: 558,
+        height: 660,
+        webPreferences: {webSecurity: false},
+        title: '小蚂蚁教学助手',
+        icon: './images/logoo.png'
+    });
+    window.setMenu(null);
+    //window.openDevTools();
+    var url = "http://192.168.50.39:6443/luckDraw/?classId=" + global.loginUser.classCode;
     window.loadURL(url);
 });
 

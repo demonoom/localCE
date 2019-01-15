@@ -2,6 +2,8 @@
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
+    const more = document.querySelector('#more');
+    const choice = document.querySelector('#choice');
     const publicScreen = document.querySelector('#publicScreen');
     const clock = document.querySelector('#clock');
     const startClass = document.querySelector('#startClass');
@@ -52,6 +54,22 @@
         ipcRenderer.send('capture-screen');
     };
 
+    //选人
+    choice.onclick = () => {
+        ipcRenderer.send('choose_stu');
+    };
+
+    //更多
+    more.onclick = () => {
+        if ($(more).attr('data-more') === 'false') {
+            $(more).attr('data-more', "true");
+            $('.moreCont').show().height(198)
+        } else {
+            $(more).attr('data-more', "false");
+            $('.moreCont').hide().height(0)
+        }
+    };
+
     //统计
     statistics.onclick = () => {
         ipcRenderer.send('open_statistics')
@@ -79,7 +97,8 @@
                 $('#content').hide();
                 ipcRenderer.send('class_over');
                 clearTimeout(timer);
-                overClass()
+                overClass();
+                $('.moreCont').hide().height(0)
             }
         });
     };
