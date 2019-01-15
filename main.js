@@ -146,11 +146,13 @@ let win_afterPushQue = null;
  */
 function afterPushQue() {
     console.log('afterPushQue');
+    // const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
-        width: 678,
-        height: 662,
+        width: 1000,
+        height:1000,
         title: '小蚂蚁教学助手',
-        resizable: false,
+        transparent: true,  //使窗口透明
+        alwaysOnTop: true,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +166,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 

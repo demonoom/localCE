@@ -4,10 +4,7 @@ body, html {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     width: 100%;
     height: 100%;
-    background: -webkit-linear-gradient(#a2c1ff, white); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(#a2c1ff, white); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(#a2c1ff, white); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#a2c1ff, white); /* 标准的语法 */
+    background: transparent;
 }
 
 ul, li {
@@ -156,13 +153,10 @@ input:-webkit-autofill {
     background-size: cover;
     cursor: pointer;
 }
-#announceAnswer{
-    height: 100%;
-}
 #announceAnswer li {
     height: 20px;
     line-height: 20px;
-    padding-right: 26px;
+    padding-right: 18px;
     font-size: 26px;
 }
 #announceAnswer ul{
@@ -181,7 +175,7 @@ input:-webkit-autofill {
     display: inline-block;
     vertical-align: bottom;
     cursor: pointer;
-    margin: 0 16px;
+    margin: 0 12px;
     background: #fff;
 }
 .checkIcon.active{
@@ -230,7 +224,7 @@ input:-webkit-autofill {
 }
 .studentName{
     font-size: 18px;
-    color: #444E6F;
+    color: #fff;
     line-height: 1;
     margin-top: 12px;
     width: 100%;
@@ -318,8 +312,10 @@ input:-webkit-autofill {
 .student_list_Cont{
     position: absolute;
     width: 100%;
-    bottom: 0;
+    height: 0;
+    top: 0;
     left: 0;
+    z-index: 1;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
     color: #b2b2b2;
@@ -333,18 +329,24 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
 　　input:-ms-input-placeholder, textarea:-ms-input-placeholder{
     color: #b2b2b2;
 }
-#set_knowledge{
-    height: 262px;
-    position: relative;
+#set_knowledge, #announceAnswer{
+    height: 326px;
+    position: absolute;
+    width: 352px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: -webkit-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(162,193,255,0.7), rgba(255,255,255,0.7)); /* 标准的语法 */
+    z-index: 10;
 }
 .blueBtn-first{
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     left: 50%;
     margin-left: -150px;
-}
-.blueBtn-last{
-    margin-top: 25px;
 }
 @keyframes jump {
     0% {
