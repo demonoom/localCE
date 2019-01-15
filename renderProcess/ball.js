@@ -64,15 +64,24 @@
 
     //下课
     clock.onclick = () => {
-        let obj = {
-            "command": "classOver",
-        };
-        connection.send(obj);
-        $('#startClass').show();
-        $('#content').hide();
-        ipcRenderer.send('class_over');
-        clearTimeout(timer);
-        overClass()
+        remote.dialog.showMessageBox({
+            type: 'info',
+            title: '下课提示',
+            message: '请问是否要下课',
+            buttons: ['确定', '取消']
+        }, (index) => {
+            if (index == 0) {
+                let obj = {
+                    "command": "classOver",
+                };
+                connection.send(obj);
+                $('#startClass').show();
+                $('#content').hide();
+                ipcRenderer.send('class_over');
+                clearTimeout(timer);
+                overClass()
+            }
+        });
     };
 
     AR.onclick = function () {

@@ -1,4 +1,4 @@
-const {Tray, Menu, dialog} = require('electron');
+const {Tray, Menu, dialog, ipcMain} = require('electron');
 //const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
@@ -41,6 +41,13 @@ function createTray(win, app) {
     setTimeout(function () {
         checkForUpdates(tray);
     }, 5000);
+
+    /**
+     * 登录成功之后也检查更新
+     */
+    ipcMain.on('loginSuccess', () => {
+        checkForUpdates(tray);
+    });
 
 
     /**
@@ -90,4 +97,4 @@ function createTray(win, app) {
     }
 }
 
-module.exports = createTray
+module.exports = createTray;
