@@ -97,7 +97,12 @@
     connection.clazzWsListener = {
         onError: function (errorMsg) {
             //强制退出课堂
-            console.log(errorMsg);
+            $('#startClass').show();
+            $('#content').hide();
+            ipcRenderer.send('class_over');
+            clearTimeout(timer);
+            overClass();
+            remote.dialog.showErrorBox('错误', errorMsg);
         },
 
         onWarn: function (warnMsg) {
