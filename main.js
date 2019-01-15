@@ -290,6 +290,7 @@ ipcMain.on('updateClassSubjectAnswer', () => {
         open_statistics()
     }, 1000);
     win_afterPushQue.destroy();
+    win_afterPushQue = null;
 });
 
 //消息转发到afterPushQue
