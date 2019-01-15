@@ -291,7 +291,6 @@ ipcMain.on('clazzWsListener', (e, info) => {
     }
 });
 
-
 //跳转ar页面
 ipcMain.on('toArPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
@@ -322,6 +321,7 @@ ipcMain.on('toBoothPage', (e) => {
     var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
     window.loadURL(url);
 });
+
 /**
  * 消息转发到公屏
  */
