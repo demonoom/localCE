@@ -58,11 +58,11 @@ function create_helloWin() {
         enableLargerThanScreen: true,
         hasShadow: false,
         webPreferences: {
-            webSecurity: false
+        webSecurity: false
         }
     });
     hello_win.setAlwaysOnTop(true, 'screen-saver');
-    hello_win.setVisibleOnAllWorkspaces(true);
+   // hello_win.setVisibleOnAllWorkspaces(true);
     hello_win.setFullScreenable(false);
 
     hello_win.loadURL(url.format({
@@ -146,11 +146,13 @@ let win_afterPushQue = null;
  */
 function afterPushQue() {
     console.log('afterPushQue');
+    const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
-        width: 678,
-        height: 662,
+        width: size.width,
+        height: size.height,
         title: '小蚂蚁教学助手',
-        resizable: false,
+        transparent: true,  //使窗口透明
+        alwaysOnTop: true,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +166,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
+    //win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 
