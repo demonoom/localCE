@@ -160,6 +160,7 @@ ul, li {
 /*}*/
 .moreCont > div{
     font-size: 0;
+    cursor: pointer;
 }
 .statistics {
     width: 55px;
