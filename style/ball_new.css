@@ -211,7 +211,7 @@ ul, li {
 
 .centerText {
     position: absolute;
-    top: 62px;
+    top: 63px;
     right: 0;
     background: url("../images/icon_ballOver.png") no-repeat;
     background-size: cover;
@@ -222,7 +222,7 @@ ul, li {
 
 .overClass {
     position: absolute;
-    top: 62px;
+    top: 63px;
     right: 0;
     background: url("../images/icon_ballOver02.png") no-repeat;
     background-size: cover;
