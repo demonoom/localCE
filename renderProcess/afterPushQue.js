@@ -9,7 +9,7 @@ let konwLedegArr = [];
         if(info==undefined){
             return;
         }
-        if(info.command=='studentSubjectsCommit'){
+        if(info.command=='studentSubjectsCommit'||info.command=='braceletPushAnswer'){
             var studentId=info.data.uid;
             console.log(remote.getGlobal('loginUser').classCode);
             getStudentInfoById(studentId);

@@ -115,7 +115,25 @@
             }
         }
     };
+    //连接推题消息
+    let simpleConnection = new SimpleWebsocketConnection();
+    simpleConnection.msgWsListener = {
+        onError: function (errorMsg) {
+            //强制退出课堂
+            console.log(errorMsg);
+        },
 
+        onWarn: function (warnMsg) {
+            message.warn(warnMsg);
+        },
+        // 显示消息
+        onMessage: function (info) {
+            var data = info.data;
+            console.log(info);
+            ipcRenderer.send('clazzWsListener', info);
+        }
+    };
+    simpleConnection.connect();
     //截屏推题，发送消息
     ipcRenderer.on('pushQue', (e, msg) => {
         let obj = {

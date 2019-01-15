@@ -1,8 +1,8 @@
 function SimpleWebsocketConnection() {
     this.msgWsListener = null;
     this.REMOTE_URL = "wss://www.maaee.com:7891/Excoord_SimpleWsServer/simple";
-    this.LOCAL_URL = "ws://192.168.50.15:8080/Excoord_SimpleWsServer/simple";
-    this.WS_URL = this.REMOTE_URL;
+    this.LOCAL_URL = "ws://192.168.50.15:8891/Excoord_SimpleWsServer/simple";
+    this.WS_URL = this.LOCAL_URL;
     this.ws = null;
     this.PING_COMMAND = "ping_0123456789_abcdefg";
     this.PONG_COMMAND = "pong_0123456789_abcdefg";
@@ -56,7 +56,7 @@ function SimpleWebsocketConnection() {
         connection.ws.onopen = function (event) {
             connection.connecting = false;
             connection.connected = true;
-            //	console.log("连接到服务器 ....");
+            console.log("连接到simple服务器 ....");
         };
         connection.ws.onerror = function (event) {
             connection.connecting = false;

@@ -150,7 +150,7 @@ function afterPushQue() {
         width: 678,
         height: 662,
         title: '小蚂蚁教学助手',
-        resizable: false,
+        // resizable: false,
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
@@ -164,7 +164,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
+   win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 
