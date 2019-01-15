@@ -4,7 +4,7 @@ body, html {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
 }
 
 ul, li {
@@ -65,7 +65,7 @@ input:-webkit-autofill {
 .knowledge_cont input{
     line-height: 18px;
     padding: 10px 15px;
-    border: 1px #A0A0A0 solid;
+    border: 1px transparent solid;
     color: #333;
     width:calc(100% - 70px);
     box-sizing: border-box;
@@ -140,6 +140,7 @@ input:-webkit-autofill {
     position: relative;
     font-size: 14px;
     color: #333;
+    background: #fff;
 }
 #knowledge_list li .close{
     position: absolute;
@@ -207,6 +208,7 @@ input:-webkit-autofill {
     border-radius: 50%;
     box-sizing: border-box;
     background: #d6d6d6;
+    margin: 0 auto;
 }
 .student_avatar-active{
     border: 2px solid #51A938;
@@ -254,16 +256,16 @@ input:-webkit-autofill {
     -webkit-animation-iteration-count:2; /* Safari 和 Chrome */
 }
 .student_item{
-    width: 66px;
+    width: 80px;
     height: 92px;
     position: relative;
     text-align: center;
-    margin: 0 20px 28px 20px;
+    margin: 0 22px 35px 22px;
     display: inline-block;
 }
 .student_list_title{
     text-align: center;
-    color: #97beff;
+    color: #67baff;
     font-size: 20px;
     line-height: 1;
     position: relative;
@@ -272,7 +274,7 @@ input:-webkit-autofill {
 .student_list_line{
     width: calc(50% - 80px);
     height: 2px;
-    background: #97beff;
+    background: #67baff;
     position: absolute;
     top:9px;
 }
@@ -284,7 +286,7 @@ input:-webkit-autofill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #97beff;
+    background: #67baff;
     display: inline-block;
     position: absolute;
     top: -4px;
@@ -298,7 +300,7 @@ input:-webkit-autofill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #97beff;
+    background: #67baff;
     display: inline-block;
     position: absolute;
     top: -4px;
@@ -307,7 +309,7 @@ input:-webkit-autofill {
 .student_itemCont{
     overflow-y: auto ;
     overflow-x: hidden;
-    height: 300px;
+    height: calc(100vh - 84px);
 }
 .student_list_Cont{
     position: absolute;

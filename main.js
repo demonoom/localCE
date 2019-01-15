@@ -166,7 +166,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-    //win_afterPushQue.webContents.openDevTools();
+   // win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true)
 }
 
