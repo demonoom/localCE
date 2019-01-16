@@ -42,7 +42,19 @@ ul, li {
     right: 0;
     top: 0;
 }
+#startClassNoDrag{
+    position: absolute;
 
+    right: -90px;
+
+    top: 41px;
+    width: 130px;
+    height: 130px;
+    z-index: 11;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
 .startClass .shade {
     width: 100%;
     height: 100%;
@@ -51,7 +63,6 @@ ul, li {
     position: absolute;
     right: 0;
     top: 0;
-    cursor: pointer;
     z-index: 10;
     animation: startClass 5s ease-in-out infinite;
     -webkit-animation: startClass 5s ease-in-out infinite;
@@ -91,11 +102,11 @@ ul, li {
 }
 
 .pushQue {
-    width: 63px;
-    height: 43px;
+    width: 57px;
+    height: 36px;
     position: absolute;
-    top: 8px;
-    right: 4px;
+    top: 12px;
+    right: 3px;
     transform: rotate(-25deg);
     overflow: hidden;
     border-radius: 40%;
@@ -114,31 +125,31 @@ ul, li {
 }
 
 .screenShot {
-    width: 63px;
-    height: 44px;
+    width: 55px;
+    height: 39px;
     position: absolute;
     top: 64px;
-    right: 48px;
-    transform: rotate(-70deg);
+    right: 50px;
+    transform: rotate(-89deg);
     overflow: hidden;
     border-radius: 35%;
 }
 .choice {
-    width: 63px;
-    height: 44px;
+    width: 56px;
+    height: 38px;
     position: absolute;
-    top: 131px;
-    right: 36px;
-    transform: rotate(-128deg);
+    top: 132px;
+    right: 38px;
+    transform: rotate(-131deg);
     overflow: hidden;
     border-radius: 35%;
 }
 .more{
-    width: 42px;
-    height: 38px;
+    width: 38px;
+    height: 36px;
     position: absolute;
-    top: 167px;
-    right: 0;
+    top: 168px;
+    right: 2px;
     transform: rotate(-166deg);
     overflow: hidden;
     border-radius: 38%;
@@ -160,6 +171,7 @@ ul, li {
 /*}*/
 .moreCont > div{
     font-size: 0;
+    cursor: pointer;
 }
 .statistics {
     width: 55px;
@@ -198,11 +210,20 @@ ul, li {
 }
 
 #clock {
-    width: 90px;
-    height: 90px;
+    /*width: 90px;*/
+    /*height: 90px;*/
+    /*position: absolute;*/
+    /*top: -3px;*/
+    /*right: -51px;*/
+    /*overflow: hidden;*/
+    /*z-index: 12;*/
+    /*cursor: pointer;*/
+    /*border-radius: 50%;*/
+    width: 69px;
+    height: 69px;
     position: absolute;
-    top: -3px;
-    right: -51px;
+    top: 5px;
+    right: -43px;
     overflow: hidden;
     z-index: 12;
     cursor: pointer;
@@ -221,6 +242,7 @@ ul, li {
 }
 
 .overClass {
+
     position: absolute;
     top: 63px;
     right: 0;

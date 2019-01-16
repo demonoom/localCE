@@ -156,7 +156,7 @@ function afterPushQue() {
         icon: './images/logoo.png',
         minimizable: false,
         maximizable: false,
-        closable: false,
+        // closable: false,
     });
 
     win_afterPushQue.loadURL(url.format({
@@ -205,8 +205,7 @@ function openPubWin() {
 
 function open_statistics() {
     // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
-    // http://jiaoxue.maaee.com:8091/#/classPractice?userId=23836&vid=35255
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
 
     let win_statistics = new BrowserWindow({
         width: 400,
@@ -254,13 +253,13 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 //下课
 ipcMain.on('class_over', () => {
     console.log('class_over');
-    global.loginUser.msgArr = []
+    global.loginUser.msgArr = [];
+    global.loginUser.honeySwitch = 'switch-on'
 });
 
 //课堂统计
 ipcMain.on('open_statistics', () => {
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
-
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
@@ -290,6 +289,7 @@ ipcMain.on('updateClassSubjectAnswer', () => {
         open_statistics()
     }, 1000);
     win_afterPushQue.destroy();
+    win_afterPushQue = null;
 });
 
 //消息转发到afterPushQue
@@ -373,7 +373,8 @@ global.loginUser = {
     vid: '',
     sid: '',
     subjectType: '',
-    msgArr: []
+    msgArr: [],
+    honeySwitch: 'switch-on'
 };
 
 

@@ -17,12 +17,32 @@ let konwLedegArr = [];
     });
     var clazzId = remote.getGlobal('loginUser').classCode;
     initStudentInfo(clazzId, requestLittleAntApi);
+    getDoSubjectTagsByUserId();
     if (subjectType === 'C') {
         $('#choose_ans').show();
         $('#judge_ans').hide();
     } else {
         $('#choose_ans').hide();
         $('#judge_ans').show();
+    }
+
+    //输入框聚焦时显示
+    $('#knowledge').focus(() => {
+        $('.select_list').show()
+    });
+
+    $('#knowledge').click(() => {
+        $('.select_list').show()
+    });
+
+    //输入框失焦时隐藏
+    $('#knowledge').blur(() => {
+        $('.select_list').hide()
+    });
+
+    //输入框输入时立马隐藏
+    document.querySelector('#knowledge').oninput = () => {
+        $('.select_list').hide()
     }
 
     $('#add').click(() => {
@@ -192,6 +212,46 @@ let konwLedegArr = [];
             }
         });
     }
+
+    /**
+     * public List<DoSubjectTag> getDoSubjectTagsByUserId(String searchKeywords,String pageNo,String userId)
+     * 搜索此人所能看到的标签
+     */
+    function getDoSubjectTagsByUserId() {
+        let param = {
+            "method": "getDoSubjectTagsByUserId",
+            "searchKeywords": '',
+            "pageNo": -1,
+            "userId": remote.getGlobal('loginUser').colUid,
+        };
+        requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.success) {
+                    if (result.response.length != 0) {
+                        buildTags(result.response);
+                    }
+                } else {
+                    layer.msg(result.msg);
+                }
+            },
+            onError: function (error) {
+                // message.error(error);
+            }
+        });
+    };
+
+    /**
+     * 构建历史标签
+     * @param arr
+     */
+    function buildTags(arr) {
+        let htmlstr = '';
+        arr.forEach((v, i) => {
+            htmlstr += `<li onmousedown="tagOnMouseDown(this)" onclick="tagOnClick(this)">${v.tagTitle}</li>`;
+        })
+        $('.select_list').empty();
+        $('.select_list').append(htmlstr);
+    }
 })();
 
 function removeKnowLedge(str) {
@@ -254,4 +314,17 @@ function initStudentInfo(classId, requestLittleAntApi) {
         }
     });
 
+}
+
+function tagOnClick(e) {
+    $('#knowledge').val($(e).html());
+    $('.select_list').hide()
+}
+
+function tagOnMouseDown(e) {
+    if ( e && e.preventDefault )
+        e.preventDefault();
+    //IE阻止默认事件
+    else
+        window.event.returnValue = false;
 }
