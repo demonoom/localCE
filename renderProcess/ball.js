@@ -13,6 +13,7 @@
     const remote = require('electron').remote;
     var timer = null;
 
+
     //开课，调用登陆页面
     startClass.onclick = () => {
         ipcRenderer.send('showLogin')
