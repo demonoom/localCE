@@ -15,6 +15,14 @@
             margin-top: -178px;
             border: none;
         }
+        #announceAnswer {
+            width: 354px;
+            height: 354px;
+            padding: 0;
+            margin-left: -178px;
+            margin-top: -178px;
+            border: none;
+        }
     </style>
     <script src="../public/simple.js"></script>
 </head>
@@ -33,7 +41,7 @@
         </ul>
         <div class="blueBtn blueBtn-first" id="pushSubjectWithTag" >确 定</div>
     </div>
-    <div id="announceAnswer" style="display: none" >
+    <div id="announceAnswer" style="display: none" class="ui-widget-content">
         <div class="title">选择正确答案</div>
         <div class="announce_cont">
             <ul id="choose_ans" class="my_flex">
@@ -75,6 +83,7 @@
 <script>
     $(function() {
         $( "#set_knowledge" ).draggable();
+        $( "#announceAnswer" ).draggable();
     });
 </script>
 </body>
