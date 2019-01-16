@@ -253,4 +253,5 @@ function initStudentInfo(classId, requestLittleAntApi) {
             // message.error(error);
         }
     });
+
 }
