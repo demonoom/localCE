@@ -1,4 +1,5 @@
-const {Tray, Menu, dialog} = require('electron');
+const {Tray, Menu, dialog, ipcMain} = require('electron');
+//const {autoUpdater} = require('electron-updater');
 const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
