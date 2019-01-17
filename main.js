@@ -11,6 +11,13 @@ let win = null;
 
 let hello_win = null;
 
+electron.crashReporter.start({
+    companyName: 'Excoord',
+    submitURL: 'http://192.168.50.29:1127/',
+    uploadToServer: true,
+    autoSubmit: true
+});
+
 if (!gotTheLock) {
     app.quit();
 } else {
@@ -23,9 +30,9 @@ if (!gotTheLock) {
     app.on('ready', function () {
         electronScreen = require('electron').screen;
         // showClassBall()
-        create_helloWin()
+        create_helloWin();
         setTimeout(() => {
-            hello_win.hide()
+            hello_win.hide();
             showClassBall()
         }, 2000)
     });
@@ -145,6 +152,7 @@ let win_afterPushQue = null;
  * 推题之后选择知识点
  */
 function afterPushQue() {
+    // process.crash();
     console.log('afterPushQue');
     const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
