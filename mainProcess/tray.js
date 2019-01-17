@@ -34,7 +34,7 @@ function createTray(win, app) {
 
     });
 
-    tray.setToolTip('小蚂蚁教学助手');
+    tray.setToolTip('小蚂蚁教学助手' + app.getVersion());
 
     tray.setContextMenu(menu);
 

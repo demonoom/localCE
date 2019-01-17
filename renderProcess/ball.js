@@ -6,12 +6,13 @@
     const choice = document.querySelector('#choice');
     const publicScreen = document.querySelector('#publicScreen');
     const clock = document.querySelector('#clock');
-    const startClass = document.querySelector('#startClass');
+    const startClass = document.querySelector('#startClassNoDrag');
     const AR = document.querySelector("#AR");
     const booth = document.querySelector("#booth");
     const {ipcRenderer} = require('electron');
     const remote = require('electron').remote;
     var timer = null;
+
 
     //开课，调用登陆页面
     startClass.onclick = () => {
