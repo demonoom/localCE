@@ -11,12 +11,12 @@ let win = null;
 
 let hello_win = null;
 
-electron.crashReporter.start({
+/*electron.crashReporter.start({
     companyName: 'Excoord',
     submitURL: 'http://192.168.50.29:1127/',
     uploadToServer: true,
     autoSubmit: true
-});
+});*/
 
 if (!gotTheLock) {
     app.quit();
