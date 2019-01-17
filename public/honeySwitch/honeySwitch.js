@@ -1,7 +1,15 @@
 var honeySwitch = {};
 const {ipcRenderer} = require('electron');
+const remote = require('electron').remote;
 honeySwitch.themeColor = "rgb(100, 189, 99)";
 honeySwitch.init = function () {
+    if (remote.getGlobal('loginUser').honeySwitch === 'switch-on') {
+        $("[class^=switch]").removeClass("switch-off").addClass("switch-on");
+        $('.title').text('锁屏');
+    } else {
+        $("[class^=switch]").removeClass("switch-on").addClass("switch-off");
+        $('.title').text('解除锁屏');
+    }
     var s = "<span class='slider'></span>";
     $("[class^=switch]").append(s);
     $("[class^=switch]").click(function () {
@@ -9,7 +17,8 @@ honeySwitch.init = function () {
             return;
         }
         if ($(this).hasClass("switch-on")) {
-            $('.title').text('解除禁言');
+            remote.getGlobal('loginUser').honeySwitch = 'switch-off'
+            $('.title').text('解除锁屏');
             ipcRenderer.send('stopDanMu', '0');
             $(this).removeClass("switch-on").addClass("switch-off");
             $(".switch-off").css({
@@ -18,7 +27,8 @@ honeySwitch.init = function () {
                 'background-color': 'rgb(255, 255, 255)'
             });
         } else {
-            $('.title').text('禁言');
+            remote.getGlobal('loginUser').honeySwitch = 'switch-on'
+            $('.title').text('锁屏');
             ipcRenderer.send('stopDanMu', '1');
             $(this).removeClass("switch-off").addClass("switch-on");
             if (honeySwitch.themeColor) {

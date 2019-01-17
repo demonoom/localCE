@@ -11,6 +11,13 @@ let win = null;
 
 let hello_win = null;
 
+electron.crashReporter.start({
+    companyName: 'Excoord',
+    submitURL: 'http://192.168.50.29:1127/',
+    uploadToServer: true,
+    autoSubmit: true
+});
+
 if (!gotTheLock) {
     app.quit();
 } else {
@@ -23,9 +30,9 @@ if (!gotTheLock) {
     app.on('ready', function () {
         electronScreen = require('electron').screen;
         // showClassBall()
-        create_helloWin()
+        create_helloWin();
         setTimeout(() => {
-            hello_win.hide()
+            hello_win.hide();
             showClassBall()
         }, 2000)
     });
@@ -145,6 +152,7 @@ let win_afterPushQue = null;
  * 推题之后选择知识点
  */
 function afterPushQue() {
+    // process.crash();
     console.log('afterPushQue');
     const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
@@ -166,7 +174,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-   // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true);
 
     win_afterPushQue.on('close', (event) => {
@@ -205,8 +213,7 @@ function openPubWin() {
 
 function open_statistics() {
     // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
-    // http://jiaoxue.maaee.com:8091/#/classPractice?userId=23836&vid=35255
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
 
     let win_statistics = new BrowserWindow({
         width: 400,
@@ -254,13 +261,13 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 //下课
 ipcMain.on('class_over', () => {
     console.log('class_over');
-    global.loginUser.msgArr = []
+    global.loginUser.msgArr = [];
+    global.loginUser.honeySwitch = 'switch-on'
 });
 
 //课堂统计
 ipcMain.on('open_statistics', () => {
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.account.slice(2, global.loginUser.account.length) + '&vid=' + global.loginUser.vid;
-
+    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     let win_statistics = new BrowserWindow({
         width: 400,
         height: 600,
@@ -290,6 +297,7 @@ ipcMain.on('updateClassSubjectAnswer', () => {
         open_statistics()
     }, 1000);
     win_afterPushQue.destroy();
+    win_afterPushQue = null;
 });
 
 //消息转发到afterPushQue
@@ -373,7 +381,8 @@ global.loginUser = {
     vid: '',
     sid: '',
     subjectType: '',
-    msgArr: []
+    msgArr: [],
+    honeySwitch: 'switch-on'
 };
 
 
