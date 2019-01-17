@@ -1,4 +1,4 @@
-var isDebug = false;
+var isDebug = true;
 var localDomain = "192.168.50.71";   //请求地址
 
 // //小蚂蚁webService地址
