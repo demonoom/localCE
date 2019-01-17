@@ -91,7 +91,7 @@ $(function () {
                         });
                         remote.getGlobal('loginUser').account = $("#act").val();
                         remote.getGlobal('loginUser').password = $("#pwd").val();
-                        remote.getGlobal('loginUser').colUid=result.response.colUid;
+                        remote.getGlobal('loginUser').colUid = result.response.colUid;
                     }
                     accountArr = makeArr(accountArr, "account");
                     localStorage.setItem('accountData', JSON.stringify(accountArr));
@@ -159,12 +159,16 @@ $(function () {
         }, onWarn: function (warnMsg) {
 
         }, onMessage: function (info) {
+            console.log(info);
             var command = info.command;
             if (command == "allowLoginTeachSystem") {
                 var data = info.data;
                 var uuid = data.uuid;
                 //                   var user = data.user;
                 if (uuid == machineId) {
+                    remote.getGlobal('loginUser').account = data.user.colAccount;
+                    remote.getGlobal('loginUser').password = data.user.colPasswd;
+                    remote.getGlobal('loginUser').colUid = data.user.colUid;
                     getTeacherClasses();
                 } else {
 
