@@ -11,23 +11,27 @@
             width: 354px;
             height: 354px;
             padding: 0;
-            margin-left: -178px;
-            margin-top: -178px;
+            /*margin-left: 0px;*/
+            /*margin-top: 0px;*/
             border: none;
+            /*top:35%;*/
+            /*left:35%;*/
         }
         #announceAnswer {
             width: 354px;
             height: 354px;
             padding: 0;
-            margin-left: -178px;
-            margin-top: -178px;
+            margin-left: 0px;
+            margin-top: 0px;
             border: none;
+            /*top:35%;*/
+            /*left:35%;*/
         }
     </style>
     <script src="../public/simple.js"></script>
 </head>
 <body>
-<div class="content">
+<div class="content" id="containment-wrapper" >
     <div id="set_knowledge" class="ui-widget-content">
         <div class="title">归纳知识点</div>
         <div class="knowledge_cont">
@@ -82,8 +86,8 @@
 <script src="../public/jquery-ui.min.js"></script>
 <script>
     $(function() {
-        $( "#set_knowledge" ).draggable();
-        $( "#announceAnswer" ).draggable();
+        $( "#set_knowledge" ).draggable({ containment: "#containment-wrapper", scroll: false });
+        $( "#announceAnswer" ).draggable({ containment: "#containment-wrapper", scroll: false });
     });
 </script>
 </body>
