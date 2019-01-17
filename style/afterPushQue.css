@@ -107,6 +107,7 @@ input:-webkit-autofill {
     text-align: center;
     color: white;
     cursor: pointer;
+    font-size: 16px;
 
 }
 .blueBtn{
