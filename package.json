@@ -41,10 +41,11 @@
     "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
-    "electron-updater": "3.1.6",
-    "hashmap": "^2.3.0",
-    "ws": "^6.1.0",
     "app-root-path": "^2.1.0",
-    "fs-extra": "^7.0.1"
+    "baidu-aip-sdk": "^2.3.9",
+    "electron-updater": "3.1.6",
+    "fs-extra": "^7.0.1",
+    "hashmap": "^2.3.0",
+    "ws": "^6.1.0"
   }
 }
