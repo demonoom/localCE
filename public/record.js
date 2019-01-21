@@ -2,7 +2,7 @@
     //兼容
     window.URL = window.URL || window.webkitURL;
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
+    const requestLittleAntApi = require('../public/webServiceUtil');
 
     var HZRecorder = function (stream, config) {
         config = config || {};
@@ -165,7 +165,7 @@
                 // 告诉jQuery不要去设置Content-Type请求头
                 contentType: false,
                 success: function (responseStr) {
-                    console.log(responseStr.replace('mp3', 'wav'));
+                    speechRecognition(responseStr.replace('mp3', 'wav'))
                 },
                 error: function (responseStr) {
                     console.log(responseStr);
@@ -182,6 +182,7 @@
 
 
     };
+
     //抛出异常
     HZRecorder.throwError = function (message) {
         alert(message);
@@ -231,6 +232,29 @@
 
 
     window.HZRecorder = HZRecorder;
+
+    /**
+     * 语音识别
+     * @param path
+     */
+    function speechRecognition(path) {
+        let param = {
+            "method": "speechRecognition",
+            "path": path,
+        };
+        requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.success) {
+                    $('#knowledge').val(result.response);
+                } else {
+                    layer.msg(result.msg);
+                }
+            },
+            onError: function (error) {
+                // message.error(error);
+            }
+        });
+    }
 
 
 })(window);

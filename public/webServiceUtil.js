@@ -1,5 +1,5 @@
-var isDebug = false;
-var localDomain = "192.168.50.15";   //请求地址
+var isDebug = true;
+var localDomain = "192.168.43.171";   //请求地址
 
 // //小蚂蚁webService地址
 const apiWebServiceURLOfLocals = "http://" + localDomain + ":9006/Excoord_ApiServer/webservice";

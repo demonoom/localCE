@@ -31,6 +31,10 @@ let konwLedegArr = [];
 
     $('#record').click((e) => {
         e.preventDefault();
+        if (timer) {
+            return
+        }
+        clearInterval(timer);
         var num = 10;
         timer = setInterval(() => {
             if (num > 0) {
@@ -42,6 +46,7 @@ let konwLedegArr = [];
                 $('#record_stop').html('停止录音' + num);
             } else {
                 clearInterval(timer);
+                timer = null;
                 stopRecordAndUpload();
             }
         }, 1000);
@@ -53,6 +58,7 @@ let konwLedegArr = [];
 
     $('#record_stop').click(() => {
         clearInterval(timer);
+        timer = null;
         stopRecordAndUpload();
     });
 
