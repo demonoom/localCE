@@ -37,9 +37,11 @@ let konwLedegArr = [];
                 num -= 1;
                 if (num === 0) {
                     $('#record_stop').html('');
+                    $('#record_stop_wrap').hide();
                     return
                 }
-                $('#record_stop').html('停止录音' + num);
+                $('#record_stop_wrap').show();
+                $('#record_stop').html('<div class="title">正在录音</div><img src="../images/icon_record.gif"/><div>可点击任意区域结束录音<span  class="time">倒计时 ' + num + '</span></div>');
             } else {
                 clearInterval(timer);
                 stopRecordAndUpload();
@@ -51,7 +53,7 @@ let konwLedegArr = [];
         });
     });
 
-    $('#record_stop').click(() => {
+    $('#record_stop_wrap').click(() => {
         clearInterval(timer);
         stopRecordAndUpload();
     });
@@ -176,6 +178,7 @@ let konwLedegArr = [];
      */
     function stopRecordAndUpload() {
         $('#record_stop').html('');
+        $('#record_stop_wrap').hide();
         recorder.stop();
         recorder.upload();
     }
