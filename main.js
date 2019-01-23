@@ -152,7 +152,6 @@ let win_afterPushQue = null;
  * 推题之后选择知识点
  */
 function afterPushQue() {
-    // process.crash();
     console.log('afterPushQue');
     const size = electronScreen.getPrimaryDisplay().size;
     win_afterPushQue = new BrowserWindow({
@@ -230,7 +229,7 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-     win_statistics.webContents.openDevTools();
+     // win_statistics.webContents.openDevTools();
 }
 
 //展示登陆页面
