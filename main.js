@@ -174,7 +174,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-    win_afterPushQue.webContents.openDevTools();
+    // win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true);
 
     win_afterPushQue.on('close', (event) => {
@@ -230,7 +230,7 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-     win_statistics.webContents.openDevTools();
+    // win_statistics.webContents.openDevTools();
 }
 
 //展示登陆页面
