@@ -333,8 +333,8 @@ ipcMain.on('toBoothPage', (e) => {
         icon: './images/logoo.png'
     });
     window.setMenu(null);
-    //window.openDevTools();
-    var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.vid;
+    // window.openDevTools();
+    var url = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.colUid;
     window.loadURL(url);
 });
 
