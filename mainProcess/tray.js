@@ -1,10 +1,10 @@
 const {Tray, Menu, dialog, ipcMain} = require('electron');
-//const {autoUpdater} = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
 function createTray(win, app) {
     // 创建系统托盘图标对象
-    let tray = new Tray(path.join(__dirname, '../images/logo(1).png'));
+    let tray = new Tray(path.join(__dirname, '../images/l_class_logo.png'));
 
     //创建系统托盘的上下文菜单--右键菜单
     const menu = Menu.buildFromTemplate([

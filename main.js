@@ -229,7 +229,8 @@ function open_statistics() {
 
     win_statistics.setMenuBarVisibility(false);
 
-     // win_statistics.webContents.openDevTools();
+    // win_statistics.webContents.openDevTools();
+
 }
 
 //展示登陆页面

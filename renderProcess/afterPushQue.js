@@ -4,6 +4,7 @@ let konwLedegArr = [];
     const remote = require('electron').remote;
     const requestLittleAntApi = require('../public/webServiceUtil');
     let subjectType = remote.getGlobal('loginUser').subjectType;
+    var timer;
     ipcRenderer.on('clazzWsListener', (e, info) => {
         console.log(info, 'clazzWsListener');
         if (info == undefined) {
@@ -26,6 +27,43 @@ let konwLedegArr = [];
         $('#judge_ans').show();
     }
 
+    var recorder;
+
+    $('#record').click((e) => {
+        e.preventDefault();
+        if (timer) {
+            return
+        }
+        clearInterval(timer);
+        var num = 10;
+        timer = setInterval(() => {
+            if (num > 0) {
+                num -= 1;
+                if (num === 0) {
+                    $('#record_stop').html('');
+                    $('#record_stop_wrap').hide();
+                    return
+                }
+                $('#record_stop_wrap').show();
+                $('#record_stop').html('<div class="title">正在录音</div><img src="../images/icon_record.gif"/><div>可点击任意区域结束录音<span  class="time">倒计时 ' + num + '</span></div>');
+            } else {
+                clearInterval(timer);
+                timer = null;
+                stopRecordAndUpload();
+            }
+        }, 1000);
+        HZRecorder.get(function (rec) {
+            recorder = rec;
+            recorder.start();
+        });
+    });
+
+    $('#record_stop_wrap').click(() => {
+        clearInterval(timer);
+        timer = null;
+        stopRecordAndUpload();
+    });
+
     //输入框聚焦时显示
     $('#knowledge').focus(() => {
         $('.select_list').show()
@@ -43,7 +81,7 @@ let konwLedegArr = [];
     //输入框输入时立马隐藏
     document.querySelector('#knowledge').oninput = () => {
         $('.select_list').hide()
-    }
+    };
 
     $('#add').click(() => {
         if ($('#knowledge').val().trim() == '') {
@@ -140,6 +178,17 @@ let konwLedegArr = [];
         $(this).addClass('active').attr('data-judge', "true");
         $('#judge_yes').removeClass('active').attr('data-judge', "false");
     });
+
+    /**
+     * 停止录音并上传
+     */
+    function stopRecordAndUpload() {
+        layer.msg('正在识别');
+        $('#record_stop').html('');
+        $('#record_stop_wrap').hide();
+        recorder.stop();
+        recorder.upload();
+    }
 
     /**
      * public boolean pushSubjectWithTag(String sid, String tagIds) throws Exception
@@ -322,7 +371,7 @@ function tagOnClick(e) {
 }
 
 function tagOnMouseDown(e) {
-    if ( e && e.preventDefault )
+    if (e && e.preventDefault)
         e.preventDefault();
     //IE阻止默认事件
     else
