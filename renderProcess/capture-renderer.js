@@ -172,29 +172,38 @@ getScreenSources({}, (imgSrc) => {
      * @param imgBlob
      */
     const getOnlineSrc = (imgBlob, word, subjectType) => {
-        let formData = new FormData();
-        formData.append("filePath", imgBlob, "file_" + Date.parse(new Date()) + ".png");
-        $.ajax({
-            type: "POST",
-            url: "http://60.205.86.217:8890/Excoord_Upload_Server/file/upload",
-            enctype: 'multipart/form-data',
-            data: formData,
-            // 告诉jQuery不要去处理发送的数据
-            processData: false,
-            // 告诉jQuery不要去设置Content-Type请求头
-            contentType: false,
-            success: function (responseStr) {
-                ipcRenderer.send('capture-screen', {
-                    type: 'complete',
-                    src: responseStr,
-                    word,
-                    subjectType
-                })
-            },
-            error: function (responseStr) {
-                console.log(responseStr);
-            }
+        var cut = new Promise(function (resolve, reject) {
+            let formData = new FormData();
+            formData.append("filePath", imgBlob, "file_" + Date.parse(new Date()) + ".png");
+            $.ajax({
+                type: "POST",
+                url: "http://60.205.86.217:8890/Excoord_Upload_Server/file/upload",
+                enctype: 'multipart/form-data',
+                data: formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                success: function (responseStr) {
+                    ipcRenderer.send('capture-screen', {
+                        type: 'complete',
+                        src: responseStr,
+                        word,
+                        subjectType
+                    });
+                    resolve('1');
+                },
+                error: function (responseStr) {
+                    console.log(responseStr);
+                    resolve('0');
+                }
+            });
         });
+        cut.then((res) => {
+            if (res === '0') {
+                ipcRenderer.send('netword_error');
+            }
+        })
     };
 
     let selectCapture = () => {

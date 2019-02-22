@@ -1,6 +1,6 @@
 //项目入口文件
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const path = require('path');
 const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
@@ -256,6 +256,10 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
         global.loginUser.subjectType = subjectType;
         afterPushQue();
     }
+});
+
+ipcMain.on('netword_error', () => {
+    dialog.showErrorBox('推题失败', '请检车网络情况后重新推题');
 });
 
 //下课
