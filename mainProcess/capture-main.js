@@ -46,17 +46,21 @@ const captureScreen = (screenBase64) => {
             protocol: 'file'
         }));
 
+        setTimeout(function () {
+            captureWin.webContents.send('passScreenBase64', {screenBase64})
+        }, 800)
+
         /**
          * 接收到页面加载完成的消息调用
          * 这里会叠加调用，因此使用e.sender.webContents发送消息，不能使用captureWin.webContents发送消息，否则会报错
          * 发现依旧会多次调用使用winId作为阀值控clear制只调用一次  2.26
          */
-        ipcMain.on('capture-loaded', (e) => {
+        /*ipcMain.on('capture-loaded', (e) => {
             if (winId !== e.sender.id) {
                 e.sender.webContents.send('passScreenBase64', {screenBase64});
                 winId = e.sender.id;
             }
-        });
+        });*/
 
         captureWin.setSkipTaskbar(true);
 
