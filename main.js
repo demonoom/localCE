@@ -259,7 +259,7 @@ ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, word, subjectTy
 });
 
 ipcMain.on('netword_error', () => {
-    dialog.showErrorBox('推题失败', '请检车网络情况后重新推题');
+    dialog.showErrorBox('推题失败', '请检查网络情况后重新推题');
 });
 
 //下课

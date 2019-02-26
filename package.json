@@ -4,7 +4,7 @@
   "description": "小蚂蚁教学助手",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron --enable-transparent-visuals --disable-gpu .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --win --ia32"
   },

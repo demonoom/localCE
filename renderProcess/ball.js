@@ -52,7 +52,36 @@
 
     //截图推题
     push_que.onclick = () => {
-        ipcRenderer.send('capture-screen');
+        // 获取屏幕数量
+        const displays = require('electron').screen.getAllDisplays();
+        // 每个屏幕都截图一个
+        // desktopCapturer.getSources可以一次获取所有桌面的截图
+        const getDesktopCapturer = displays.map((display, i) => {
+            return new Promise((resolve, reject) => {
+                require('electron').desktopCapturer.getSources({
+                    types: ['screen'],
+                    thumbnailSize: display.size
+                }, (error, sources) => {
+                    if (!error) {
+                        return resolve({
+                            display,
+                            thumbnail: sources[i].thumbnail.toDataURL()
+                        })
+                    }
+                    return reject(error)
+                })
+            })
+        });
+
+        Promise.all(getDesktopCapturer)
+            .then(sources => {
+                let screenBase64 = sources[0].thumbnail;
+                ipcRenderer.send('capture-screen', {
+                    type: 'start',
+                    screenBase64
+                });
+            })
+            .catch(error => console.log(error));
     };
 
     //选人
