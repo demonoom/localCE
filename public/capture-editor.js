@@ -64,9 +64,9 @@ class CaptureEditor extends Event {
         ctx.drawImage(img, 0, 0)
         this.bgCtx = ctx
 
-        document.addEventListener('mousedown', this.onMouseDown)
+        // document.addEventListener('mousedown', this.onMouseDown)
         document.addEventListener('mousemove', this.onMouseMove)
-        document.addEventListener('mouseup', this.onMouseUp)
+        // document.addEventListener('mouseup', this.onMouseUp)
         document.addEventListener('click', this.click)
     }
 
