@@ -51,7 +51,9 @@ const initQue = () => {
 };
 
 //选择题
-$('#choose_que').click(function () {
+$('#choose_que').click(function (e) {
+    e.stopPropagation()
+    e.preventDefault()
     subjectType = 'C';
     $('#judge_answer').hide();
     // $('#choose_answer').show();
@@ -73,7 +75,9 @@ $('.choose_selection').each((i, e) => {
 });
 
 //判断题
-$('#judge_que').click(function () {
+$('#judge_que').click(function (e) {
+    e.stopPropagation()
+    e.preventDefault()
     subjectType = 'J';
     // $('#judge_answer').show();
     $('#choose_answer').hide();
@@ -159,9 +163,10 @@ ipcRenderer.on('passScreenBase64', (e, msg) => {
             window.close()
         });
 
-        $btnReset.addEventListener('click', () => {
+        $btnReset.addEventListener('click', (event) => {
+            event.stopPropagation();
             capture.reset()
-        });
+        }, false);
 
         /**
          * base64转成blob对象

@@ -120,10 +120,16 @@ class CaptureEditor extends Event {
                     y: e.pageY,
                     moved: false,
                 };
+
+                document.querySelector('#point').style.display = 'block';
+                document.querySelector('#point').style.top = `${e.pageY - 10}px`;
+                document.querySelector('#point').style.left = `${e.pageX - 10}px`;
+
                 e.stopPropagation();
                 e.preventDefault()
             }
         } else if (clickFlag) {
+            document.querySelector('#point').style.display = 'none';
             if (this.disabled) {
                 return
             }
