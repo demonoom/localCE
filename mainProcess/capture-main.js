@@ -45,11 +45,11 @@ const captureScreen = (screenBase64) => {
         }));
 
         /**
-         * 延迟500毫秒通知渲染进程显示内容
+         * 接收到页面加载完成的消息调用
          */
-        setTimeout(function () {
+        ipcMain.on('capture-loaded', () => {
             captureWin.webContents.send('passScreenBase64', {screenBase64});
-        }, 300);
+        });
 
         captureWin.setSkipTaskbar(true);
 
