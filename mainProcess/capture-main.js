@@ -10,7 +10,7 @@ let captureWins = [];
  * @param e
  * @param args
  */
-const captureScreen = (e, args) => {
+const captureScreen = (screenBase64) => {
     if (captureWins.length) {
         return
     }
@@ -44,6 +44,13 @@ const captureScreen = (e, args) => {
             protocol: 'file'
         }));
 
+        /**
+         * 延迟200毫秒通知渲染进程显示内容
+         */
+        setTimeout(function () {
+            captureWin.webContents.send('passScreenBase64', {screenBase64});
+        }, 200);
+
         captureWin.setSkipTaskbar(true);
 
         let {x, y} = screen.getCursorScreenPoint();
@@ -74,9 +81,9 @@ const useCapture = () => {
         }
     });
 
-    ipcMain.on('capture-screen', (e, {type = 'start', screenId, src} = {}) => {
+    ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, screenBase64} = {}) => {
         if (type === 'start') {
-            captureScreen()
+            captureScreen(screenBase64);
         } else if (type === 'complete') {
             //在main.js中处理，方便传给ball.js
         } else if (type === 'select') {
