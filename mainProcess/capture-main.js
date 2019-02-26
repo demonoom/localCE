@@ -48,7 +48,7 @@ const captureScreen = (screenBase64) => {
 
         setTimeout(function () {
             captureWin.webContents.send('passScreenBase64', {screenBase64})
-        }, 800)
+        }, 800);
 
         /**
          * 接收到页面加载完成的消息调用

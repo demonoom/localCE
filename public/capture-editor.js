@@ -1,21 +1,23 @@
 const Event = require('events')
-const { getCurrentScreen } = require('./utils')
+const {getCurrentScreen} = require('./utils')
 
 const CREATE_RECT = 1
 const MOVING_RECT = 2
 const RESIZE = 3
 
+let clickFlag = false;
+
 const ANCHORS = [
-    { row: 'x', col: 'y', cursor: 'nwse-resize' },
-    { row: '', col: 'y', cursor: 'ns-resize' },
-    { row: 'r', col: 'y', cursor: 'nesw-resize' },
+    {row: 'x', col: 'y', cursor: 'nwse-resize'},
+    {row: '', col: 'y', cursor: 'ns-resize'},
+    {row: 'r', col: 'y', cursor: 'nesw-resize'},
 
-    { row: 'x', col: '', cursor: 'ew-resize' },
-    { row: 'r', col: '', cursor: 'ew-resize' },
+    {row: 'x', col: '', cursor: 'ew-resize'},
+    {row: 'r', col: '', cursor: 'ew-resize'},
 
-    { row: 'x', col: 'b', cursor: 'nesw-resize' },
-    { row: '', col: 'b', cursor: 'ns-resize' },
-    { row: 'r', col: 'b', cursor: 'nwse-resize' },
+    {row: 'x', col: 'b', cursor: 'nesw-resize'},
+    {row: '', col: 'b', cursor: 'ns-resize'},
+    {row: 'r', col: 'b', cursor: 'nwse-resize'},
 ]
 
 class CaptureEditor extends Event {
@@ -35,6 +37,7 @@ class CaptureEditor extends Event {
         this.onMouseDown = this.onMouseDown.bind(this)
         this.onMouseMove = this.onMouseMove.bind(this)
         this.onMouseUp = this.onMouseUp.bind(this)
+        this.click = this.click.bind(this)
 
         this.init().then(() => {
             // console.log('init')
@@ -64,6 +67,82 @@ class CaptureEditor extends Event {
         document.addEventListener('mousedown', this.onMouseDown)
         document.addEventListener('mousemove', this.onMouseMove)
         document.addEventListener('mouseup', this.onMouseUp)
+        document.addEventListener('click', this.click)
+    }
+
+    click(e) {
+        if (!clickFlag) {
+            if (this.disabled) {
+                return
+            }
+            this.mouseDown = true
+            const {pageX, pageY} = e
+            if (this.selectRect) {
+                const {
+                    w, h, x, y, r, b,
+                } = this.selectRect;
+                if (this.selectAnchorIndex !== -1) {
+                    this.startPoint = {
+                        x: pageX,
+                        y: pageY,
+                        moved: false,
+                        selectRect: {
+                            w, h, x, y, r, b,
+                        },
+                        rawRect: {
+                            w, h, x, y, r, b,
+                        },
+                    }
+                    this.action = RESIZE
+                    return
+                }
+                this.startPoint = {
+                    x: e.pageX,
+                    y: e.pageY,
+                    moved: false,
+                }
+                if (pageX > x && pageX < r && pageY > y && pageY < b) {
+                    this.action = MOVING_RECT
+                    this.startDragRect = {
+                        x: pageX,
+                        y: pageY,
+                        selectRect: {
+                            x, y, w, h, r, b,
+                        },
+                    }
+                } else {
+                    this.action = CREATE_RECT
+                }
+            } else {
+                this.action = CREATE_RECT
+                this.startPoint = {
+                    x: e.pageX,
+                    y: e.pageY,
+                    moved: false,
+                };
+                e.stopPropagation();
+                e.preventDefault()
+            }
+        } else if (clickFlag) {
+            if (this.disabled) {
+                return
+            }
+            if (!this.mouseDown) {
+                return
+            }
+            this.mouseDown = false
+            e.stopPropagation()
+            e.preventDefault()
+            this.emit('mouse-up')
+            if (!this.startPoint.moved) {
+                this.emit('end-moving')
+                return
+            }
+            this.emit('end-dragging')
+            this.drawRect()
+            this.startPoint = null
+        }
+        clickFlag = !clickFlag;
     }
 
     onMouseDown(e) {
@@ -71,11 +150,11 @@ class CaptureEditor extends Event {
             return
         }
         this.mouseDown = true
-        const { pageX, pageY } = e
+        const {pageX, pageY} = e
         if (this.selectRect) {
             const {
                 w, h, x, y, r, b,
-            } = this.selectRect
+            } = this.selectRect;
             if (this.selectAnchorIndex !== -1) {
                 this.startPoint = {
                     x: pageX,
@@ -114,8 +193,8 @@ class CaptureEditor extends Event {
                 x: e.pageX,
                 y: e.pageY,
                 moved: false,
-            }
-            e.stopPropagation()
+            };
+            e.stopPropagation();
             e.preventDefault()
         }
     }
@@ -127,7 +206,7 @@ class CaptureEditor extends Event {
         e.stopPropagation()
         e.preventDefault()
 
-        const { pageX, pageY } = e
+        const {pageX, pageY} = e
         let startDragging
         let selectRect = this.selectRect
         if (!this.startPoint.moved) {
@@ -146,8 +225,8 @@ class CaptureEditor extends Event {
                 this.emit('start-dragging', selectRect)
             }
             this.emit('dragging', selectRect)
-            const { w, h } = selectRect
-            const { x: startX, y: startY } = this.startPoint
+            const {w, h} = selectRect
+            const {x: startX, y: startY} = this.startPoint
             let newX = this.startDragRect.selectRect.x + pageX - startX
             let newY = this.startDragRect.selectRect.y + pageY - startY
             let newR = newX + w
@@ -177,7 +256,7 @@ class CaptureEditor extends Event {
             this.drawRect()
         } else if (this.action === RESIZE) {
             this.emit('dragging', selectRect)
-            let { row, col } = ANCHORS[this.selectAnchorIndex]
+            let {row, col} = ANCHORS[this.selectAnchorIndex]
             if (row) {
                 this.startPoint.rawRect[row] = this.startPoint.selectRect[row] + pageX - this.startPoint.x
                 selectRect.x = this.startPoint.rawRect.x
@@ -206,7 +285,7 @@ class CaptureEditor extends Event {
             this.drawRect()
         } else {
             // 生成选区
-            const { pageX, pageY } = e
+            const {pageX, pageY} = e
             let x, y, w, h, r, b
             if (this.startPoint.x > pageX) {
                 x = pageX
@@ -317,7 +396,7 @@ class CaptureEditor extends Event {
         }
         this.selectAnchorIndex = -1
         if (this.selectRect) {
-            const { pageX, pageY } = e
+            const {pageX, pageY} = e
             const {
                 x, y, r, b,
             } = this.selectRect
