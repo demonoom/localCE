@@ -45,11 +45,11 @@ const captureScreen = (screenBase64) => {
         }));
 
         /**
-         * 延迟200毫秒通知渲染进程显示内容
+         * 延迟500毫秒通知渲染进程显示内容
          */
         setTimeout(function () {
             captureWin.webContents.send('passScreenBase64', {screenBase64});
-        }, 200);
+        }, 300);
 
         captureWin.setSkipTaskbar(true);
 
