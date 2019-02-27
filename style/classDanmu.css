@@ -141,9 +141,39 @@ li {
     position: absolute;
     cursor: pointer
 }
-.icon_close.blackBg{
-    background:rgba(0,0,0,0.4) url("../images/icon_closeImage.png") no-repeat center center;
-    background-size:30px;
+
+.icon_btn{
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    background: rgba(0,0,0,0.4);
+    width: 62px;
+    height: 122px;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+.icon_btn .icon_blackClose{
+    background: url("../images/icon_popClose.png") no-repeat center center;
+    background-size:31px;
+    width: 45px;
+    height: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.icon_btn .icon_min{
+    background: url("../images/icon_popMin.png") no-repeat center center;
+    background-size:31px;
+    width: 45px;
+    height: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.icon_btn .line{
+    background: rgba(255,255,255,0.2);
+    height: 1px;
+    margin: 0 14px;
+    display: block;
 }
 #preview_img {
     max-width: 90%;

@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        body,html{
+            margin: 0;
+        }
+        .icon_btn{
+            position: absolute;
+            left: 0;
+            bottom: 50px;
+            background: rgba(0,0,0,0.4);
+            width: 62px;
+            height: 122px;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .icon_btn .icon_blackClose{
+            background: url("../images/icon_popClose.png") no-repeat center center;
+            background-size:31px;
+            width: 45px;
+            height: 50%;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .icon_btn .icon_min{
+            background: url("../images/icon_popMin.png") no-repeat center center;
+            background-size:31px;
+            width: 45px;
+            height: 50%;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .icon_btn .line{
+            background: rgba(255,255,255,0.2);
+            height: 1px;
+            margin: 0 14px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div class="iframe-wrap" id="content_container">
-    <webview style="width: 100%;height: 550px;" id="conentIframe" plugins nodeintegration disablewebsecurity>
+    <div class="icon_btn">
+        <div class="icon_blackClose"></div>
+        <i class="line"></i>
+        <div class="icon_min"></div>
+    </div>
+    <webview style="width: 100%;height: 100vh;" id="conentIframe" plugins nodeintegration disablewebsecurity>
     </webview>
 </div>
 <script src="../public/jquery.min.js"></script>
