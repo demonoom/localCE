@@ -141,7 +141,10 @@ li {
     position: absolute;
     cursor: pointer
 }
-
+.icon_close.blackBg{
+    background:rgba(0,0,0,0.4) url("../images/icon_closeImage.png") no-repeat center center;
+    background-size:30px;
+}
 #preview_img {
     max-width: 90%;
     max-height: 90%;

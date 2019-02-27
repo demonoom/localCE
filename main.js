@@ -188,9 +188,12 @@ function afterPushQue() {
 let win_publicScreen = null;
 
 function openPubWin() {
+    const size = electronScreen.getPrimaryDisplay().size;
     win_publicScreen = new BrowserWindow({
-        minWidth: 750,
-        minHeight: 700,
+        // minWidth: 750,
+        // minHeight: 700,
+        width: size.width,
+        height: size.height,
         icon: './images/logoo.png',
         title: '小蚂蚁教学助手'
     });
@@ -215,10 +218,12 @@ function openPubWin() {
 function open_statistics() {
     // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
     let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
-
+    const size = electronScreen.getPrimaryDisplay().size;
     let win_statistics = new BrowserWindow({
-        width: 400,
-        height: 600,
+        // width: 400,
+        // height: 600,
+        width: size.width,
+        height: size.height,
         title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
@@ -274,9 +279,12 @@ ipcMain.on('class_over', () => {
 //课堂统计
 ipcMain.on('open_statistics', () => {
     let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
+    const size = electronScreen.getPrimaryDisplay().size;
     let win_statistics = new BrowserWindow({
-        width: 400,
-        height: 600,
+        // width: 400,
+        // height: 600,
+        width: size.width,
+        height: size.height,
         title: '小蚂蚁教学助手',
         resizable: false,
         icon: './images/logoo.png',
