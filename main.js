@@ -143,6 +143,8 @@ function showClassBall() {
 
     win_ball.setSkipTaskbar(true);
 
+    win_ball.setMaximizable(false)
+
     createTray(win_ball, app);
 };
 
