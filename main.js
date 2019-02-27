@@ -217,7 +217,7 @@ function openPubWin() {
 
 function open_statistics() {
     // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
+    let url_tongji = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     const size = electronScreen.getPrimaryDisplay().size;
     let win_statistics = new BrowserWindow({
         // width: 400,
@@ -228,11 +228,22 @@ function open_statistics() {
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
-            nodeIntegration: false  //加载带有jquery的项目时
+            // nodeIntegration: false  //加载带有jquery的项目时
         }
     });
 
-    win_statistics.loadURL(url);
+    win_statistics.loadURL(url.format({
+        pathname: path.join(__dirname, './views/publicWebView.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    win_statistics.webContents.on('did-finish-load', () => {
+        win_statistics.webContents.send('webviewSrc', {
+            type: 'tongji',
+            src: url_tongji
+        });
+    });
 
     win_statistics.setMenuBarVisibility(false);
 
@@ -278,7 +289,7 @@ ipcMain.on('class_over', () => {
 
 //课堂统计
 ipcMain.on('open_statistics', () => {
-    let url = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
+    let url_tongji = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     const size = electronScreen.getPrimaryDisplay().size;
     let win_statistics = new BrowserWindow({
         // width: 400,
@@ -289,11 +300,22 @@ ipcMain.on('open_statistics', () => {
         resizable: false,
         icon: './images/logoo.png',
         webPreferences: {
-            nodeIntegration: false  //加载带有jquery的项目时
+            // nodeIntegration: false  //加载带有jquery的项目时
         }
     });
 
-    win_statistics.loadURL(url);
+    win_statistics.loadURL(url.format({
+        pathname: path.join(__dirname, './views/publicWebView.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    win_statistics.webContents.on('did-finish-load', () => {
+        win_statistics.webContents.send('webviewSrc', {
+            type: 'tongji',
+            src: url_tongji
+        });
+    });
 
     win_statistics.setMenuBarVisibility(false);
 

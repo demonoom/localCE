@@ -56,6 +56,14 @@ $(function () {
         }
     });
 
+    $('.icon_blackClose').click(function () {
+        remote.getCurrentWindow().close();
+    })
+
+    $('.icon_min').click(function () {
+        remote.getCurrentWindow().minimize()
+    })
+
     //获取本地消息记录，加载历史消息
     msgArr = remote.getGlobal('loginUser').msgArr;
     if (msgArr.length !== 0) {

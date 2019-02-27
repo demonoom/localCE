@@ -179,6 +179,14 @@ let konwLedegArr = [];
         $('#judge_yes').removeClass('active').attr('data-judge', "false");
     });
 
+    $('.icon_blackClose').click(function () {
+        remote.getCurrentWindow().close();
+    })
+
+    $('.icon_min').click(function () {
+        remote.getCurrentWindow().minimize()
+    })
+
     /**
      * 停止录音并上传
      */
