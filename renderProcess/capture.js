@@ -80,7 +80,10 @@ desktopCapturer.getSources({
         window.close()
     })
 
-    $btnReset.addEventListener('click', () => {
+    $btnReset.addEventListener('click', (e) => {
+        console.log(e);
+        e.stopPropagation()
+        e.preventDefault()
         capture.reset()
     })
 
