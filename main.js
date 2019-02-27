@@ -377,15 +377,26 @@ ipcMain.on('choose_stu', () => {
         transparent: true,  //使窗口透明
         webPreferences: {
             webSecurity: false,
-            nodeIntegration: false
         },
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png',
     });
     window.setMenu(null);
     // window.openDevTools();
-    var url = "https://www.maaee.com:6443/luckDraw/?classId=" + global.loginUser.classCode;
-    window.loadURL(url);
+    var url_choose = "https://www.maaee.com:6443/luckDraw/?classId=" + global.loginUser.classCode;
+
+    window.loadURL(url.format({
+        pathname: path.join(__dirname, './views/publicWebView.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    window.webContents.on('did-finish-load', () => {
+        window.webContents.send('webviewSrc', {
+            type: 'xuanren',
+            src: url_choose
+        });
+    });
 });
 
 /**
