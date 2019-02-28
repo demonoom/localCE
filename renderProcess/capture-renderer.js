@@ -22,9 +22,6 @@ audio.src = '../assets/audio/capture.mp3';
 
 const currentScreen = getCurrentScreen();
 
-//页面一加载就发送消息通知主进程
-ipcRenderer.send('capture-loaded');
-
 //题目类型
 let subjectType = 'C';
 
