@@ -6,19 +6,27 @@ html, body, div {
     color: #333;
     font-family: "Microsoft YaHei", "Hiragino Sans GB", Arial, Helvetica;
 }
-ul,li{
+
+ul, li {
     list-style: none;
 }
-ul{
+
+ul {
     padding-left: 10px;
     padding-right: 10px;
 }
-.my_flex{
+
+#js-mask {
+    display: none;
+}
+
+.my_flex {
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
     height: 100%;
 }
+
 .mask {
     position: absolute;
     top: 0;
@@ -74,48 +82,57 @@ ul{
     padding-left: 3px;
     cursor: pointer;
 }
-.icon-guanbi{
+
+.icon-guanbi {
     color: #FF0600;
 }
-.icon-duihao{
+
+.icon-duihao {
     color: #51A938;
 }
-.titleType div{
+
+.titleType div {
     padding: 0 10px;
     position: relative;
     cursor: pointer;
 }
-.titleType div.active{
+
+.titleType div.active {
     color: #3672ED;
 }
-.titleType div:first-child::after{
+
+.titleType div:first-child::after {
     content: '';
     background: #D2D2D2;
     height: 100%;
     width: 1px;
     position: absolute;
     right: 0;
-    top:0;
+    top: 0;
 }
-li{
+
+li {
     margin-right: 15px;
 }
-.inputCont{
+
+.inputCont {
     display: inline-block;
     width: 14px;
     height: 14px;
     position: relative;
     margin-right: 10px;
 }
-.inputCont input{
+
+.inputCont input {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     z-index: 5;
     opacity: 0;
     -webkit-appearance: none;
 }
-.checkIcon{
+
+.checkIcon {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -124,12 +141,14 @@ li{
     vertical-align: bottom;
     cursor: pointer;
 }
-.checkIcon.active{
+
+.checkIcon.active {
     border: 1px #3672ED solid;
     background: #3672ED;
     position: relative;
 }
-.checkIcon.active::after{
+
+.checkIcon.active::after {
     content: '';
     position: absolute;
     width: 9px;

@@ -104,6 +104,8 @@ ipcRenderer.on('passScreenBase64', (e, msg) => {
         // let capture = new CaptureEditor($canvas, $bg, imgSrc);
         let capture = new CaptureEditor($canvas, $bg, msg.screenBase64);
 
+        $('#js-mask').css('display', 'block')   //让蒙层在此时显示，解决闪烁的问题
+
         let onDrag = (selectRect) => {
             $toolbar.style.display = 'none';
             $sizeInfo.style.display = 'block';

@@ -46,10 +46,6 @@ const captureScreen = (screenBase64) => {
             protocol: 'file'
         }));
 
-        // setTimeout(function () {
-        //     captureWin.webContents.send('passScreenBase64', {screenBase64})
-        // }, 800);
-
         /**
          * 页面加载完成调用
          */
