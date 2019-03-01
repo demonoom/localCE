@@ -72,7 +72,7 @@ class CaptureEditor extends Event {
     }
 
     click(e) {
-        if(!this.onmouse) {
+        if (!this.onmouse) {
             if (!clickFlag) {
                 if (this.disabled) {
                     return
@@ -127,11 +127,16 @@ class CaptureEditor extends Event {
                     document.querySelector('#point').style.top = `${e.pageY - 10}px`;
                     document.querySelector('#point').style.left = `${e.pageX - 10}px`;
 
+                    document.querySelector('#tip').style.display = 'block';
+                    document.querySelector('#tip').style.top = `${e.pageY - 54}px`;
+                    document.querySelector('#tip').style.left = `${e.pageX - 155}px`;
+
                     e.stopPropagation();
                     e.preventDefault()
                 }
             } else if (clickFlag) {
                 document.querySelector('#point').style.display = 'none';
+                document.querySelector('#tip').style.display = 'none';
                 if (this.disabled) {
                     return
                 }
@@ -216,6 +221,15 @@ class CaptureEditor extends Event {
         e.preventDefault()
 
         const {pageX, pageY} = e
+
+        if (pageY > this.startPoint.y) {
+            document.querySelector('#tip').style.top = `${e.pageY + 12}px`;
+            document.querySelector('#tip').style.left = `${e.pageX - 155}px`;
+        } else {
+            document.querySelector('#tip').style.top = `${e.pageY - 54}px`;
+            document.querySelector('#tip').style.left = `${e.pageX - 155}px`;
+        }
+
         let startDragging
         let selectRect = this.selectRect
         if (!this.startPoint.moved) {

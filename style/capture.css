@@ -171,3 +171,9 @@ li {
     display: none;
     z-index: 999;
 }
+
+#tip {
+    position: fixed;
+    display: none;
+    z-index: 999;
+}
