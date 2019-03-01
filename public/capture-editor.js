@@ -27,6 +27,7 @@ class CaptureEditor extends Event {
         this.$canvas = $canvas
         this.imageSrc = imageSrc
         this.disabled = false
+        this.onmouse = false
         let currentScreen = getCurrentScreen()
         this.scaleFactor = currentScreen.scaleFactor
         this.screenWidth = currentScreen.bounds.width
@@ -71,84 +72,86 @@ class CaptureEditor extends Event {
     }
 
     click(e) {
-        if (!clickFlag) {
-            if (this.disabled) {
-                return
-            }
-            this.mouseDown = true
-            const {pageX, pageY} = e
-            if (this.selectRect) {
-                const {
-                    w, h, x, y, r, b,
-                } = this.selectRect;
-                if (this.selectAnchorIndex !== -1) {
-                    this.startPoint = {
-                        x: pageX,
-                        y: pageY,
-                        moved: false,
-                        selectRect: {
-                            w, h, x, y, r, b,
-                        },
-                        rawRect: {
-                            w, h, x, y, r, b,
-                        },
-                    }
-                    this.action = RESIZE
+        if(!this.onmouse) {
+            if (!clickFlag) {
+                if (this.disabled) {
                     return
                 }
-                this.startPoint = {
-                    x: e.pageX,
-                    y: e.pageY,
-                    moved: false,
-                }
-                if (pageX > x && pageX < r && pageY > y && pageY < b) {
-                    this.action = MOVING_RECT
-                    this.startDragRect = {
-                        x: pageX,
-                        y: pageY,
-                        selectRect: {
-                            x, y, w, h, r, b,
-                        },
+                this.mouseDown = true
+                const {pageX, pageY} = e
+                if (this.selectRect) {
+                    const {
+                        w, h, x, y, r, b,
+                    } = this.selectRect;
+                    if (this.selectAnchorIndex !== -1) {
+                        this.startPoint = {
+                            x: pageX,
+                            y: pageY,
+                            moved: false,
+                            selectRect: {
+                                w, h, x, y, r, b,
+                            },
+                            rawRect: {
+                                w, h, x, y, r, b,
+                            },
+                        }
+                        this.action = RESIZE
+                        return
+                    }
+                    this.startPoint = {
+                        x: e.pageX,
+                        y: e.pageY,
+                        moved: false,
+                    }
+                    if (pageX > x && pageX < r && pageY > y && pageY < b) {
+                        this.action = MOVING_RECT
+                        this.startDragRect = {
+                            x: pageX,
+                            y: pageY,
+                            selectRect: {
+                                x, y, w, h, r, b,
+                            },
+                        }
+                    } else {
+                        this.action = CREATE_RECT
                     }
                 } else {
                     this.action = CREATE_RECT
+                    this.startPoint = {
+                        x: e.pageX,
+                        y: e.pageY,
+                        moved: false,
+                    };
+
+                    document.querySelector('#point').style.display = 'block';
+                    document.querySelector('#point').style.top = `${e.pageY - 10}px`;
+                    document.querySelector('#point').style.left = `${e.pageX - 10}px`;
+
+                    e.stopPropagation();
+                    e.preventDefault()
                 }
-            } else {
-                this.action = CREATE_RECT
-                this.startPoint = {
-                    x: e.pageX,
-                    y: e.pageY,
-                    moved: false,
-                };
-
-                document.querySelector('#point').style.display = 'block';
-                document.querySelector('#point').style.top = `${e.pageY - 10}px`;
-                document.querySelector('#point').style.left = `${e.pageX - 10}px`;
-
-                e.stopPropagation();
+            } else if (clickFlag) {
+                document.querySelector('#point').style.display = 'none';
+                if (this.disabled) {
+                    return
+                }
+                if (!this.mouseDown) {
+                    return
+                }
+                this.mouseDown = false
+                e.stopPropagation()
                 e.preventDefault()
+                this.emit('mouse-up')
+                if (!this.startPoint.moved) {
+                    this.emit('end-moving')
+                    return
+                }
+                this.emit('end-dragging')
+                this.drawRect()
+                this.startPoint = null
             }
-        } else if (clickFlag) {
-            document.querySelector('#point').style.display = 'none';
-            if (this.disabled) {
-                return
-            }
-            if (!this.mouseDown) {
-                return
-            }
-            this.mouseDown = false
-            e.stopPropagation()
-            e.preventDefault()
-            this.emit('mouse-up')
-            if (!this.startPoint.moved) {
-                this.emit('end-moving')
-                return
-            }
-            this.emit('end-dragging')
-            this.drawRect()
-            this.startPoint = null
+            clickFlag = !clickFlag;
         }
-        clickFlag = !clickFlag;
     }
 
     onMouseDown(e) {
@@ -417,14 +420,16 @@ class CaptureEditor extends Event {
             }
             if (selectAnchor) {
                 this.selectAnchorIndex = selectIndex
-                document.body.style.cursor = ANCHORS[selectIndex].cursor
+                // document.body.style.cursor = ANCHORS[selectIndex].cursor
                 this.emit('moving')
                 return
             }
             if (pageX > x && pageX < r && pageY > y && pageY < b) {
-                document.body.style.cursor = 'move'
+                this.onmouse = true
+                // document.body.style.cursor = 'move'
             } else {
-                document.body.style.cursor = 'auto'
+                this.onmouse = false
+                // document.body.style.cursor = 'auto'
             }
             this.emit('moving')
         }

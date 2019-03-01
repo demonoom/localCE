@@ -11,13 +11,6 @@ let win = null;
 
 let hello_win = null;
 
-/*electron.crashReporter.start({
-    companyName: 'Excoord',
-    submitURL: 'http://192.168.50.29:1127/',
-    uploadToServer: true,
-    autoSubmit: true
-});*/
-
 if (!gotTheLock) {
     app.quit();
 } else {
@@ -284,7 +277,7 @@ ipcMain.on('netword_error', () => {
 ipcMain.on('class_over', () => {
     console.log('class_over');
     global.loginUser.msgArr = [];
-    global.loginUser.honeySwitch = 'switch-on'
+    global.loginUser.honeySwitch = 'switch-off'
 });
 
 //课堂统计
@@ -453,7 +446,7 @@ global.loginUser = {
     sid: '',
     subjectType: '',
     msgArr: [],
-    honeySwitch: 'switch-on'
+    honeySwitch: 'switch-off'
 };
 
 

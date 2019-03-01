@@ -12,7 +12,7 @@ let winId = -1;
  * @param e
  * @param args
  */
-const captureScreen = (screenBase64) => {
+const captureScreen = () => {
     if (captureWins.length) {
         return
     }
@@ -46,13 +46,6 @@ const captureScreen = (screenBase64) => {
             protocol: 'file'
         }));
 
-        /**
-         * 页面加载完成调用
-         */
-        captureWin.webContents.on('did-finish-load', () => {
-            captureWin.webContents.send('passScreenBase64', {screenBase64})
-        });
-
         captureWin.setSkipTaskbar(true);
 
         let {x, y} = screen.getCursorScreenPoint();
@@ -62,7 +55,7 @@ const captureScreen = (screenBase64) => {
             captureWin.blur()
         }
         // 调试用
-        // captureWin.openDevTools();
+        captureWin.openDevTools();
 
         captureWin.on('closed', () => {
             let index = captureWins.indexOf(captureWin);
@@ -83,9 +76,9 @@ const useCapture = () => {
         }
     });
 
-    ipcMain.on('capture-screen', (e, {type = 'start', screenId, src, screenBase64} = {}) => {
+    ipcMain.on('capture-screen', (e, {type = 'start', screenId, src} = {}) => {
         if (type === 'start') {
-            captureScreen(screenBase64);
+            captureScreen();
         } else if (type === 'complete') {
             //在main.js中处理，方便传给ball.js
         } else if (type === 'select') {
