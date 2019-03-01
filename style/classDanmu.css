@@ -144,18 +144,18 @@ li {
 
 .icon_btn{
     position: absolute;
-    left: 0;
-    bottom: 50px;
+    right: 0;
+    bottom: 60px;
     background: rgba(0,0,0,0.4);
-    width: 62px;
-    height: 122px;
+    width: 55px;
+    height: 112px;
     border-radius: 10px;
     overflow: hidden;
     text-align: center;
 }
 .icon_btn .icon_blackClose{
     background: url("../images/icon_popClose.png") no-repeat center center;
-    background-size:31px;
+    background-size:26px;
     width: 45px;
     height: 50%;
     margin: 0 auto;
@@ -163,7 +163,7 @@ li {
 }
 .icon_btn .icon_min{
     background: url("../images/icon_popMin.png") no-repeat center center;
-    background-size:31px;
+    background-size:26px;
     width: 45px;
     height: 50%;
     margin: 0 auto;
