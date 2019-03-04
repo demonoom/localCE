@@ -82,7 +82,7 @@ input:-webkit-autofill {
 }
 .icon_btn .icon_blackClose{
     background: url("../images/icon_popClose.png") no-repeat center center;
-    background-size:26px;
+    background-size:25px;
     width: 45px;
     height: 33.3%;
     margin: 0 auto;
@@ -97,7 +97,7 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 .icon_btn .icon_refresh{
-    background: url("../images/icon_popMin.png") no-repeat center center;
+    background: url("../images/icon_popRefresh.png") no-repeat center center;
     background-size:26px;
     width: 45px;
     height: 33.3%;
