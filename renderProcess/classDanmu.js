@@ -1,5 +1,17 @@
 let msgArr = [];
 let this_src;
+var viewer;
+
+window.onload = function () {
+    viewer = new Viewer(document.getElementById('jq22'), {
+        show:function() {
+            viewer.update();
+        },
+        url: 'data-original',
+        navbar: false
+    });
+}
+
 $(function () {
     const remote = require('electron').remote;
     const {ipcRenderer} = require('electron');
@@ -85,6 +97,7 @@ $(function () {
     function buildMesList(arr) {
         $('.empty').hide();
         let htmlStr = '';
+        let htmlStr2 = '';
         var historyScroll = document.querySelector('#content').scrollHeight;
         arr.forEach((e, i) => {
             if (e.message.attachment != null && e.message.content === '[图片]') {
@@ -111,8 +124,20 @@ $(function () {
                 </li>`
             }
         });
+        arr.forEach((e, i) => {
+            console.log(e.message.fromUser.userName);
+            if (e.message.attachment != null && e.message.content === '[图片]') {
+                //图片
+                htmlStr2 += `<li>
+                    <img src=${e.message.attachment.address} data-original=${e.message.attachment.address} alt=${JSON.stringify(e.message.fromUser.userName)}>
+                </li>`
+            }
+        });
         $('#content>ul').empty();
         $('#content>ul').append(htmlStr);
+
+        $('#jq22').empty();
+        $('#jq22').append(htmlStr2);
 
         //如果不是停在最下部，就不滚动到最低
         if (document.querySelector('#content').scrollTop < historyScroll - document.body.clientHeight) {
@@ -121,13 +146,15 @@ $(function () {
 
         document.querySelector('#content').scrollTop = document.querySelector('#content').scrollHeight
 
+        viewer.update();
+
     }
 });
 
 function img_onclick(e) {
-    this_src = e.src;
-    $("#preview_img").attr("src", e.src);
-    $('#userName').empty();
-    $('#userName').append($(e).attr('data-name'));
-    $("#mask").show();
+    $('#jq22>li').each((v, i) => {
+        if (e.src === $(i).children('img')[0].src) {
+            $(i).children('img').click();
+        }
+    })
 }
