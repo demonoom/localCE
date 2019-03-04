@@ -15,4 +15,7 @@ $(function () {
     $('.icon_min').click(function () {
         remote.getCurrentWindow().minimize()
     })
+    $('.icon_refresh').click(()=>{
+        remote.getCurrentWindow().reload();
+    })
 });
