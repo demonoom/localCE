@@ -3,11 +3,16 @@ let this_src;
 $(function () {
     const remote = require('electron').remote;
     const {ipcRenderer} = require('electron');
-
+    console.log(remote,"ooo")
     //关闭
     $('.icon_close').click(() => {
         $("#mask").hide();
     });
+
+
+    $('.icon_refresh').click(()=>{
+        remote.getCurrentWindow().reload();
+    })
 
     //下一张
     $('.icon_right').click(() => {

@@ -130,7 +130,7 @@ function showClassBall() {
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
         x: size.width - 108,
-        y: size.height / 2 - 200
+        y: size.height / 2 - 220
     });
 
     // win_ball.webContents.openDevTools();
@@ -175,7 +175,7 @@ function afterPushQue() {
     }));
 
     win_afterPushQue.setMenuBarVisibility(false);
-    // win_afterPushQue.webContents.openDevTools();
+    win_afterPushQue.webContents.openDevTools();
     win_afterPushQue.setSkipTaskbar(true);
 
     win_afterPushQue.on('close', (event) => {
@@ -206,7 +206,7 @@ function openPubWin() {
 
     win_publicScreen.setMenuBarVisibility(false);
 
-    // win_publicScreen.webContents.openDevTools();
+    win_publicScreen.webContents.openDevTools();
 
     win_publicScreen.on('close', (event) => {
         if (win_publicScreen) {

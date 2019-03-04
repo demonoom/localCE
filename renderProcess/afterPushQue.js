@@ -187,6 +187,10 @@ let konwLedegArr = [];
         remote.getCurrentWindow().minimize()
     })
 
+    $('.icon_refresh').click(()=>{
+        remote.getCurrentWindow().reload();
+    })
+
     /**
      * 停止录音并上传
      */
