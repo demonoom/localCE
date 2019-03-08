@@ -2,6 +2,7 @@
     const shot_btn = document.querySelector('#screenShot');
     const push_que = document.querySelector('#pushQue');
     const statistics = document.querySelector('#statistics');
+    const antPlate = document.querySelector('#antPlate');
     const more = document.querySelector('#more');
     const choice = document.querySelector('#choice');
     const publicScreen = document.querySelector('#publicScreen');
@@ -64,7 +65,7 @@
     more.onclick = () => {
         if ($(more).attr('data-more') === 'false') {
             $(more).attr('data-more', "true");
-            $('.moreCont').show().height(198)
+            $('.moreCont').show().height(242)
         } else {
             $(more).attr('data-more', "false");
             $('.moreCont').hide().height(0)
@@ -74,6 +75,11 @@
     //统计
     statistics.onclick = () => {
         ipcRenderer.send('open_statistics')
+    };
+
+    //蚁盘
+    antPlate.onclick = () => {
+        ipcRenderer.send('open_antPlate')
     };
 
     //公屏

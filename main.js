@@ -119,13 +119,13 @@ function showClassBall() {
     const size = electronScreen.getPrimaryDisplay().size;
     win_ball = new BrowserWindow({
         width: 108,
-        height: 392,
+        height: 436,
         frame: false,
         resizable: false,
         transparent: true,  //使窗口透明
         alwaysOnTop: true,
         x: size.width - 108,
-        y: size.height / 2 - 220
+        y: size.height / 2 - 260
     });
 
     // win_ball.webContents.openDevTools();
@@ -314,6 +314,37 @@ ipcMain.on('open_statistics', () => {
 
     win_statistics.setMenuBarVisibility(false);
 
+});
+
+//蚁盘
+ipcMain.on('open_antPlate', () => {
+    // let url_antPlate = 'https://jiaoxue.maaee.com:8099/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
+    let url_antPlate = 'http://localhost:8091/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
+    const size = electronScreen.getPrimaryDisplay().size;
+    let win_antPlate = new BrowserWindow({
+        width: size.width,
+        height: size.height,
+        title: '小蚂蚁教学助手',
+        resizable: false,
+        icon: './images/logoo.png',
+    });
+
+    win_antPlate.loadURL(url.format({
+        pathname: path.join(__dirname, './views/publicWebView.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    win_antPlate.webContents.on('did-finish-load', () => {
+        win_antPlate.webContents.send('webviewSrc', {
+            type: 'antPlate',
+            src: url_antPlate
+        });
+    });
+
+    // win_antPlate.webContents.openDevTools();
+
+    win_antPlate.setMenuBarVisibility(false);
 });
 
 ipcMain.on('public_screen', () => {

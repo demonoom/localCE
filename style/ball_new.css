@@ -208,7 +208,14 @@ ul, li {
     right: 0;
     overflow: hidden;
 }
-
+.antPlate {
+    width: 55px;
+    height: 40px;
+    position: absolute;
+    bottom: 49px;
+    right: 0;
+    overflow: hidden;
+}
 #clock {
     /*width: 90px;*/
     /*height: 90px;*/

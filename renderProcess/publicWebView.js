@@ -10,12 +10,13 @@ $(function () {
 
     $('.icon_blackClose').click(function () {
         remote.getCurrentWindow().close();
-    })
+    });
 
     $('.icon_min').click(function () {
         remote.getCurrentWindow().minimize()
-    })
-    $('.icon_refresh').click(()=>{
+    });
+
+    $('.icon_refresh').click(() => {
         remote.getCurrentWindow().reload();
     })
 });
