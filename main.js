@@ -319,7 +319,7 @@ ipcMain.on('open_statistics', () => {
 //蚁盘
 ipcMain.on('open_antPlate', () => {
     // let url_antPlate = 'https://jiaoxue.maaee.com:8099/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
-    let url_antPlate = 'http://localhost:8091/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
+    let url_antPlate = 'http://172.20.10.11:8091/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
     const size = electronScreen.getPrimaryDisplay().size;
     let win_antPlate = new BrowserWindow({
         width: size.width,
