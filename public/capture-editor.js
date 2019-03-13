@@ -137,6 +137,7 @@ class CaptureEditor extends Event {
             } else if (clickFlag) {
                 document.querySelector('#point').style.display = 'none';
                 document.querySelector('#tip').style.display = 'none';
+                this.onmouse = true
                 if (this.disabled) {
                     return
                 }
@@ -439,10 +440,10 @@ class CaptureEditor extends Event {
                 return
             }
             if (pageX > x && pageX < r && pageY > y && pageY < b) {
-                this.onmouse = true
+                // this.onmouse = true
                 // document.body.style.cursor = 'move'
             } else {
-                this.onmouse = false
+                // this.onmouse = false
                 // document.body.style.cursor = 'auto'
             }
             this.emit('moving')
@@ -495,6 +496,7 @@ class CaptureEditor extends Event {
     }
 
     reset() {
+        this.onmouse = false
         this.anchors = null
         this.startPoint = null
         this.selectRect = null
