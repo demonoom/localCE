@@ -5,7 +5,7 @@ const path = require('path');
 const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
-// const autoStart = require('./public/self-startimg')
+const autoStart = require('./public/self-startimg')
 let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
@@ -24,7 +24,7 @@ if (!gotTheLock) {
     app.on('ready', function () {
         electronScreen = require('electron').screen;
         // showClassBall()
-        // autoStart()  //自启动
+        autoStart()  //自启动
         create_helloWin();
         setTimeout(() => {
             hello_win.hide();
@@ -210,11 +210,13 @@ function openPubWin() {
     });
 }
 
+let win_statistics = null
+
 function open_statistics() {
     // http://192.168.50.29:8091/#/classPractice?userId=23836&vid=35246
     let url_tongji = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     const size = electronScreen.getPrimaryDisplay().size;
-    let win_statistics = new BrowserWindow({
+    win_statistics = new BrowserWindow({
         // width: 400,
         // height: 600,
         width: size.width,
@@ -278,6 +280,18 @@ ipcMain.on('netword_error', () => {
 //下课
 ipcMain.on('class_over', () => {
     console.log('class_over');
+    // if (!!win_afterPushQue) {
+    //     console.log(1);
+    //     win_afterPushQue.destroy()
+    // }
+    // if (!!win_publicScreen) {
+    //     console.log(2);
+    //     win_publicScreen.destroy()
+    // }
+    // if (!!win_statistics) {
+    //     console.log(3);
+    //     win_statistics.destroy()
+    // }
     global.loginUser.msgArr = [];
     global.loginUser.honeySwitch = 'switch-off'
 });
