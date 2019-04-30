@@ -195,6 +195,10 @@ let konwLedegArr = [];
         remote.getCurrentWindow().reload();
     })
 
+    $('.questionBtn').click(() => {
+        $('#announceAnswer').show()
+    });
+
     /**
      * 停止录音并上传
      */
