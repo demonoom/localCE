@@ -5,7 +5,7 @@ const path = require('path');
 const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
-// const autoStart = require('./public/self-startimg')
+const autoStart = require('./public/self-startimg')
 let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
@@ -24,7 +24,7 @@ if (!gotTheLock) {
     app.on('ready', function () {
         electronScreen = require('electron').screen;
         // showClassBall()
-        // autoStart()  //自启动
+        autoStart()  //自启动
         create_helloWin();
         setTimeout(() => {
             hello_win.hide();
@@ -280,18 +280,33 @@ ipcMain.on('netword_error', () => {
 //下课
 ipcMain.on('class_over', () => {
     console.log('class_over');
-    // if (!!win_afterPushQue) {
-    //     console.log(1);
-    //     win_afterPushQue.destroy()
-    // }
-    // if (!!win_publicScreen) {
-    //     console.log(2);
-    //     win_publicScreen.destroy()
-    // }
-    // if (!!win_statistics) {
-    //     console.log(3);
-    //     win_statistics.destroy()
-    // }
+    /*if (!!win_afterPushQue) {
+        win_afterPushQue.close()
+    }
+    if (!!win_publicScreen) {
+        //公屏
+        win_publicScreen.close()
+    }
+    if (!!win_statistics) {
+        //统计
+        win_statistics.close()
+    }
+    if (!!win_antPlate) {
+        //蚁盘
+        win_antPlate.close()
+    }
+    if (!!ar_window) {
+        //ar
+        ar_window.close()
+    }
+    if (!!bp_window) {
+        //展台
+        bp_window.close()
+    }
+    if (!!choose_stu_window) {
+        //选人
+        choose_stu_window.close()
+    }*/
     global.loginUser.msgArr = [];
     global.loginUser.honeySwitch = 'switch-off'
 });
@@ -300,7 +315,7 @@ ipcMain.on('class_over', () => {
 ipcMain.on('open_statistics', () => {
     let url_tongji = 'http://jiaoxue.maaee.com:8091/#/classPractice?userId=' + global.loginUser.colUid + '&vid=' + global.loginUser.vid;
     const size = electronScreen.getPrimaryDisplay().size;
-    let win_statistics = new BrowserWindow({
+    win_statistics = new BrowserWindow({
         // width: 400,
         // height: 600,
         width: size.width,
@@ -331,10 +346,11 @@ ipcMain.on('open_statistics', () => {
 });
 
 //蚁盘
+let win_antPlate = null
 ipcMain.on('open_antPlate', () => {
     let url_antPlate = 'http://jiaoxue.maaee.com:8091/#/antPlate?ident=' + global.loginUser.colUid + '&fileId=-1&title=蚁盘&phoneType=3';
     const size = electronScreen.getPrimaryDisplay().size;
-    let win_antPlate = new BrowserWindow({
+    win_antPlate = new BrowserWindow({
         width: size.width,
         height: size.height,
         title: '小蚂蚁教学助手',
@@ -383,26 +399,27 @@ ipcMain.on('clazzWsListener', (e, info) => {
 });
 
 //跳转ar页面
+let ar_window = null
 ipcMain.on('toArPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
-    const window = new BrowserWindow({
+    ar_window = new BrowserWindow({
         width: width,
         height: height,
         webPreferences: {webSecurity: false},
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png'
     });
-    window.setMenu(null);
-    // window.openDevTools();
+    ar_window.setMenu(null);
+    // ar_window.openDevTools();
 
-    window.loadURL(url.format({
+    ar_window.loadURL(url.format({
         pathname: path.join(__dirname, './views/publicWebView.html'),
         protocol: 'file',
         slashes: true
     }));
 
-    window.webContents.on('did-finish-load', () => {
-        window.webContents.send('webviewSrc', {
+    ar_window.webContents.on('did-finish-load', () => {
+        ar_window.webContents.send('webviewSrc', {
             type: 'ar',
             src: 'https://www.maaee.com:6443/arBook/arsycPlay.html'
         });
@@ -410,27 +427,28 @@ ipcMain.on('toArPage', (e) => {
 });
 
 //跳转展台页面
+let bp_window
 ipcMain.on('toBoothPage', (e) => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
-    const window = new BrowserWindow({
+    bp_window = new BrowserWindow({
         width: width,
         height: height,
         webPreferences: {webSecurity: false},
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png'
     });
-    window.setMenu(null);
-    // window.openDevTools();
+    bp_window.setMenu(null);
+    // bp_window.openDevTools();
     var url_webview = "https://www.maaee.com:6443/classOther/zhantai/openZhantaiQr.html?vid=" + global.loginUser.colUid;
 
-    window.loadURL(url.format({
+    bp_window.loadURL(url.format({
         pathname: path.join(__dirname, './views/publicWebView.html'),
         protocol: 'file',
         slashes: true
     }));
 
-    window.webContents.on('did-finish-load', () => {
-        window.webContents.send('webviewSrc', {
+    bp_window.webContents.on('did-finish-load', () => {
+        bp_window.webContents.send('webviewSrc', {
             type: 'zhantai',
             src: url_webview
         });
@@ -438,9 +456,10 @@ ipcMain.on('toBoothPage', (e) => {
 });
 
 //跳转到选人
+let choose_stu_window
 ipcMain.on('choose_stu', () => {
     const {width, height} = electron.screen.getPrimaryDisplay().workArea;
-    const window = new BrowserWindow({
+    choose_stu_window = new BrowserWindow({
         width,
         height,
         transparent: true,  //使窗口透明
@@ -450,18 +469,18 @@ ipcMain.on('choose_stu', () => {
         title: '小蚂蚁教学助手',
         icon: './images/logoo.png',
     });
-    window.setMenu(null);
-    // window.openDevTools();
+    choose_stu_window.setMenu(null);
+    // choose_stu_window.openDevTools();
     var url_choose = "https://www.maaee.com:6443/luckDraw/?classId=" + global.loginUser.classCode;
 
-    window.loadURL(url.format({
+    choose_stu_window.loadURL(url.format({
         pathname: path.join(__dirname, './views/publicWebView.html'),
         protocol: 'file',
         slashes: true
     }));
 
-    window.webContents.on('did-finish-load', () => {
-        window.webContents.send('webviewSrc', {
+    choose_stu_window.webContents.on('did-finish-load', () => {
+        choose_stu_window.webContents.send('webviewSrc', {
             type: 'xuanren',
             src: url_choose
         });
