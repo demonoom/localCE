@@ -224,6 +224,13 @@ $(function () {
         $('#logo_content').hide();
         $('#classList').show();
     };
+
+    /**
+     * 渲染进程监听到窗口失去焦点
+     */
+    remote.getCurrentWindow().addListener('blur', () => {
+        $("#act").blur();
+    });
 });
 
 function classCheck(e, classCode) {
