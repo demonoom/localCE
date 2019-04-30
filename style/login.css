@@ -313,16 +313,9 @@ input#act {
     position: relative;
     height: calc(100% - 258px);
 }
-.classList .btn {
-    width: 120px;
+.classList .btnWrap .btnInner{
+    width: auto;
     height: 30px;
-    line-height: 30px;
-    font-size: 14px;
-    color: white;
-    text-align: center;
-    border-radius: 4px;
-    background: #3672ED;
-    cursor: pointer;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -331,5 +324,18 @@ input#act {
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    display: flex;
+}
+.classList .btn {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    background: #3672ED;
+    cursor: pointer;
+    margin: 0 7px;
 
 }

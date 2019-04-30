@@ -237,10 +237,16 @@ input:-webkit-autofill {
     line-height: 20px;
     padding-right: 18px;
     font-size: 26px;
+    margin-bottom: 25px;
 }
 #announceAnswer ul{
     margin: 0 10px 20px;
     padding: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#announceAnswer ul#judge_ans{
+    justify-content: center;
 }
 .announce_cont{
     padding-top: 50px;
@@ -473,7 +479,31 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
     width: 150px;
     margin: 20px auto;
 }
-
+.questionBtn{
+    cursor: pointer;
+    font-size: 26px;
+    width: 55px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #1A58FB;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    line-height: 1.2;
+    z-index: 99;
+    background: -webkit-linear-gradient(#2facfb, #3f37aa); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#2facfb, #3f37aa); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#2facfb, #3f37aa); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#2facfb, #3f37aa); /* 标准的语法 */
+}
 @keyframes jump {
     0% {
         transform: translateY(0) ;
