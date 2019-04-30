@@ -5,7 +5,7 @@ const path = require('path');
 const url = require('url');
 const {useCapture} = require('./mainProcess/capture-main');
 const createTray = require('./mainProcess/tray');
-const autoStart = require('./public/self-startimg')
+// const autoStart = require('./public/self-startimg')
 let electronScreen;
 const gotTheLock = app.requestSingleInstanceLock();
 let win = null;
@@ -24,7 +24,7 @@ if (!gotTheLock) {
     app.on('ready', function () {
         electronScreen = require('electron').screen;
         // showClassBall()
-        autoStart()  //自启动
+        // autoStart()  //自启动
         create_helloWin();
         setTimeout(() => {
             hello_win.hide();

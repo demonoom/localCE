@@ -136,6 +136,10 @@ let konwLedegArr = [];
                             ansStr += 'C,';
                         } else if (i == 3) {
                             ansStr += 'D,';
+                        } else if (i == 4) {
+                            ansStr += 'E,';
+                        } else if (i == 5) {
+                            ansStr += 'F,';
                         }
                     }
                 });
@@ -187,7 +191,7 @@ let konwLedegArr = [];
         remote.getCurrentWindow().minimize()
     })
 
-    $('.icon_refresh').click(()=>{
+    $('.icon_refresh').click(() => {
         remote.getCurrentWindow().reload();
     })
 
