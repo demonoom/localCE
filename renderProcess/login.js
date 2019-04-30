@@ -107,6 +107,17 @@ $(function () {
     });
 
     /**
+     * 后退
+     */
+    $('#goback').on('click',function () {
+        $('#logo_content').show();
+        $('#classList').hide();
+        $('#account').click();
+        $('#act').val('');
+        $('#pwd').val('');
+    });
+
+    /**
      * 去重
      * @param arr
      * @returns {*}
@@ -121,7 +132,7 @@ $(function () {
             }
         }
         return arr
-    }
+    };
 
     /**
      * 记录账号被点击
@@ -134,6 +145,7 @@ $(function () {
     };
 
     accountArr = makeArr(accountArr, "account");
+
     accountArr.forEach(function (v, i) {
         $("#actData").append(`<div onClick='getInputValue("${v.account}","${v.password}")'>${v.account}</div>`)
     });
