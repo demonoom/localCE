@@ -95,12 +95,12 @@ input:-webkit-autofill {
 }
 
 .inputWrap #actData {
-    max-height: 83px;
+    max-height: 132px;
     overflow-y: auto;
     width: 100%;
     position: absolute;
     left: 0;
-    top: 74px;
+    top: 72px;
     box-sizing: border-box;
     border: 1px #e5e5e5 solid;
     background: white;
@@ -125,16 +125,37 @@ input:-webkit-autofill {
     background-color: initial;
 }
 
-.inputWrap #actData > div {
+.inputWrap .listCont{
+    position: relative;
     padding: 5px 15px;
-    cursor: pointer;
     font-size: 14px;
     color: #666;
+    cursor: pointer;
 }
 
-.inputWrap #actData > div:hover {
+.inputWrap #actData > .listCont:hover {
     background-color: #edf2ff;
     color: #333;
+}
+
+.inputWrap .listCont .text {
+    line-height: 28px;
+    display: block;
+    width: calc(100% - 20px);
+}
+.listCont .close {
+    display: block;
+    width: 28px;
+    height: 28px;
+    background:url("../images/icon_close2.png") no-repeat center center;
+    background-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 0;
 }
 
 input {

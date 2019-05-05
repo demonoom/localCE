@@ -109,7 +109,7 @@ $(function () {
     /**
      * 后退
      */
-    $('#goback').on('click',function () {
+    $('#goback').on('click', function () {
         $('#logo_content').show();
         $('#classList').hide();
         $('#account').click();
@@ -144,10 +144,33 @@ $(function () {
         $("#pwd").val(password);
     };
 
+    //删除
+    deleteData = function (account) {
+        layer.confirm('从列表中删除此账号', {
+            btn: ['确定', '取消'], //按钮
+            title: '删除账号'
+        }, function () {
+            var actData = JSON.parse(localStorage.getItem("accountData")) == null ? accountArr : JSON.parse(localStorage.getItem("accountData"))
+            actData.forEach((v, i) => {
+                if (v.account == account) {
+                    actData.splice(i, 1);
+                    $("#actData").html("");
+                    actData.forEach(function (v, i) {
+                        $("#actData").append(`<div class="listCont"><span class="text" onClick='getInputValue("${v.account}","${v.password}")'>${v.account}</span><span class="close" onClick='deleteData("${v.account}")'>删除</span></div>`)
+                    });
+                    localStorage.setItem('accountData', JSON.stringify(actData));
+                    layer.msg('删除成功', {icon: 1, time: 1000});
+                }
+            })
+        }, function () {
+
+        });
+    }
+
     accountArr = makeArr(accountArr, "account");
 
     accountArr.forEach(function (v, i) {
-        $("#actData").append(`<div onClick='getInputValue("${v.account}","${v.password}")'>${v.account}</div>`)
+        $("#actData").append(`<div class="listCont"><span class="text" onClick='getInputValue("${v.account}","${v.password}")'>${v.account}</span><span class="close" onClick='deleteData("${v.account}")'>删除</span></div>`)
     });
 
     $("#act").blur(function () {
@@ -157,8 +180,9 @@ $(function () {
     });
 
     $("#act").focus(function () {
+        $("#placeholder").hide();
         accountArr = JSON.parse(localStorage.getItem("accountData")) == null ? accountArr : JSON.parse(localStorage.getItem("accountData"));
-        $("#actData").css("display", "block");
+        accountArr.length != 0 ? $("#actData").css("display", "block") : $("#actData").css("display", "none");
     });
 
     /**
