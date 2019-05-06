@@ -93,9 +93,9 @@
             type: 'info',
             title: '下课提示',
             message: '请问是否要下课',
-            buttons: ['确定', '取消']
+            buttons: ['取消', '确定']
         }, (index) => {
-            if (index == 0) {
+            if (index == 1) {
                 let obj = {
                     "command": "classOver",
                 };

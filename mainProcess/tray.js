@@ -1,5 +1,5 @@
 const {Tray, Menu, dialog, ipcMain} = require('electron');
-// const {autoUpdater} = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 var path = require('path');
 
 function createTray(win, app) {
@@ -15,9 +15,9 @@ function createTray(win, app) {
                     type: 'info',
                     title: '退出提示',
                     message: '请问是否真的需要退出',
-                    buttons: ['确定', '取消']
+                    buttons: ['取消', '确定']
                 }, (index) => {
-                    if (index == 0) {
+                    if (index == 1) {
                         //销毁图标
                         tray.destroy();
                         //销毁窗体

@@ -126,7 +126,7 @@ $(function () {
         for (var i = 0; i < arr.length - 1; i++) {
             for (var j = i + 1; j < arr.length; j++) {
                 if (arr[i][properties] == arr[j][properties]) {
-                    arr.splice(j, 1);
+                    arr.splice(i, 1);
                     j--;
                 }
             }
@@ -160,6 +160,8 @@ $(function () {
                     });
                     localStorage.setItem('accountData', JSON.stringify(actData));
                     layer.msg('删除成功', {icon: 1, time: 1000});
+                    $('#act').val('');
+                    $('#pwd').val('');
                 }
             })
         }, function () {
